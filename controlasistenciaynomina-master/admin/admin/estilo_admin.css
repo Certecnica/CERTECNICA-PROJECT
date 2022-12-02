@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,400;0,500;0,600;0,900;1,100;1,200&display=swap');
+* {
+    box-sizing: border-box;
+    font-family: 'Barlow';
+}
+
+body {
+    background-color: #314056;
+    padding: 50px;
+    color: #2e417b;
+}
+
+
+/* SECCION LOGIN */
+
+.contenedor-login {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    background-color: #f1f2f8;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.contenedor-login h1 {
+    text-align: center;
+}
+
+.contenedor-login .contenedor-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.contenedor-login .contenedor-form .fila {
+    margin: 20px 0;
+}
+
+.contenedor-login .contenedor-form .fila label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contenedor-login .contenedor-form .fila .entrada {
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-login .contenedor-form .fila i {
+    margin-right: 15px;
+    font-size: 25px;
+}
+
+.contenedor-login .contenedor-form .fila input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border: 1px solid #c0c0c0;
+}
+
+.contenedor-login .contenedor-form .btn {
+    background: #2d40bf;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.contenedor-login .contenedor-form .btn:hover {
+    background-color: #4b62f5;
+}
+
+
+/* ESTILOS GENERALES */
+
+hr {
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.contenedor {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    background-color: #f1f2f8;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.contenedor .contenedor-info {
+    display: flex;
+}
+
+.contenedor .contenedor-info .nav {
+    width: 250px;
+    border-right: 1px solid #d6d6d6;
+}
+
+.contenedor .contenedor-info .nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor .contenedor-info .nav ul li {
+    margin: 15px 0;
+}
+
+.contenedor .contenedor-info .nav ul li .icono {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    color: #314056;
+    border-radius: 15px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.contenedor .contenedor-info .nav ul li .icono i {
+    line-height: 40px;
+}
+
+.contenedor .contenedor-info .nav ul li a {
+    text-decoration: none;
+    color: #31415a;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.contenedor .contenedor-info .nav ul li .selected {
+    background-color: #2d40bf;
+    color: #d6d6d6;
+}
+
+.contenedor .contenedor-info .panel {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 30px;
+    margin-left: 20px;
+    padding: 25px;
+}
+
+
+/* SECCION DASHBOARD */
+
+#dashboard {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#dashboard .card {
+    text-align: center;
+    padding: 5px;
+    width: 140px;
+    height: 170px;
+    margin: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+#dashboard .card .tema {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+#dashboard .card .cantidad {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+
+/* SECCION NUEVA PREGUNTA */
+
+#nuevaPregunta .fila {
+    margin: 15px 0;
+}
+
+#nuevaPregunta label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#nuevaPregunta #tema {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #c0c0c0;
+}
+
+#nuevaPregunta .agregarTema i {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #2d40bf;
+}
+
+#nuevaPregunta .agregarTema i:hover {
+    color: #2e417b;
+}
+
+#nuevaPregunta textarea {
+    width: 100%;
+    border: 1px solid #c0c0c0;
+    padding: 15px;
+    max-height: 80px;
+}
+
+#nuevaPregunta .opcion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#nuevaPregunta .opcion label {
+    width: 10%;
+    display: inline;
+}
+
+#nuevaPregunta .opcion input {
+    width: 90%;
+    padding: 10px;
+    margin-left: 15px;
+    border: 1px solid #c0c0c0;
+}
+
+#nuevaPregunta .correcta {
+    width: 10%;
+    padding: 6px;
+    border: 1px solid #c0c0c0;
+    margin-left: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#nuevaPregunta .btn-guardar {
+    background: #2d40bf;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 15px;
+    margin: 5px 0;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.gradiente1 {
+    background: linear-gradient(to bottom, #7cafe9, #fed5ee);
+}
+
+.gradiente2 {
+    background: linear-gradient(to bottom, #fea498, #ffd99c);
+}
+
+.gradiente3 {
+    background: linear-gradient(to bottom, #9adcbf, #fef2b3);
+}
+
+
+/* Ventana Modal de Noticias */
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Black w/ opacity */
+    z-index: 99;
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px;
+    height: auto;
+    position: relative;
+}
+
+.modal-content label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c0c0c0;
+}
+
+.modal-content .btn {
+    background: #2d40bf;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    transition: .5s;
+    cursor: pointer;
+}
+
+
+/* The Close Button */
+
+.close {
+    position: absolute;
+    right: -50px;
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    border: 2px solid #fff;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close:hover,
+.close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* SECCION LISTADO DE PREGUNTAS */
+
+#listadoPreguntas .contenedor-pregunta {
+    border: 1px solid #c0c0c0;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+#listadoPreguntas .contenedor-pregunta header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#listadoPreguntas .contenedor-pregunta header .tema {
+    display: block;
+    background: #7cafe9;
+    color: #fff;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+}
+
+#listadoPreguntas .contenedor-pregunta header .opciones i {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#listadoPreguntas .contenedor-pregunta .pregunta {
+    font-size: 20px;
+    font-style: italic;
+}
+
+#listadoPreguntas .contenedor-pregunta .opcion {
+    margin-bottom: 10px;
+}
+
+#listadoPreguntas .contenedor-pregunta .caja {
+    display: inline-block;
+    text-align: center;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #888;
+    font-weight: bold;
+}
+
+.pintarVerde {
+    background-color: greenyellow;
+}
+
+
+/* SECCION CONFIGURACION */
+
+#configuracion .fila {
+    margin: 15px 0;
+}
+
+#configuracion label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#configuracion input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c0c0c0;
+}
+
+#configuracion .btn-actualizar {
+    width: auto;
+    display: inline;
+    background: #2d40bf;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 15px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.form-eliminar {
+    padding: 5px;
+}
+
+.form-eliminar i {
+    color: #a41300;
+    font-size: 20px;
+}
+
+.form-eliminar .btn-eliminar {
+    border: none;
+    background-color: #a41300;
+    color: #fff;
+    display: inline-block;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.form-eliminar .btn-eliminar:hover {
+    background-color: darkred;
+}

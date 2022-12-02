@@ -49,22 +49,7 @@
             <li><a href="No_aprobadas.php"><i class="fa fa-circle-o"></i> No Aprobadas</a></li>
           </ul>
         </li>
-
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-users"></i>
-            <span>Examenes</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="index_quiz.php"><i class="fa fa-circle-o"></i>Examenes Creados</a></li>
-            <li><a href="nueva_pregunta.php"><i class="fa fa-circle-o"></i>Nueva Pregunta</a></li>
-            <li><a href="listado_preguntas.php"><i class="fa fa-circle-o"></i>Editar Preguntas</a></li>
-          </ul>
-        </li>
-
+        <li><a href="admin/index.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>Examenes</a></li>
         <li><a href="excel.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>Llegadas</a></li>
         <li><a href="documentos.php"><i class="fa fa-clock-o" aria-hidden="true"></i></i>Documentación Empleados</a></li>
         <li><a href="deduction.php"><i class="fa fa-file-text"></i> Deducciones</a></li>
