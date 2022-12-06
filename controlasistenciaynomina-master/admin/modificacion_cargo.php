@@ -5,7 +5,6 @@
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -42,8 +41,7 @@
           ";
           unset($_SESSION['success']);
         }
-      ?>
-         
+      ?>   
          <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -84,17 +82,13 @@
                     }
                   ?>
                   <?php
-
 }else{
 
     ?>
     <tr class="text-center">
     <td colspan="16">No existen registros</td>
     </tr>
-
-    
-    <?php
-    
+    <?php  
 }
 
 ?>
@@ -110,7 +104,6 @@
   $sqlquery5 = " SELECT firstname,lastname FROM employees";
   $dataa = $conexion ->query($sqlquery5);
 ?>
-
     <?php include 'modal_modifi_cargo.php'?>
   <?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>

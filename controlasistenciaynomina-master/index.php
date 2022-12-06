@@ -1,78 +1,101 @@
-<?php session_start(); ?>
-<?php include 'header.php'; ?>
-<body class="hold-transition login-page">
-<div class="login-box">
-  	<div class="login-logo">
-  		<p id="date"></p>
-      <p id="time" class="bold"></p>
-  	</div>
-  
-  	<div class="login-box-body">
-    	<h4 class="login-box-msg">Ingrese su ID de Empleado</h4>
+<?php
+  session_start();
+  if(isset($_SESSION['admin'])){
+    header('location:admin/home.php');
+  }
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>INICIA SESIÓN</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="forms-container">
+      <img src="../controlasistenciaynomina-master/images/CERTECNICA_2-removebg-preview (1).png" style="padding-top:70px; padding-left:160px ; width:35%; padding-bottom:25px;">      
 
-    	<form id="attendance">
-          <div class="form-group">
-            <select class="form-control" name="status">
-              <option value="in">Hora de Entrada</option>
-              <option value="out">Hora de Salida</option>
-            </select>
+        <div class="signin-signup">
+          
+          <form action="#" class="sign-in-form" method="POST" > 
+            <div>
+          <img src="../controlasistenciaynomina-master/images/CERTECNICA_2-removebg-preview (1).png" style="padding-bottom:70px; width: 75%;">      
           </div>
-      		<div class="form-group has-feedback">
-        		<input type="text" class="form-control input-lg" id="employee" name="employee" required>
-        		<span class="glyphicon glyphicon-calendar form-control-feedback"></span>
-      		</div>
-      		<div class="row">
-    			<div class="col-xs-4">
-          			<button type="submit" class="btn btn-primary btn-block btn-flat" name="signin"><i class="fa fa-sign-in"></i> Login</button>
-        		</div>
-      		</div>
-    	</form>
-  	</div>
-		<div class="alert alert-success alert-dismissible mt20 text-center" style="display:none;">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <span class="result"><i class="icon fa fa-check"></i> <span class="message"></span></span>
+          <h2 class="title">INICIA SESIÓN</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="text" placeholder="Usuario" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Contraseña" />
+            </div>
+            <input type="submit" value="iNGRESA" class="btn solid" />
+            <div class="social-media">
+            </div>
+          </form>
+          <form action="admin/login.php" class="sign-up-form" method="POST">
+            <h2 class="title">INICIA SESIÓN</h2>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="text" placeholder="Correo Electronico o Usuario" name="username"/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Contraseña" name="password"/>
+            </div>
+            <input type="submit" class="btn" value="Ingresar" name="login" />
+            <div class="social-media">
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panels-container">
+        <div class="panel left-panel">
+          <div class="content">
+            <h3>¿Eres Administrador?</h3>
+            <p>
+            ¡Bienvenido de nuevo, se te ha echado de menos!
+            </p>
+         <br>
+            <button class="btn transparent" id="sign-up-btn">
+                Inicia Sesión
+            </button>
+          </div>
+          <img src="img/log.svg" class="image" alt="" />
+        </div>
+        <div class="panel right-panel">
+          <div class="content">
+            <h3>¿Eres Empleado?</h3>
+            <p>
+            ¡Bienvenido de nuevo, se te ha echado de menos!
+            </p>
+            <button class="btn transparent" id="sign-in-btn">
+              Inicia Sesión
+            </button>
+          </div>
+          <img src="img/register.svg" class="image" alt="" />
+        </div>
+        <?php
+  		if(isset($_SESSION['error'])){
+  			echo "
+  				<div class='callout callout-danger text-center mt20'>
+			  		<p>".$_SESSION['error']."</p> 
+			  	</div>
+  			";
+  			unset($_SESSION['error']);
+  		}
+  	?>
+      </div>
     </div>
-		<div class="alert alert-danger alert-dismissible mt20 text-center" style="display:none;">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <span class="result"><i class="icon fa fa-warning"></i> <span class="message"></span></span>
-    </div>
-  		
-</div>
-	
-<?php include 'scripts.php' ?>
-<script type="text/javascript">
-$(function() {
-  var interval = setInterval(function() {
-    var momentNow = moment();
-    $('#date').html(momentNow.format('dddd').substring(0,3).toUpperCase() + ' - ' + momentNow.format('MMMM DD, YYYY'));  
-    $('#time').html(momentNow.format('hh:mm:ss A'));
-  }, 100);
 
-  $('#attendance').submit(function(e){
-    e.preventDefault();
-    var attendance = $(this).serialize();
-    $.ajax({
-      type: 'POST',
-      url: 'attendance.php',
-      data: attendance,
-      dataType: 'json',
-      success: function(response){
-        if(response.error){
-          $('.alert').hide();
-          $('.alert-danger').show();
-          $('.message').html(response.message);
-        }
-        else{
-          $('.alert').hide();
-          $('.alert-success').show();
-          $('.message').html(response.message);
-          $('#employee').val('');
-        }
-      }
-    });
-  });
-    
-});
-</script>
-</body>
+    <?php include 'includes/scripts.php' ?>
+    <script src="app.js"></script>
+  </body>
 </html>

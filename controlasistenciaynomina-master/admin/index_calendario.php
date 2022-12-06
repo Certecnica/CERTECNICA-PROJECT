@@ -1,149 +1,178 @@
-<?php require_once('includes/conn.php') ?>
+<?php include 'includes/session.php'; ?>
+<?php include 'includes/header.php'; ?>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <?php include 'includes/navbar.php'; ?>
+  <?php include 'includes/menubar.php'; ?>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+      Calendario
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li>Calendario</li>
+        <li class="active">Calendario Certecnica</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+      <?php
+        if(isset($_SESSION['error'])){
+          echo "
+            <div class='alert alert-danger alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4><i class='icon fa fa-warning'></i> Error!</h4>
+              ".$_SESSION['error']."
+            </div>
+          ";
+          unset($_SESSION['error']);
+        }
+        if(isset($_SESSION['success'])){
+          echo "
+            <div class='alert alert-success alert-dismissible'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4><i class='icon fa fa-check'></i>¡Proceso Exitoso!</h4>
+              ".$_SESSION['success']."
+            </div>
+          ";
+          unset($_SESSION['success']);
+        }
+      ?>
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUENTE WEB</title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./fullcalendar/lib/main.min.css">
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./fullcalendar/lib/main.min.js"></script>    
-    <style>
-        :root {
-            --bs-success-rgb: 71, 222, 152 !important;
-        }
-
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            font-family: Apple Chancery, cursive;
-        }
-
-        .btn-info.text-light:hover,
-        .btn-info.text-light:focus {
-            background: #000;
-        }
-        table, tbody, td, tfoot, th, thead, tr {
-            border-color: #ededed !important;
-            border-style: solid;
-            border-width: 1px !important;
-        }
-    </style>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Mi Calendario</title>
+	<link rel="stylesheet" type="text/css" href="css/fullcalendar.min.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
-
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
-        <div class="container">
-            <a class="navbar-brand" href="https://www.youtube.com/channel/UCQt66csrx8LcVsI66hnu2fQ">
-            FUENTE WEB
-            </a>
-
-            <div>
-                <b class="text-light">Calendario de Eventos</b>
-            </div>
-        </div>
-    </nav>
-    <div class="container py-5" id="page-container">
-        <div class="row">
-            <div class="col-md-9">
-                <div id="calendar"></div>
-            </div>
-            <div class="col-md-3">
-                <div class="cardt rounded-0 shadow">
-                    <div class="card-header bg-gradient bg-primary text-light">
-                        <h5 class="card-title">Crear Evento</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="container-fluid">
-                            <form action="save_schedule.php" method="post" id="schedule-form">
-                                <input type="hidden" name="id" value="">
-                                <div class="form-group mb-2">
-                                    <label for="title" class="control-label">Nombre</label>
-                                    <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label for="description" class="control-label">Descripción</label>
-                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label for="start_datetime" class="control-label">Inicio</label>
-                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <label for="end_datetime" class="control-label">Fin</label>
-                                    <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="text-center">
-                            <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Guardar</button>
-                            <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancelar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Event Details Modal -->
-    <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-0">
-                <div class="modal-header rounded-0">
-                    <h5 class="modal-title">Detalles de evento</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body rounded-0">
-                    <div class="container-fluid">
-                        <dl>
-                            <dt class="text-muted">Nombre</dt>
-                            <dd id="title" class="fw-bold fs-4"></dd>
-                            <dt class="text-muted">Descripción</dt>
-                            <dd id="description" class=""></dd>
-                            <dt class="text-muted">Inicio</dt>
-                            <dd id="start" class=""></dd>
-                            <dt class="text-muted">Fin</dt>
-                            <dd id="end" class=""></dd>
-                        </dl>
-                    </div>
-                </div>
-                <div class="modal-footer rounded-0">
-                    <div class="text-end">
-                        <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Editar</button>
-                        <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Eliminar</button>
-                        <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Event Details Modal -->
-
-<?php 
-$schedules = $conn->query("SELECT * FROM `schedule_list`");
-$sched_res = [];
-foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
-    $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));
-    $row['edate'] = date("F d, Y h:i A",strtotime($row['end_datetime']));
-    $sched_res[$row['id']] = $row;
-}
+<body>
+<?php
+include('includes/conn.php');
+  $SqlEventos   = ("SELECT * FROM eventoscalendar");
+  $resulEventos = mysqli_query($conn, $SqlEventos);
 ?>
-<?php 
-if(isset($conn)) $conn->close();
+<div class="mt-5"></div>
+<div class="container">
+  <div class="row">
+    <div class="col msjs">
+      <?php
+        include('msjs.php');
+      ?>
+    </div>
+  </div>
+<div class="row">
+</div>
+</div>
+<div id="calendar"></div>
+<?php  
+  include('modalNuevoEvento.php');
+  include('modalUpdateEvento.php');
 ?>
-</body>
-
-<script src="../js/es.js"></script> <!--Idioma español Fullcalendar-->
-<script>
-    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+<?php include 'includes/scripts.php'; ?>
+<script src ="js/jquery-3.0.0.min.js"> </script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>	
+<script type="text/javascript" src="js/fullcalendar.min.js"></script>
+<script src='locales/es.js'></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#calendar").fullCalendar({
+    header: {
+      left: "prev,next today",
+      center: "title",
+      right: "month,agendaWeek,agendaDay"
+    },
+    locale: 'es',
+    defaultView: "month",
+    navLinks: true, 
+    editable: true,
+    eventLimit: true, 
+    selectable: true,
+    selectHelper: false,
+//Nuevo Evento
+  select: function(start, end){
+      $("#exampleModal").modal();
+      $("input[name=fecha_inicio]").val(start.format('DD-MM-YYYY'));
+       
+      var valorFechaFin = end.format("DD-MM-YYYY");
+      var F_final = moment(valorFechaFin, "DD-MM-YYYY").subtract(1, 'days').format('DD-MM-YYYY'); //Le resto 1 dia
+      $('input[name=fecha_fin').val(F_final);  
+    },
+    events: [
+      <?php
+       while($dataEvento = mysqli_fetch_array($resulEventos)){ ?>
+          {
+          id: '<?php echo $dataEvento['id']; ?>',
+          title: '<?php echo $dataEvento['evento']; ?>',
+          start: '<?php echo $dataEvento['fecha_inicio']; ?>',
+          end:   '<?php echo $dataEvento['fecha_fin']; ?>',
+          color: '<?php echo $dataEvento['color_evento']; ?>'
+          },
+        <?php } ?>
+    ],
+//Eliminar Evento
+eventRender: function(event, element) {
+    element
+      .find(".fc-content")
+      .prepend("<span id='btnCerrar'; class='closeon material-icons'>&#xe5cd;</span>");
+    //Eliminar evento
+    element.find(".closeon").on("click", function() {
+  var pregunta = confirm("Deseas Borrar este Evento?");   
+  if (pregunta) {
+    $("#calendar").fullCalendar("removeEvents", event._id);
+     $.ajax({
+            type: "POST",
+            url: 'deleteEvento.php',
+            data: {id:event._id},
+            success: function(datos)
+            {
+              $(".alert-danger").show();
+              setTimeout(function () {
+                $(".alert-danger").slideUp(500);
+              }, 3000); 
+            }
+        });
+      }
+    });
+  },
+//Moviendo Evento Drag - Drop
+eventDrop: function (event, delta) {
+  var idEvento = event._id;
+  var start = (event.start.format('DD-MM-YYYY'));
+  var end = (event.end.format("DD-MM-YYYY"));
+    $.ajax({
+        url: 'drag_drop_evento.php',
+        data: 'start=' + start + '&end=' + end + '&idEvento=' + idEvento,
+        type: "POST",
+        success: function (response) {
+         // $("#respuesta").html(response);
+        }
+    });
+},
+//Modificar Evento del Calendario 
+eventClick:function(event){
+    var idEvento = event._id;
+    $('input[name=idEvento').val(idEvento);
+    $('input[name=evento').val(event.title);
+    $('input[name=fecha_inicio').val(event.start.format('DD-MM-YYYY'));
+    $('input[name=fecha_fin').val(event.end.format("DD-MM-YYYY"));
+    $("#modalUpdateEvento").modal();
+  },
+  });
+//Oculta mensajes de Notificacion
+  setTimeout(function () {
+    $(".alert").slideUp(300);
+  }, 3000); 
+});
 </script>
-<script src="js/script_calendario.js"></script>
-
+</body>
 </html>

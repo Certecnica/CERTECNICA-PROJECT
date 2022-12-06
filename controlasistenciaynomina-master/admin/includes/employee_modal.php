@@ -9,7 +9,26 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="employee_add.php" enctype="multipart/form-data">
-          		  <div class="form-group">
+              <div class="form-group">
+                    <label for="gender" class="col-sm-3 control-label">Tipo de Documento</label>
+
+                    <div class="col-sm-9"> 
+                      <select class="form-control" name="Tdocumento" id="Tdocumento" required>
+                        <option value="" selected>- Seleccionar -</option>
+                        <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                        <option value="Cédula de ciudadanía">Cédula de ciudadanía</option>
+                        <option value="Cédula de extranjería">Cédula de extranjería</option>
+                      </select>
+                    </div>
+                </div>
+              <div class="form-group">
+                  	<label for="documento" class="col-sm-3 control-label">Documento</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="text" class="form-control" id="documento" name="documento" required>
+                  	</div>
+                </div>  
+              <div class="form-group">
                   	<label for="firstname" class="col-sm-3 control-label">Nombre</label>
 
                   	<div class="col-sm-9">
@@ -52,8 +71,8 @@
                     <div class="col-sm-9"> 
                       <select class="form-control" name="gender" id="gender" required>
                         <option value="" selected>- Seleccionar -</option>
-                        <option value="Male">Hombre</option>
-                        <option value="Female">Mujer</option>
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
                       </select>
                     </div>
                 </div>

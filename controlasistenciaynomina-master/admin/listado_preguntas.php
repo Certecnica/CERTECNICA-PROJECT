@@ -41,9 +41,7 @@
           ";
           unset($_SESSION['success']);
         }
-      ?>
-
-
+      ?>9
 <?php
 include("funciones.php");
 

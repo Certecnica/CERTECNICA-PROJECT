@@ -27,16 +27,7 @@ if(isset($_GET['idCategoria'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="estilo.css">
-    <title>QUIZ GAME</title>
-</head>
-<body>
-    <div class="container" id="cantainer">
-        <div class="left">
-            <div class="logo">
-                QUIZ GAME
-            </div>
-            <h2>PON A PRUEBA TUS CONOCIMIENTOS!!</h2>
-        </div>
+
         <div class="right">
             <h3>Elige una categoría</h3>
             <div class="categorias">
@@ -52,9 +43,7 @@ if(isset($_GET['idCategoria'])){
                 <?php endwhile?>
             </div>
         </div>
-        <footer>
-            <a href="https://www.youtube.com/c/CódigoWeb">By Código Web  <i class="fa-brands fa-youtube"></i> </a>
-        </footer>
+   
     </div>
 </body>
 </html>

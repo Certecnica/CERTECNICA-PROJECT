@@ -1,10 +1,10 @@
 <?php
 	include 'includes/session.php';
-
+//TRAEMOS DATOS DEL MODAL
 	if(isset($_POST['add'])){
 		$employee = $_POST['employee'];
 		$amount = $_POST['amount'];
-		
+		//CONSULTA A LA BASE DE DATOS (BASICO)		
 		$sql = "SELECT * FROM employees WHERE employee_id = '$employee'";
 		$query = $conn->query($sql);
 		if($query->num_rows < 1){
