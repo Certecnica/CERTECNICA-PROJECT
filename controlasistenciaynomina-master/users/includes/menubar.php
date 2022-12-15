@@ -14,7 +14,7 @@
         <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Panel de Control</span></a></li>
         <li class="header">ADMINISTRACIÓN</li>
 
-        <li><a href="position.php"><i class="fa fa-suitcase"></i>Solicitar Permiso</a></li>
+        <li><a href="solicitudes_permisos.php"><i class="fa fa-suitcase"></i>Solicitar Permiso</a></li>
         <li><a href="includes/logout.php"><i class="fa fa-suitcase"></i>Cerrar Sesión</a></li>
     
     </section>

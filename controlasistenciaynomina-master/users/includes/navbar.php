@@ -33,7 +33,7 @@
               </li>
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#profile" data-toggle="modal" class="btn btn-default btn-flat" id="admin_profile">Actualizar</a>
+                  <a href="#perfil" data-toggle="modal" class="btn btn-default btn-flat" id="user_profile">Actualizar</a>
                 </div>
                 <div class="pull-right">
                   <a href="includes/logout.php" class="btn btn-default btn-flat">Cerrar Sesión</a>
@@ -45,3 +45,4 @@
       </div>
     </nav>
   </header>
+       <?php include 'profile_modal.php' ?>
