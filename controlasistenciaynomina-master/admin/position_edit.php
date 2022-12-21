@@ -5,7 +5,7 @@
 		$id = $_POST['id'];
 		$title = $_POST['title'];
 
-		$sql = "UPDATE position SET description = '$title'  WHERE id = '$id'";
+		$sql = " UPDATE position SET description = '$title'  WHERE id = '$id'";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Posición Actualizada Satisfactoriamente';
 		}

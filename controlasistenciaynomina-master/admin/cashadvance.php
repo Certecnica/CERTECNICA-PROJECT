@@ -3,28 +3,38 @@
 <?php include 'includes/header.php'; ?>
 
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+
     <section class="content-header">
       <h1>
       Adelanto en Efectivo
       </h1>
       <ol class="breadcrumb">
+
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+
         <li>Empleados</li>
+
         <li class="active">Avance de Efectivo</li>
+
       </ol>
+
     </section>
            <!-- Main content -->
     <section class="content">
-      <?php
-        if(isset($_SESSION['error'])){
+     
+     <?php   
+       if(isset($_SESSION['error'])){
           echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -95,12 +105,17 @@
           </div>
         </div>
       </div>
+
     </section>   
                   </div>
   <?php include 'includes/footer.php'; ?>
+
   <?php include 'includes/cashadvance_modal.php'; ?>
+  
 </div>
+
 <?php include 'includes/scripts.php'; ?>
+
 <script>
 $(function(){
   $('.edit').click(function(e){
@@ -116,6 +131,7 @@ $(function(){
     getRow(id);
   });
 });
+
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -135,6 +151,10 @@ function getRow(id){
     }
   });
 }
+</script>
+
+<script>
+
 </script>
 </body>
 </html>

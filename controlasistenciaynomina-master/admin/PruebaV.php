@@ -30,12 +30,11 @@ class PDF extends FPDF
       $this->SetFont('Arial', 'B', 11);
       $this->Cell(18, 10, utf8_decode('Nombres '), 1, 0, 'C', 1);
       $this->Cell(20, 10, utf8_decode('Apellidos'), 1, 0, 'C', 1);
-      $this->Cell(30, 10, utf8_decode('Fecha'), 1, 0, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('Fecha'), 1, 0, 'C', 1);
       $this->Cell(25, 10, utf8_decode('Hora Llegada'), 1, 0, 'C', 1);
-      $this->Cell(70, 10, utf8_decode('Hora Salida'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode(''), 1, 1, 'C', 1);
+      $this->Cell(25, 10, utf8_decode('Hora Salida'), 1, 1, 'C', 1);
    }
-
+ 
    // Pie de página
    function Footer()
    {
@@ -77,9 +76,10 @@ $pdf->SetDrawColor(163, 163, 163); //colorBorde
    }*/
 $i = $i + 1;
 /* TABLA */
-$pdf->Cell(18, 10, utf8_decode('NOMBRES'), 1, 0, 'C', 0);
-$pdf->Cell(20, 10, utf8_decode("numero"), 1, 0, 'C', 0);
-$pdf->Cell(30, 10, utf8_decode("nombre"), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("precio"), 1, 0, 'C', 0);
+$pdf->Cell(18, 10, utf8_decode('JUAN'), 1, 0, 'C', 0);
+$pdf->Cell(20, 10, utf8_decode('MARIN'), 1, 0, 'C', 0);
+$pdf->Cell(25, 10, utf8_decode("2/11/2022"), 1, 0, 'C', 0);
+$pdf->Cell(25, 10, utf8_decode("12:20:00"), 1, 0, 'C', 0);
+$pdf->Cell(25, 10, utf8_decode("04:40:00"), 1, 0, 'C', 0);
 
-$pdf->Output('Reporte_.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('Reporte.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)

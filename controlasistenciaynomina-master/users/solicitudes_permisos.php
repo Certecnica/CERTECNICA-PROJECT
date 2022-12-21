@@ -1,19 +1,30 @@
+
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
+
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
+
       <h1>
        Solicitud de Permiso
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+
         <li>Empleado</li>
+        
         <li class="active">Solicitud de Empleado</li>
       </ol>
     </section>
@@ -42,9 +53,8 @@
         }
       ?>
     <body>
-
-
 <?php include "includes/conn.php"; ?>
+
 <?php
   $reasonErr = $absenceErr = "";
   global $leaveApplicationValidate;
@@ -53,6 +63,7 @@
       $absenceErr = "Please select absence type";
       $leaveApplicationValidate = false;
     }
+
     else{
       $arr = $_POST['absence'];
       $absence = implode(",",$arr);
@@ -63,6 +74,7 @@
       $fromdateErr = "Please Enter starting date";
       $leaveApplicationValidate = false;
     }
+
     else{
       $fromdate = mysqli_real_escape_string($conn,$_POST['fromdate']);
       $leaveApplicationValidate = true;
@@ -72,37 +84,45 @@
       $todateErr = "Please Enter ending date";
       $leaveApplicationValidate = false;
     }
+
     else{
       $todate = mysqli_real_escape_string($conn,$_POST['todate']);
       $leaveApplicationValidate = true;
     }
 
-    
     $reason = mysqli_real_escape_string($conn,$_POST['reason']);
     if(empty($reason)){
       $reasonErr = "Please give reason for the leave in detail";
       $leaveApplicationValidate = false;
     }
+
     else{
-      $absencePlusReason = $absence." : ".$reason;
+      $absencePlusReason = $absence." , ".$reason;
       $leaveApplicationValidate = true;
     }
-    $status = "Pending"; 
+
+    $status = "Pendiente"; 
     if($leaveApplicationValidate){
       //for eid
       $username = $_SESSION["employees"];
-      $eid_query = mysqli_query($conn,"SELECT id FROM employees WHERE firstname = '".$username."'");
+
+      $eid_query = mysqli_query($conn, "SELECT id FROM employees WHERE lastname = $username");
+      
       $row = mysqli_fetch_array($eid_query);
-      $query = "INSERT INTO leaves (eid, ename, descr, fromdate, todate, status) VALUES({$row['id']},'{$username}','$absencePlusReason', '$fromdate', '$todate', '$status')";
+
+      $row = $eid_query->fetch_assoc();
+}
+      $query = "INSERT INTO leaves(eid, ename, descr, fromdate, todate, status) VALUES('$username','$row','$absencePlusReason', '$fromdate', '$todate', '$status')";
+      
       $execute = mysqli_query($conn,$query);
+      
       if($execute){
-        echo '<script>alert("Leave Application Submitted. Please wait for approval status!")</script>';
+        echo '<script>alert("Solicitud de permiso enviada. ¡Por favor espere el estado de aprobación!")</script>';
       }
       else{
-        echo "Query Error : " . $query . "<br>" . mysqli_error($conn);;
+        echo "Query Error : " . $query . "<br>" . mysqli_error($conn);
       }
     }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +135,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-  <title>Leave Application</title>
+  <title>Solicitudes de per</title>
   <script>
     const validate = () => {
       let desc = document.getElementById('leaveDesc').value;
@@ -128,10 +148,10 @@
       }
        let errMsg = [];
       if (desc === "") {
-        errMsg.push("Please enter the reason and date of leave");
+        errMsg.push("Indique el motivo de la solicitud de permiso");
       }
       if(checkedValue.length < 1){
-        errMsg.push("Please select the type of Leave");
+        errMsg.push("Seleccione el tipo de solicitud de permiso");
       }
       if (errMsg.length > 0) {
         errDiv.style.display = "block";
@@ -161,65 +181,57 @@
       <!-- error message if type of absence isn't selected -->
       <span class="error"><?php echo "&nbsp;".$absenceErr ?></span><br/>
       <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Sick" id="Sick">
-        <label class="form-check-label" for="Sick">
-        Enfermedad
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Control o cita medica" id="Control o cita medica">
+        <label class="form-check-label" for="citamedica">
+        Control o cita medica
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Casual" id="Casual">
-        <label class="form-check-label" for="Casual">
-          Casual
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Calamidad Domestica" id="Calamidad Domestica">
+        <label class="form-check-label" for="calamidad_domestica">
+          Calamidad Domestica
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Vacation" id="Vacation">
-        <label class="form-check-label" for="Vacation">
-          Vacaciones
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Motivos personales" id="Motivos personales">
+        <label class="form-check-label" for="motivo_personal">
+         Por motivos personales 
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Licencia no remunerada" id="Licencia no remunerada">
+        <label class="form-check-label" for="licencia_no_remunerada">
+        Licencia no remunerada
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Bereavement" id="Bereavement">
-        <label class="form-check-label" for="Bereavement">
-        Fallecimiento de un familiar
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Licencia Maternidad / Paternidad" id="Licencia Maternidad / Paternidad">
+        <label class="form-check-label" for="licencia_maternidad_paternidad">
+         licencia Maternidad / Paternidad
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Time off without pay" id="Time Off Without Pay">
-        <label class="form-check-label" for="Time Off Without Pay">
-        Tiempo libre sin goce de sueldo
+        <input class="form-check-input" name="absence[]" type="checkbox" value="Otro" id="Otro">
+        <label class="form-check-label" for="Otro">
+         otro
         </label>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Maternity / Paternity" id="Maternity/Paternity">
-        <label class="form-check-label" for="Maternity/Paternity">
-          Maternidad / Paternidad
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Sabbatical" id="Sabbatical">
-        <label class="form-check-label" for="Sabbatical">
-        Sabático
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" name="absence[]" type="checkbox" value="Other" id="Other">
-        <label class="form-check-label" for="Other">
-     Otro
-        </label>
-      </div>
+      
       <div class="mb-3 ">
         <label for="dates"><b>Desde -</b></label>
-        <input type="date" name="fromdate">
+        <input type="date" name="fromdate" required>
         <label for="dates"><b>Hasta -</b></label>
-        <input type="date" name="todate">
+        <input type="date" name="todate" required>
       </div>
+     
       <div class="mb-3">
         <label for="leaveDesc" class="form-label"><b>Por favor mencione las razones de sus días de licencia :</b></label>
         <!-- error message if reason of the leave is not given -->
         <span class="error"><?php echo "&nbsp;".$reasonErr ?></span>
         <textarea class="form-control" name="reason" id="leaveDesc" rows="4" placeholder="Entre aquí..."></textarea>
       </div>
+    
       <input type="submit" name="submit" value="Enviar Solicitud de permiso" class="btn btn-success">
     </form>  
   </div>
@@ -233,6 +245,7 @@ error_reporting(E_ALL);
     </section>   
 </div>
 <?php include 'includes/scripts.php'; ?>
+
 <?php include 'includes/footer.php'; ?>
 <script>
 $(function(){
