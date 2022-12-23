@@ -1,17 +1,15 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
-
-  <?php include 'includes/navbar.php'; ?>
-  <?php include 'includes/menubar.php'; ?>
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="wrapper"> 
+<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/menubar.php'; ?>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Administradores
+       Llegadas Empleados
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -42,9 +40,8 @@
           ";
           unset($_SESSION['success']);
         }
-    
       ?>
-<?PHP if(!empty($_GET['status'])){
+<?php if(!empty($_GET['status'])){
     switch($_GET['status']){
         case 'succ':
             $statusType = 'alert-success';
@@ -64,7 +61,6 @@
     }
 }
 ?>
-
 <!-- Display status message -->
 <div class="row">
         <div class="col-xs-12">
@@ -82,27 +78,25 @@
         <form action="importData.php" method="post" enctype="multipart/form-data">
         <br>    
         <input type="file" name="file" />
-            <br>
-          
+            <br>    
         <input type="submit" class="btn btn-danger" name="importSubmit" value="Importar archivo">
         </form>
-    </div>
-   <br>
+    </div><br>
             </div>
+            <a href="PruebaV.php" class="btn btn-danger"><b>PDF</b>
+       <i class="fa-solid fa-file-pdf"></i> </a>
+ <br>
             <div class="box-body">
-
-    
             <?php
   include('includes/conn.php');
   $sqlClientes = ("SELECT * FROM llegadas ORDER BY id ASC");
   $queryData   = mysqli_query($conn, $sqlClientes);
   $total_client = mysqli_num_rows($queryData);
   ?>
-
-      <table id="example1" class="table table-bordered">
+ <table id="example1" class="table table-bordered">
           <thead>
             <tr>
-               <th>Nombres</th>
+              <th>Nombres</th>
               <th>Apellidos</th>
               <th>FECHA</th>
               <th>Hora Llegada</th>
@@ -114,7 +108,6 @@
             $i = 1;
             while ($data = mysqli_fetch_array($queryData)) { ?>
             <tr>
-             
               <td><?php echo $data['NOMBRES']; ?></td>
               <td><?php echo $data['APELLIDOS']; ?></td>
               <td><?php echo $data['FECHA']; ?></td>
@@ -130,8 +123,6 @@
       </div>
     </section>   
   </div>
-    
-    
   <?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
@@ -159,7 +150,6 @@ $(function(){
   });
 
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -183,11 +173,9 @@ function getRow(id){
   });
 }
 </script>
-
 <script src="js/jquery.min.js"></script>
 <script src="'js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
 <script>
 function formToggle(ID){
     var element = document.getElementById(ID);
@@ -198,7 +186,5 @@ function formToggle(ID){
     }
 }
 </script>
-
-
 </body>
 </html>

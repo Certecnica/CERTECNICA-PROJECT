@@ -56,6 +56,7 @@
                   <th>Foto</th>
                   <th>Nombre</th>
                   <th>Posición</th>
+                  <th>Correo Electronico</th>
                   <th>Horarios</th>
                   <th>Miembro Desde</th>
                   <th>Acción</th>
@@ -71,6 +72,7 @@
                           <td><img src="<?php echo (!empty($row['photo']))? '../images/'.$row['photo']:'../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $row['empid']; ?>"><span class="fa fa-edit"></span></a></td>
                           <td><?php echo $row['firstname'].' '.$row['lastname']; ?></td>
                           <td><?php echo $row['description']; ?></td>
+                          <td><?php echo $row['contact_info'];?></td>
                           <td><?php echo date('h:i A', strtotime($row['time_in'])).' - '.date('h:i A', strtotime($row['time_out'])); ?></td>
                           <td><?php echo date('M d, Y', strtotime($row['created_on'])) ?></td>
                           <td>

@@ -18,7 +18,7 @@
 				$_SESSION['admin'] = $row['id'];
 			}
 			else{
-				$_SESSION['error'] = 'Conteaseña Incorrecta';
+				$_SESSION['error'] = 'Contraseña Incorrecta';
 	
 			}
 		}

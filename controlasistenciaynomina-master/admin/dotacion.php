@@ -1,15 +1,23 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
+
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
+
     <section class="content-header">
+
       <h1>
          Dotacion Empleados
       </h1>
@@ -57,26 +65,23 @@
                   <th>Talla Calzado</th>
                   <th>Talla Chaqueta</th>
                   <th>Talla Pantalon </th>
-                  <th>Estado</th>
                   <th>Acciones</th>
                 </thead>
                 <tbody>
                   <?php
                    $conexion=mysqli_connect("localhost","root","","apsystem");               
-                   $SQL="SELECT *FROM dotacion";
+                   $SQL="SELECT * FROM dotacion";
                    $dato = mysqli_query($conexion, $SQL);
                    
                    if($dato -> num_rows >0){
                        while($fila=mysqli_fetch_array($dato)){
-                       
                       ?>
                         <tr>
                           <td><?php echo $fila['EMPLEADO']; ?></td>
                           <td><?php echo $fila['TALLA_CAMISA']; ?></td>
                           <td><?php echo $fila['TALLA_CALZADO']; ?></td>
                           <td><?php echo $fila['TALLA_CHAQUETA']; ?></td>
-                          <td><?php echo $fila['TALLA_PANTALON']; ?></td>
-                          <td><?php echo $fila['status']; ?></td>   
+                          <td><?php echo $fila['TALLA_PANTALON']; ?></td> 
                           <td>
                             <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
@@ -86,36 +91,33 @@
                     }
                   ?>
                   <?php
-
 }else{
-
     ?>
     <tr class="text-center">
     <td colspan="16">No existen registros</td>
     </tr>
-
-    
     <?php
-    
 }
-
-?>
-                </tbody>
-              </table>
-            </div>
-          </div>
+?>   </tbody>
+  </table>
+     </div>
+           </div>
         </div>
       </div>
-
-
 </section>   
   </div>
   <?php include 'modal_add_dotacion.php' ?>  
+
   <?php include 'includes/footer.php'; ?>
+
   <?php include '../admin/includes/admin_modal.php'; ?>
+
 </div>
+
 <?php include 'includes/scripts.php'; ?>
+
 <script>
+
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();

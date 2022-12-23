@@ -76,7 +76,6 @@ include('includes/conn.php');
   include('modalNuevoEvento.php');
   include('modalUpdateEvento.php');
 ?>
-<?php include 'includes/scripts.php'; ?>
 <script src ="js/jquery-3.0.0.min.js"> </script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -101,8 +100,7 @@ $(document).ready(function() {
 //Nuevo Evento
   select: function(start, end){
       $("#exampleModal").modal();
-      $("input[name=fecha_inicio]").val(start.format('DD-MM-YYYY'));
-       
+      $("input[name=fecha_inicio]").val(start.format('DD-MM-YYYY'));    
       var valorFechaFin = end.format("DD-MM-YYYY");
       var F_final = moment(valorFechaFin, "DD-MM-YYYY").subtract(1, 'days').format('DD-MM-YYYY'); //Le resto 1 dia
       $('input[name=fecha_fin').val(F_final);  

@@ -1,28 +1,40 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
 
   <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+
     <section class="content-header">
       <h1>
       Adelanto en Efectivo
       </h1>
       <ol class="breadcrumb">
+
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+
         <li>Empleados</li>
+
         <li class="active">Avance de Efectivo</li>
+
       </ol>
+
     </section>
-    <!-- Main content -->
+           <!-- Main content -->
     <section class="content">
-      <?php
-        if(isset($_SESSION['error'])){
+     
+     <?php   
+       if(isset($_SESSION['error'])){
           echo "
             <div class='alert alert-danger alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
@@ -57,10 +69,14 @@
                   <th>ID Empleado</th>
                   <th>Nombre</th>
                   <th>Monto</th>
+                  <th>Cuotas</th>
+                  <th>Cuota Mensual</th>
+                  <th>Fecha Primer Pago</th>
+                  <th>Destino del prestamo</th>
                   <th>Acción</th>
                 </thead>
                 <tbody>
-                  <?php
+                  <?php 
                     $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance LEFT JOIN employees ON employees.id=cashadvance.employee_id ORDER BY date_advance DESC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
@@ -71,6 +87,10 @@
                           <td>".$row['empid']."</td>
                           <td>".$row['firstname'].' '.$row['lastname']."</td>
                           <td>".number_format($row['amount'], 2)."</td>
+                          <td>" .$row['cuotas']."</td>
+                          <td> ".$row['cuota_mensual']."</td>
+                          <td>".$row['date_primerpago']."</td>
+                          <td> ".$row['destino_prestasmo']."</td>
                           <td>
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['caid']."'><i class='fa fa-edit'></i> Editar</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['caid']."'><i class='fa fa-trash'></i> Eliminar</button>
@@ -85,22 +105,25 @@
           </div>
         </div>
       </div>
+
     </section>   
-  </div>
-    
+                  </div>
   <?php include 'includes/footer.php'; ?>
+
   <?php include 'includes/cashadvance_modal.php'; ?>
+  
 </div>
+
 <?php include 'includes/scripts.php'; ?>
+
 <script>
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
-    $('#edit').modal('show');
+    $('#editar').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
-
   $('.delete').click(function(e){
     e.preventDefault();
     $('#delete').modal('show');
@@ -121,9 +144,17 @@ function getRow(id){
       $('.employee_name').html(response.firstname+' '+response.lastname);
       $('.caid').val(response.caid);
       $('#edit_amount').val(response.amount);
+      $('#edit_Ncuotas').val(response.cuotas);
+      $('#edit_cuotasMensual').val(response.cuota_mensual);
+      $('#edit_fechapago').val(response.date_primerpago);
+      $('#edit_destino').val(response.destino_prestasmos);
     }
   });
 }
+</script>
+
+<script>
+
 </script>
 </body>
 </html>

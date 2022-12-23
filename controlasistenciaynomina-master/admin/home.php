@@ -72,6 +72,30 @@
             <a href="employee.php" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
+         <!-- -->
+      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <?php
+                $sql = "SELECT * FROM position";
+                $query = $conn->query($sql);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+
+              <p>Total Cargos</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="position.php" class="small-box-footer"> Más información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <!-- -->
+        
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -89,47 +113,8 @@
                 $percentage = ($early/$total)*100;
 
                 echo "<h3>".number_format($percentage, 2)."<sup style='font-size: 20px'>%</sup></h3>";
-              ?>
-          
-              <p>Empleados a Tiempo</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="attendance.php" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 1";
-                $query = $conn->query($sql);
+             ?> 
 
-                echo "<h3>".$query->num_rows."</h3>"
-              ?>
-             
-              <p>A tiempo hoy</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-clock"></i>
-            </div>
-            <a href="attendance.php" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM attendance WHERE date = '$today' AND status = 0";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>"
-              ?>
 
               <p>Tarde hoy</p>
             </div>
