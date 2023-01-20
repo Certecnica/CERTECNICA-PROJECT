@@ -1,11 +1,15 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
-  <?php include 'includes/menubar.php'; ?>
 
+  <?php include 'includes/menubar.php'; ?>
+  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -48,6 +52,7 @@
             <div class="box-header with-border">
               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
             </div>
+                    <a href="pdf_position.php" class="btn btn-danger"><b>PDF</a></b>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -78,7 +83,6 @@
       </div>
     </section>   
   </div>
-    
   <?php include 'includes/footer.php'; ?>
   <?php include 'includes/position_modal.php'; ?>
 </div>

@@ -1,10 +1,16 @@
+
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
+
   <style>
         h1 {
             text-align: center;
@@ -12,13 +18,11 @@
             font-weight: bold;
             padding-top: 1em;
         }
-
         .mycontainer {
             width: 90%;
             margin: 1.5rem auto;
             min-height: 60vh;
         }
-
         .mycontainer table {
             margin: 1.5rem auto;
         }
@@ -79,33 +83,26 @@
                     <th>Solicitud de Permiso</th>
                     <th>Fechas</th>
                     <th></th>
-                    <!-- <th>Action</th> -->
+                    <!-- <th>Acciones</th> -->
                 </thead>
-                <tbody>
-                        <!-- loading all leave applications from database -->
+                <tbody>   <!-- Cargando todas las solicitudes de permiso -->
                         <?php
                                 global $row;
-                                $query = mysqli_query($conn,"SELECT * FROM leaves WHERE status='Aceptado'");
-                                
+                                $query = mysqli_query($conn,"SELECT * FROM leaves WHERE status='Aceptado'");      
                                 $numrow = mysqli_num_rows($query);
-
                                if($query){
-                                    
                                     if($numrow!=0){
                                          $cnt=1;
-
                                           while($row = mysqli_fetch_assoc($query)){
                                             $datetime1 = new DateTime($row['fromdate']);
                                             $datetime2 = new DateTime($row['todate']);
-                                            $interval = $datetime1->diff($datetime2);
-                                            
+                                            $interval = $datetime1->diff($datetime2); 
                                             echo "<tr>
                                                     <td>$cnt</td>
                                                     <td>{$row['ename']}</td>
                                                     <td>{$row['descr']}</td>
                                                     <td>{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
                                                     <td>{$interval->format('%a Day/s')}</td>
-                                          
                                                   </tr>";  
                                          $cnt++; }       
                                     }
@@ -113,26 +110,17 @@
                                 else{
                                     echo "Query Error : " . "SELECT * FROM leaves WHERE status='Aceptado'" . "<br>" . mysqli_error($conn);
                                 }
-                       ?> 
-                    
+                       ?>              
                 </tbody>
             </table>
     </div>  
 </body>
-
 </html>
 
 <?php
-
-
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 ?>
-
-
-
-
-
 
 </div>
     </section>   

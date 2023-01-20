@@ -1,5 +1,6 @@
 <?php
-	include 'includes/session.php';
+
+include 'includes/session.php';
 
 	if(isset($_POST['add'])){
 
@@ -30,7 +31,9 @@
 		$filename = $_FILES['photo']['name'];
 		
 		if(!empty($filename)){
+		
 			move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);	
+		
 		}
 		
 		$sql = "INSERT INTO employees (tipo_documento,employee_id, firstname, lastname, address, birthdate, contact_info,contraseña, gender, position_id, schedule_id, photo, created_on) VALUES ('$Tipo_Documento','$documento	', '$firstname', '$lastname', '$address', '$birthdate', '$contact','$password_encriptada', '$gender', '$position', '$schedule', '$filename', NOW())";
@@ -43,18 +46,14 @@
 
 			$_SESSION['error'] = $conn->error;
 		}
-
 	}
 	else{
-
 		$_SESSION['error'] = 'Complete el formulario completo';
-	}
+	} 
 
 	header('location: employee.php');
 
-    
 //realizar modificación en la base de datos
-
 $nombre_completo = "$firstname  $lastname";	
 
 // obtener la hora y fecha actual
@@ -72,7 +71,6 @@ $data = "$Tipo_Documento,$documento,$firstname,$lastname,$address,$birthdate,$co
 $sql = "INSERT INTO log_employees (timestamp, user_id, description , data) VALUES('$timestamp','$user_id','$description','$data')";
 
 //conexion de base de datos y el query que se realizo a la base de datos 
-
 mysqli_query($conn, $sql);
 
 ?>

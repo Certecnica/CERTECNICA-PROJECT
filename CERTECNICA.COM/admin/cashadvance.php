@@ -9,34 +9,23 @@
   <?php include 'includes/navbar.php'; ?>
 
   <?php include 'includes/menubar.php'; ?>
-
+  
   <!-- Content Wrapper. Contains page content -->
-
   <div class="content-wrapper">
-
     <!-- Content Header (Page header) -->
-
     <section class="content-header">
-
       <h1>
       Adelanto en Efectivo
       </h1>
-      
       <ol class="breadcrumb">
-
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-
         <li>Empleados</li>
-
         <li class="active">Avance de Efectivo</li>
-
       </ol>
-
     </section>
            <!-- Main content -->
     <section class="content">
-     
-     <?php   
+<?php   
        if(isset($_SESSION['error'])){
           echo "
             <div class='alert alert-danger alert-dismissible'>
@@ -109,8 +98,8 @@
         </div>
       </div>
 
-    </section>   
-                  </div>
+    </section>
+</div>
 
   <?php include 'includes/footer.php'; ?>
 
@@ -135,7 +124,6 @@ $(function(){
     getRow(id);
   });
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -155,8 +143,6 @@ function getRow(id){
     }
   });
 }
-
-
 function getRow(id){
   $.ajax({
     type : 'POST',
@@ -180,18 +166,15 @@ function getRow(id){
   })
 }
 </script>
-
 <script>
   function formToggle(ID) {
    var element = document.getElementById(ID);
    if (element.style.display == 'none') {
- 
      element.style.display = 'block';
   }else{
     element.style.display = 'none';
   }
 }   
 </script>
-
 </body>
 </html>

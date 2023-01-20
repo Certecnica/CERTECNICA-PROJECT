@@ -65,7 +65,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index_quiz.php"><i class="fa fa-circle-o"></i>Examenes Creados</a></li>
+            <li><a href="quiz.php"><i class="fa fa-circle-o"></i>Examenes Creados</a></li>
             <li><a href="nueva_pregunta.php"><i class="fa fa-circle-o"></i>Nueva Pregunta</a></li>
             <li><a href="listado_preguntas.php"><i class="fa fa-circle-o"></i>Editar Preguntas</a></li>
           </ul>

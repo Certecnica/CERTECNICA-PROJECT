@@ -1,15 +1,14 @@
+
 <?php
 
-require('./fpdf.php');
+ require('./fpdf.php');
+
 
 class PDF extends FPDF
 {
    // Cabecera de página
    function Header()
    {
-      include 'includes/conn.php';
-      $consulta_info = $conn->query("SELECT * from llegadas ");//traemos datos de la empresa desde BD
-      $dato_info = $consulta_info->fetch_object();
       $this->Image('logo.jpg', 15, 5, 60); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
       $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
       $this->Cell(45); // Movernos a la derecha
@@ -28,13 +27,13 @@ class PDF extends FPDF
       $this->SetTextColor(255, 255, 255); //colorTexto
       $this->SetDrawColor(163, 163, 163); //colorBorde
       $this->SetFont('Arial', 'B', 11);
-      $this->Cell(18, 10, utf8_decode('Nombres '), 1, 0, 'C', 1);
-      $this->Cell(20, 10, utf8_decode('Apellidos'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode('Fecha'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode('Hora Llegada'), 1, 0, 'C', 1);
-      $this->Cell(25, 10, utf8_decode('Hora Salida'), 1, 1, 'C', 1);
+      $this->Cell(45, 10, utf8_decode('NOMBRES '), 1, 0, 'C', 1);
+      $this->Cell(45, 10, utf8_decode('APELLIDOS'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('FECHA'), 1, 0, 'C', 1);
+      $this->Cell(35, 10, utf8_decode('HORA LLEGADA'), 1, 0, 'C', 1);
+      $this->Cell(30, 10, utf8_decode('HORA SALIDA'), 1, 1, 'C', 1);
    }
- 
+
    // Pie de página
    function Footer()
    {
@@ -54,15 +53,11 @@ class PDF extends FPDF
    }
 }
 
-//include '../../recursos/Recurso_conexion_bd.php';
 
-//require '../../funciones/CortarCadena.php';
+require 'includes/conn.php';
+$consulta = "SELECT * FROM llegadas";
+$resultado = $conn->query($consulta);
 
-/* CONSULTA INFORMACION DEL HOSPEDAJE */
-
-//$consulta_info = $conexion->query("select *from hotel ");
-
-//$dato_info = $consulta_info->fetch_object();
 
 $pdf = new PDF();
 $pdf->AddPage(); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
@@ -70,16 +65,15 @@ $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
 $i = 0;
 $pdf->SetFont('Arial', '', 12);
 $pdf->SetDrawColor(163, 163, 163); //colorBorde
-/*$consulta_reporte_alquiler = $conexion->query("  ");*/
 
-/*while ($datos_reporte = $consulta_reporte_alquiler->fetch_object()) {      
-   }*/
-$i = $i + 1;
+
 /* TABLA */
-$pdf->Cell(18, 10, utf8_decode('JUAN'), 1, 0, 'C', 0);
-$pdf->Cell(20, 10, utf8_decode('MARIN'), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("2/11/2022"), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("12:20:00"), 1, 0, 'C', 0);
-$pdf->Cell(25, 10, utf8_decode("04:40:00"), 1, 0, 'C', 0);
+while ($row = $resultado->fetch_assoc()) {
+   $pdf->Cell(45, 10 , $row['NOMBRES'], 1, 0, 'C', 0);
+   $pdf -> Cell (45 , 10 , $row ['APELLIDOS'] , 1 , 0 , 'C', 0);
+   $pdf->Cell(30, 10, $row['FECHA'], 1, 0, 'C', 0);
+   $pdf -> Cell(35 , 10 , $row ['HORA_LLEGADA' ],1 , 0 , 'C', 0);
+   $pdf -> Cell (30, 10, $row ['HORA_SALIDA'], 1 , 1 , 'C', 0);
+}
 
-$pdf->Output('Reporte.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+$pdf->Output('Reporte_llegadas.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)

@@ -1,9 +1,14 @@
-<?php include 'includes/session.php'; ?>
-<?php include 'includes/header.php'; ?>
+<?php include 'includes/session.php';?>  
+
+<?php include 'includes/header.php';?>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-  <?php include 'includes/navbar.php'; ?>
-  <?php include 'includes/menubar.php'; ?>
+
+  <?php include 'includes/navbar.php';?>
+
+  <?php include 'includes/menubar.php';?>
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -58,7 +63,7 @@
                 </thead>
                 <tbody>
                   <?php    
-                  $sql= "SELECT *FROM  admin ";
+                  $sql= "SELECT * FROM  admin ";
                     $query = $conn->query($sql);
                     while($fila = $query->fetch_assoc()){
                       ?>
@@ -94,7 +99,7 @@ $(function(){
     $('#edit').modal('show');
     var id = $(this).data('id');
     getRow(id);
-  });
+  }); 
 
   $('.delete').click(function(e){
     e.preventDefault();
@@ -135,3 +140,4 @@ function getRow(id){
 </body>
 </html>
 
+ 

@@ -91,7 +91,6 @@ window.Modernizr = (function( window, document, undefined ) {
 
     featureName, // used in testing loop
 
-
     /*>>teststyles*/
     // Inject element with style element and some CSS rules
     injectElementWithStyles = function( rule, callback, nodes, testnames ) {
@@ -171,8 +170,6 @@ window.Modernizr = (function( window, document, undefined ) {
 
      },
      /*>>mq*/
-
-
     /*>>hasevent*/
     //
     // isEventSupported determines if a given element supports the given event

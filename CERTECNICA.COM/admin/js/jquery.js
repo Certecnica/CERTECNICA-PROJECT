@@ -2553,10 +2553,8 @@ function condense( unmatched, map, filter, context, xml ) {
 			}
 		}
 	}
-
 	return newUnmatched;
 }
-
 function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postSelector ) {
 	if ( postFilter && !postFilter[ expando ] ) {
 		postFilter = setMatcher( postFilter );
@@ -2569,36 +2567,28 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 			preMap = [],
 			postMap = [],
 			preexisting = results.length,
-
 			// Get initial elements from seed or context
 			elems = seed || multipleContexts( selector || "*", context.nodeType ? [ context ] : context, [] ),
-
 			// Prefilter to get matcher input, preserving a map for seed-results synchronization
 			matcherIn = preFilter && ( seed || !selector ) ?
 				condense( elems, preMap, preFilter, context, xml ) :
 				elems,
-
 			matcherOut = matcher ?
 				// If we have a postFinder, or filtered seed, or non-seed postFilter or preexisting results,
 				postFinder || ( seed ? preFilter : preexisting || postFilter ) ?
-
 					// ...intermediate processing is necessary
 					[] :
-
 					// ...otherwise use results directly
 					results :
 				matcherIn;
-
 		// Find primary matches
 		if ( matcher ) {
 			matcher( matcherIn, matcherOut, context, xml );
 		}
-
 		// Apply postFilter
 		if ( postFilter ) {
 			temp = condense( matcherOut, postMap );
 			postFilter( temp, [], context, xml );
-
 			// Un-match failing elements by moving them back to matcherIn
 			i = temp.length;
 			while ( i-- ) {
@@ -2606,8 +2596,14 @@ function setMatcher( preFilter, selector, matcher, postFilter, postFinder, postS
 					matcherOut[ postMap[i] ] = !(matcherIn[ postMap[i] ] = elem);
 				}
 			}
+		} 
+		// FUNCIONES ADD Y CHANGES IN THE CODE FOR PRINT PDFS 
+		else {
+			i = temp.Array;
+             {
+				matcherOut[postmap[i]] = !(matcherIn[postmap[i]])
+			 }
 		}
-
 		if ( seed ) {
 			if ( postFinder || preFilter ) {
 				if ( postFinder ) {
@@ -3768,12 +3764,10 @@ jQuery.extend({
 	removeData: function( elem, name ) {
 		return internalRemoveData( elem, name );
 	},
-
 	// For internal use only.
 	_data: function( elem, name, data ) {
 		return internalData( elem, name, data, true );
 	},
-
 	_removeData: function( elem, name ) {
 		return internalRemoveData( elem, name, true );
 	},
@@ -3814,7 +3808,6 @@ jQuery.fn.extend({
 
 						if ( name.indexOf("data-") === 0 ) {
 							name = jQuery.camelCase( name.slice(5) );
-
 							dataAttr( elem, name, data[ name ] );
 						}
 					}
@@ -3831,26 +3824,22 @@ jQuery.fn.extend({
 				jQuery.data( this, key );
 			});
 		}
-
 		return arguments.length > 1 ?
 
 			// Sets one value
 			this.each(function() {
 				jQuery.data( this, key, value );
 			}) :
-
 			// Gets one value
 			// Try to fetch any internally stored data first
 			elem ? dataAttr( elem, key, jQuery.data( elem, key ) ) : null;
 	},
-
 	removeData: function( key ) {
 		return this.each(function() {
 			jQuery.removeData( this, key );
 		});
 	}
 });
-
 function dataAttr( elem, key, data ) {
 	// If nothing was found internally, try to fetch any
 	// data from the HTML5 data-* attribute
@@ -3878,10 +3867,8 @@ function dataAttr( elem, key, data ) {
 			data = undefined;
 		}
 	}
-
 	return data;
 }
-
 // checks a cache object for emptiness
 function isEmptyDataObject( obj ) {
 	var name;
@@ -4192,7 +4179,6 @@ jQuery.fn.extend({
 					// store className if set
 					jQuery._data( this, "__className__", this.className );
 				}
-
 				// If the element has a class name or if we're passed "false",
 				// then remove the whole classname (if there was one, the above saved it).
 				// Otherwise bring back whatever was previously saved (if anything),
@@ -4320,10 +4306,9 @@ jQuery.extend({
 						values.push( value );
 					}
 				}
-
 				return values;
 			},
-
+			
 			set: function( elem, value ) {
 				var optionSet, option,
 					options = elem.options,

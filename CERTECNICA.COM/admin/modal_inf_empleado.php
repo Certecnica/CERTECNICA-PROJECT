@@ -1,4 +1,4 @@
-
+<!-- Add -->
 <div class="modal fade" id="addEmpleado">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -227,3 +227,233 @@
         </div>
     </div>
 </div>
+<!-- Edit -->
+<div class="modal fade" id="edit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          	<div class="modal-header">
+            	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              		<span aria-hidden="true">&times;</span></button>
+            	<h4 class="modal-title"><b><span class="employee_lastname"></b></h4>
+          	</div>
+          	<div class="modal-body">
+            	<form class="form-horizontal" method="POST" action="edit_inf_empleado.php" enctype="multipart/form-data">
+          		  <div class="form-group">
+                  
+                <div class="form-group">
+                    <label for="empleado" class="col-sm-3 control-label">EMPLEADO :</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" name="edit_empleado" id="edit_empleado">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM employees";
+                          $query = $conn->query($sql);
+                          while($prow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$prow['firstname'] .$prow['lastname']."'>".$prow['firstname']."".$prow['lastname']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nuevo" class="col-sm-3 control-label">CARGO : </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_cargo" name="edit_cargo" >
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM position";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['description']."'>".$srow['description']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="area" class="col-sm-3 control-label"> AREA </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_area" name="edit_area" >
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM areas";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['area']."'>".$srow['area']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  	<label for="correo_corporativo" class="col-sm-3 control-label">CORREO CORPORATIVO</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="email" class="form-control" id="edit_correo_corporativo" name="edit_correo_corporativo" placeholder="Ingrese el correo corporativo(si no tiene asignado uno ingresar N/A)">
+                  	</div> 
+                </div>
+                <div class="form-group">
+                  	<label for="numero" class="col-sm-3 control-label">TELEFONO CORPORATIVO</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="number" class="form-control" id="edit_numero" name="edit_numero" placeholder="Ingrese el Telefono  corporativo" >
+                  	</div> 
+                </div>
+                <div class="form-group">
+                    <label for="eps" class="col-sm-3 control-label"> EPS </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_eps" name="edit_eps">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM eps";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['eps']."'>".$srow['eps']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="afp" class="col-sm-3 control-label"> AFP </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_afp" name="edit_afp">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM afp";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cesantias" class="col-sm-3 control-label"> CESANTIAS </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_cesantias" name="edit_cesantias">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM cesantias";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="caja_compensacion" class="col-sm-3 control-label">CAJA COMPENSACIÓN</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_caja_compensacion" name="edit_caja_compensacion">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM cesantias";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>           <div class="form-group">
+                    <label for="arl" class="col-sm-3 control-label"> ARL </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_arl" name="edit_arl">
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM cesantias";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_Tcontrato" class="col-sm-3 control-label">TIPO CONTRATO </label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_Tcontrato" name="edit_Tcontrato" >
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM tipo_contrato";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_escolaridad" class="col-sm-3 control-label"> NIVEL ESCOLARIDAD</label>
+
+                    <div class="col-sm-9">
+                      <select class="form-control" id="edit_escolaridad" name="edit_escolaridad" >
+                        <option value="" selected>- Seleccionar -</option>
+                        <?php
+                          $sql = "SELECT * FROM nivel_escolaridad";
+                          $query = $conn->query($sql);
+                          while($srow = $query->fetch_assoc()){
+                            echo "
+                              <option value='".$srow['NOMBRE']."'>".$srow['NOMBRE']."</option>
+                            ";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                  	<label for="edit_titulo" class="col-sm-3 control-label">TITULO</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="text" class="form-control" id="edit_titulo" name="edit_titulo" placeholder="Ingrese titulo del empleado">
+                  	</div> 
+                </div>
+                <div class="form-group">
+                  	<label for="matricula" class="col-sm-3 control-label">MATRICULA PROFESIONAL</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="tex" class="form-control" id="edit_matricula" name="edit_matricula" placeholder="Ingrese la matricula profesional">
+                  	</div> 
+                </div>
+          	</div>
+            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
+            	<button type="submit" class="btn btn-primary btn-flat" name="editEmpleadoInf"><i class="fa fa-save"></i> Guardar</button>
+            	</form>
+          	</div>
+        </div>
+    </div>
+</div>
+<!--Delete-->
+

@@ -179,7 +179,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_contact" class="col-sm-3 control-label">Información de Contacto</label>
+                    <label for="edit_contact" class="col-sm-3 control-label">Correo Electronico</label>
 
                     <div class="col-sm-9">
                       <input type="text" class="form-control" id="edit_contact" name="contact">

@@ -106,7 +106,7 @@
       //for eid
       $username = $_SESSION["employees"];
 
-      $eid_query = mysqli_query($conn, "SELECT id FROM employees WHERE lastname = $username");
+      $eid_query = mysqli_query($conn, "SELECT id FROM employees WHERE lastname = '$username' ");
       
       $row = mysqli_fetch_array($eid_query);
 
@@ -247,51 +247,6 @@ error_reporting(E_ALL);
 <?php include 'includes/scripts.php'; ?>
 
 <?php include 'includes/footer.php'; ?>
-<script>
-$(function(){
-  $('.edit').click(function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.delete').click(function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $('.photo').click(function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-});
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'employee_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.empid').val(response.empid);
-      $('.employee_id').html(response.id);
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);
-      $('#employee_name').html(response.firstname+' '+response.lastname);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_address').val(response.address);
-      $('#datepicker_edit').val(response.birthdate);
-      $('#edit_contact').val(response.contact_info);
-      $('#gender_val').val(response.gender).html(response.gender);
-      $('#position_val').val(response.position_id).html(response.description);
-      $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
-    }
-  });
-}
-</script>
 </body>
 </html>
 
