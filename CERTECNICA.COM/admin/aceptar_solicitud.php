@@ -1,42 +1,22 @@
 <?php include 'includes/session.php'; ?>
-
 <?php include 'includes/header.php'; ?>
-
 <body class="hold-transition skin-blue sidebar-mini">
-
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-  <style>
-        h1 {
-            text-align: center;
-            font-size: 2.5em;
-            font-weight: bold;
-            padding-top: 1em;
-        }
 
-        .mycontainer {
-            width: 90%;
-            margin: 1.5rem auto;
-            min-height: 60vh;
-        }
-
-        .mycontainer table {
-            margin: 1.5rem auto;
-        }
-    </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Solicitudes
+        Lista de Empleados
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li>Solicitudes</li>
-        <li class="active">Lista de Solicitudes</li>
+        <li>Empleados</li>
+        <li class="active">Lista de Empleados</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -63,10 +43,12 @@
           unset($_SESSION['success']);
         }
       ?>
-<div class="row">
+   <div class="row">
         <div class="col-xs-12">
           <div class="box">
-
+            <div class="box-header with-border">
+               <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
+            </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
@@ -76,48 +58,41 @@
                   <th>descripcion</th>
                   <th>fecha_inicio</th>
                   <th>N° de dias</th>
-                  <th>N° de horas</th>
-                  <th>Aprobacion Gestion Humana</th>
                   <th>Aprobacion de Jefe </th>
-  
+                  <th>Aprobacion Gestion Humana</th>
+                  <th>Acción</th>
                 </thead>
                 <tbody>
                   <?php
-                  global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH='Rechazada' AND estado_JF ='Rechazada'");
-                 
-                 if($leaves){
-                   $numrow = mysqli_num_rows($leaves);
-                   if($numrow!=0){
-                     $cnt=1;
-                     while($row1 = mysqli_fetch_array($leaves)){
-                       $datetime1 = new DateTime($row1['fecha_inicio']);
-                       $datetime2 = new DateTime($row1['fecha_fin']);
-                       $interval = $datetime1->diff($datetime2);
-                       
-                       echo "<tr>
-                       <td>$cnt</td>
-                       <td>{$row1['Motivo']}</td>
-                       <td>{$row1['emplead']}</td>
-                       <td>{$row1['descripcion']}</td>
-                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$interval->format('%a Dia/s')}</td>
-                       <td>{$interval->format('%H Horas %i Minutos')}</td>
-                       <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-      
-                       </tr>";
-                    $cnt++; }
-                   } else {
-                     echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
-                   }
-                 }
-                 else{
-                  echo "Query Error : " . "SELECT * FROM solicitudes WHERE aprobacion_GH ='Pendiente'" . "<br>" . mysqli_error($conn);
+                   global $row;
+                   $query = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Pendiente'");
+                   $numrow = mysqli_num_rows($query);
+                      if ($query) {
+                          if ($numrow != 0) {
+                              $cnt = 1;
 
-                               }
-             ?>
-                        </tr>
+                              while ($row = mysqli_fetch_assoc($query)) {
+                                  $datetime1 = new DateTime($row['fecha_inicio']);
+                                  $datetime2 = new DateTime($row['fecha_fin']);
+                                  $interval = $datetime1->diff($datetime2);
+                                  echo "<tr>
+                                            <td>$cnt</td>
+                                            <td>{$row['Motivo']}</td>
+                                            <td>{$row['descripcion']}</td>
+                                            <td>{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
+                                            <td>{$interval->format('%a Day/s')}</td>
+                                            <td>{$row['aprobacion_GH']}</td>
+                                            <td>{$row['estado_JF']}</td>
+
+                                            <td><a href=\"updateStatusAccept.php?id={$row['id']}&descripcion={$row['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>
+                                            <a href=\"updateStatusReject.php?id={$row['id']}&descripcion={$row['descripcion']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>
+                                          </tr>";
+                                  $cnt++;
+                              }
+                          }
+                      }
+                  
+                        ?>
                 </tbody>
               </table>
             </div>
@@ -126,20 +101,10 @@
       </div>
     </section>   
   </div>
-    </body>                        
-    </section>   
-</div>
+    
 
-
-</html>
-<?php
-ini_set('display_errors', true);
-error_reporting(E_ALL);
-?>
-</div>
-    </section>   
-  </div>
-  <?php include '../admin/includes/admin_modal.php'; ?>
+<?php include 'includes/footer.php'; ?>
+  <?php include 'includes/employee_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
@@ -174,7 +139,7 @@ function getRow(id){
     dataType: 'json',
     success: function(response){
       $('.empid').val(response.empid);
-      $('.employee_id').html(response.id);
+      $('.employee_id').html(response.employee_id);
       $('.del_employee_name').html(response.firstname+' '+response.lastname);
       $('#employee_name').html(response.firstname+' '+response.lastname);
       $('#edit_firstname').val(response.firstname);

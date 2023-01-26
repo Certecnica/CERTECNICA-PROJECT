@@ -9,6 +9,7 @@
 	$query = $conn->query($sql);
 	$user = $query->fetch_assoc();
 
+	
 	if(isset($_SESSION['tiempo']) ) {
 		//Tiempo en segundos para dar vida a la sesión.
 		$inactivo = 2000;//20min en este caso.

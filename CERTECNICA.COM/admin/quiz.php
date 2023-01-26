@@ -1,186 +1,333 @@
+<?php
+include ('includes/conn.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titulo_examen = $_POST['titulo_examen'];
+
+    /**
+     * Preguntas
+     */
+    $pregunta1 = $_POST['preg1'];
+    $pregunta2 = $_POST['preg2'];an
+    $pregunta3 = $_POST['preg3'];
+    $pregunta4 = $_POST['preg4'];
+    $pregunta5 = $_POST['preg5'];
+
+    /**
+     * Opciones
+     */
+    $preg1_opcion_a = $_POST['preg1_opcion_a'];
+    $preg1_opcion_b = $_POST['preg1_opcion_b'];
+    $preg1_opcion_c = $_POST['preg1_opcion_c'];
+
+    $preg2_opcion_a = $_POST['preg2_opcion_a'];
+    $preg2_opcion_b = $_POST['preg2_opcion_b'];
+    $preg2_opcion_c = $_POST['preg2_opcion_c'];
+
+    $preg3_opcion_a = $_POST['preg3_opcion_a'];
+    $preg3_opcion_b = $_POST['preg3_opcion_b'];
+    $preg3_opcion_c = $_POST['preg3_opcion_c'];
+
+    $preg4_opcion_a = $_POST['preg4_opcion_a'];
+    $preg4_opcion_b = $_POST['preg4_opcion_b'];
+    $preg4_opcion_c = $_POST['preg4_opcion_c'];
+
+    $preg5_opcion_a = $_POST['preg5_opcion_a'];
+    $preg5_opcion_b = $_POST['preg5_opcion_b'];
+    $preg5_opcion_c = $_POST['preg5_opcion_c'];
+
+    /**
+     * Respuestas correctas
+     */
+    $preg1_correcta = $_POST['preg1_correcta'];
+    $preg2_correcta = $_POST['preg2_correcta'];
+    $preg3_correcta = $_POST['preg3_correcta'];
+    $preg4_correcta = $_POST['preg4_correcta'];
+    $preg5_correcta = $_POST['preg5_correcta'];
+
+    /**
+     * Insertar nombre del examen
+     */
+    $query = "INSERT INTO examenes (nombre) VALUES ('$titulo_examen')";
+    $resultado = mysqli_query($db, $query);
+
+    // Obtener el ID del examen
+    $query = "SELECT MAX(id) AS id FROM examenes";
+    $resultado = mysqli_fetch_assoc(mysqli_query($db, $query));
+    $ultimoexamen = $resultado['id'];
+
+    /**
+     * Insertar preguntas en tabla examen_preguntas
+     */
+    for ($i=1; $i < 6; $i++) {
+        $pregunta = "pregunta{$i}";
+        $correcta = "preg{$i}_correcta";
+        $query = "INSERT INTO examen_preguntas (pregunta, correcta, examen_id) VALUES ('{$$pregunta}', '{$$correcta}', '{$ultimoexamen}')";
+
+        $resultado = mysqli_query($db, $query);
+
+        // Obtener el ID de la pregunta
+        $query = "SELECT MAX(id) AS id FROM examen_preguntas";
+        $pregunta = mysqli_fetch_assoc(mysqli_query($db, $query));
+        $ultimapregunta = $pregunta['id'];
+
+        /**
+         * Insertar incisos en tabla respuestas
+         */
+        $opcion_a = "preg{$i}_opcion_a";
+        $opcion_b = "preg{$i}_opcion_b";
+        $opcion_c = "preg{$i}_opcion_c";
+
+        $query = "INSERT INTO respuestas (inciso, respuesta, pregunta_id, examen_id) VALUES ('A', '{$$opcion_a}', '{$ultimapregunta}', '{$ultimoexamen}')";
+        $resultado = mysqli_query($db, $query);
+
+        $query = "INSERT INTO respuestas (inciso, respuesta, pregunta_id, examen_id) VALUES ('B', '{$$opcion_b}', '{$ultimapregunta}', '{$ultimoexamen}')";
+        $resultado = mysqli_query($db, $query);
+
+        $query = "INSERT INTO respuestas (inciso, respuesta, pregunta_id, examen_id) VALUES ('C', '{$$opcion_c}', '{$ultimapregunta}', '{$ultimoexamen}')";
+        $resultado = mysqli_query($db, $query);
+    }
+
+    /**
+     * Asignar a todos los alumnos
+     */
+    $query = "SELECT * FROM usuarios WHERE es_admin IS NULL";
+    $usuarios = mysqli_query($db, $query);
+
+    while ($usuario = mysqli_fetch_assoc($usuarios)) {
+        $userid = $usuario['id'];
+        $query = "INSERT INTO usuarios_examenes (usuario_id, examen_id) VALUES ({$userid}, {$ultimoexamen})";
+        $resultado = mysqli_query($db, $query);
+    }
+
+    header('Location: /admin?examenCreado=ok');
+}
+
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-MX">
 <head>
-	</head>
-	<?php include 'includes/session.php'; ?>
-    <?php include ('includes/header.php') ?>
-	<?php include('includes/navbar.php') ?>
-	<?php include('includes/menubar.php') ?>
-	<?php include('includes/conn.php') ?>
-
-	<title>Listado de Quiz</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear examen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="/assets/css/estilos.css" as="style">
+    <link rel="stylesheet" href="/assets/css/estilos.css">
+    <script src="https://kit.fontawesome.com/a25d0be30f.js" crossorigin="anonymous"></script>
 </head>
-<body>	
-	<div class="container-fluid admin">
-		<div class="col-md-12 alert alert-primary">Quiz List</div>
-		<button class="btn btn-primary bt-sm" id="new_quiz"><i class="fa fa-plus"></i>Añadir Nuevo</button>
-		<br>
-		<br>
-		<div class="card">
-			<div class="card-body">
-				<table class="table table-bordered" id='table'>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th>Titulo</th>
-							<th>Items</th>
-							<th>Puntos por items</th>
-							<th>Area</th>
-							<th>Action</th>
-						</tr>
-					</thead>
-					<tbody>
-					<?php
-					$qry = $conn->query("SELECT q.*,u.name as fname from quiz_list q left join users u on q.user_id = u.id  order by q.title asc ");
-					$i = 1;
-					if($qry->num_rows > 0){
-						while($row= $qry->fetch_assoc()){
-							$items = $conn->query("SELECT count(id) as item_count from questions where qid = '".$row['id']."' ")->fetch_array()['item_count'];
-						?>
-					<tr>
-						<td><?php echo $i++ ?></td>
-						<td><?php echo $row['title'] ?></td>
-						<td><?php echo $items ?></td>
-						<td><?php echo $row['qpoints'] ?></td>
-							<?php if($_SESSION['login_id'] ==1): ?>
-						<td><?php echo $row['fname'] ?></td>
-							<?php endif; ?>
-						<td>
-							<center>
-							 <a class="btn btn-sm btn-outline-primary edit_quiz" href="./quiz_view.php?id=<?php echo $row['id']?>"><i class="fa fa-task"></i> Manage</a>
-							 <button class="btn btn-sm btn-outline-primary edit_quiz" data-id="<?php echo $row['id']?>" type="button"><i class="fa fa-edit"></i> Edit</button>
-							<button class="btn btn-sm btn-outline-danger remove_quiz" data-id="<?php echo $row['id']?>" type="button"><i class="fa fa-trash"></i> Delete</button>
-							</center>
-						</td>
-					</tr>
-					<?php
-					}
-					}
-					?>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
-	<div class="modal fade" id="manage_quiz" tabindex="-1" role="dialog" >
-				<div class="modal-dialog modal-centered" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							
-							<h4 class="modal-title" id="myModallabel">Add New quiz</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						</div>
-						<form id='quiz-frm'>
-							<div class ="modal-body">
-								<div id="msg"></div>
-								<div class="form-group">
-									<label>Title</label>
-									<input type="hidden" name="id" />
-									<input type="text" name="title" required="required" class="form-control" />
-								</div>
-								<div class="form-group">
-									<label>Points per question</label>
-									<input type="nember" name ="qpoints" required="" class="form-control" />
-								</div>
-								<?php if($_SESSION['login_user_type'] == 1): ?>
-								<div class="form-group">
-									<label>Faculty</label>
-									<select name="user_id" required="required" class="form-control" />
-									<option value="" selected="" disabled="">Select Here</option>
-									<?php
-										$qry = $conn->query("SELECT * from users where user_type = 2 order by name asc");
-										while($row= $qry->fetch_assoc()){
-									?>
-										<option value="<?php echo $row['id'] ?>"><?php echo $row['name'] ?></option>
-									<?php } ?>
-									</select>
-								</div>
-								<?php else: ?>
-									<input type="hidden" name="user_id" />
-								<?php endif; ?>
-							</div>
-							<div class="modal-footer">
-								<button  class="btn btn-primary" name="save"><span class="glyphicon glyphicon-save"></span> Save</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-</body>
-<?php include 'includes/scripts.php' ?>
-<script>
-	$(document).ready(function(){
-		$('#table').DataTable();
-		$('#new_quiz').click(function(){
-			$('#msg').html('')
-			$('#manage_quiz .modal-title').html('Add New quiz')
-			$('#manage_quiz #quiz-frm').get(0).reset()
-			$('#manage_quiz').modal('show')
-		})
-		$('.edit_quiz').click(function(){
-			var id = $(this).attr('data-id')
-			$.ajax({
-				url:'./get_quiz.php?id='+id,
-				error:err=>console.log(err),
-				success:function(resp){
-					if(typeof resp != undefined){
-						resp = JSON.parse(resp)
-						$('[name="id"]').val(resp.id)
-						$('[name="title"]').val(resp.title)
-						$('[name="qpoints"]').val(resp.qpoints)
-						$('[name="user_id"] ').val(resp.user_id)
-						$('#manage_quiz .modal-title').html('Edit Quiz')
-						$('#manage_quiz').modal('show')
+<body>
+    <header>
+        <div class="contenedor centrar-flex">
+            <h1 class="titulo-pagina">Crear examen</h1>
 
-					}
-				}
-			})
+            <div class="conjunto-botones">
+                <a href="/admin" class="btn-subrayado"><i class="icono fa-solid fa-arrow-left"></i> Regresar</a>
+            </div>
+        </div>
+    </header>
 
-		})
-		$('.remove_quiz').click(function(){
-			var id = $(this).attr('data-id')
-			var conf = confirm('Are you sure to delete this data.');
-			if(conf == true){
-				$.ajax({
-				url:'./delete_quiz.php?id='+id,
-				error:err=>console.log(err),
-				success:function(resp){
-					if(resp == true)
-						location.reload()
-				}
-			})
-			}
-		})
-		$('#quiz-frm').submit(function(e){
-			e.preventDefault();
-			$('#quiz-frm [name="submit"]').attr('disabled',true)
-			$('#quiz-frm [name="submit"]').html('Saving...')
-			$('#msg').html('')
+    <main class="contenedor centrar-flex">
+        <form action="crear-examen.php" class="form_examen" method="post">
+            <p class="intrucciones-examen">Asigna un nombre al examen.</p>
+            <hr class="separador">
+            
+            <div class="form_grupo">
+                <label for="titulo_examen">Nombre</label>
+                <input class="form_title" type="text" name="titulo_examen" id="titulo_examen">
+            </div>
 
-			$.ajax({
-				url:'./save_quiz.php',
-				method:'POST',
-				data:$(this).serialize(),
-				error:err=>{
-					console.log(err)
-					alert('An error occured')
-					$('#quiz-frm [name="submit"]').removeAttr('disabled')
-					$('#quiz-frm [name="submit"]').html('Save')
-				},
-				success:function(resp){
-					if(typeof resp != undefined){
-						resp = JSON.parse(resp)
-						if(resp.status == 1){
-							alert('Data successfully saved');
-							location.replace('./quiz_view.php?id='+resp.id)
-						}else{
-						$('#msg').html('<div class="alert alert-danger">'+resp.msg+'</div>')
+            <hr class="separador">
+            <p class="intrucciones-examen">Redacta las preguntas y sus respuestas.</p>
 
-						}
-					}
-				}
-			})
-		})
-	})
-</script>
-</html>
+            <!-- Inicio Pregunta examen -->
+            <div class="form_grupo form_grupo-pregunta">
+                <div class="fila">
+                    <label for="preg1" class="numero-pregunta">1</label>
+                    <input class="pregunta" type="text" name="preg1" id="preg1">
+    
+                    <!-- Seleccionar opcion correcta -->
+                    <label for="preg1_correcta" class="opcion-correcta">Opción correcta</label>
+                    <select name="preg1_correcta" id="preg1_correcta">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+                <div class="fila">
+                    <!-- Opciones -->
+                    <div class="input-opciones">
+                        <div class="opcion">
+                            <label>A</label>
+                            <input type="text" name="preg1_opcion_a">
+                        </div>
+
+                        <div class="opcion">
+                            <label>B</label>
+                            <input type="text" name="preg1_opcion_b">
+                        </div>
+
+                        <div class="opcion">
+                            <label>C</label>
+                            <input type="text" name="preg1_opcion_c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Pregunta examen -->
+
+            <!-- Inicio Pregunta examen -->
+            <div class="form_grupo form_grupo-pregunta">
+                <div class="fila">
+                    <label for="preg2" class="numero-pregunta">2</label>
+                    <input class="pregunta" type="text" name="preg2" id="preg1">
+    
+                    <!-- Seleccionar opcion correcta -->
+                    <label for="preg2_correcta" class="opcion-correcta">Opción correcta</label>
+                    <select name="preg2_correcta" id="preg2_correcta">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+                <div class="fila">
+                    <!-- Opciones -->
+                    <div class="input-opciones">
+                        <div class="opcion">
+                            <label>A</label>
+                            <input type="text" name="preg2_opcion_a">
+                        </div>
+
+                        <div class="opcion">
+                            <label>B</label>
+                            <input type="text" name="preg2_opcion_b">
+                        </div>
+
+                        <div class="opcion">
+                            <label>C</label>
+                            <input type="text" name="preg2_opcion_c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Pregunta examen -->
+
+            <!-- Inicio Pregunta examen -->
+            <div class="form_grupo form_grupo-pregunta">
+                <div class="fila">
+                    <label for="preg3" class="numero-pregunta">3</label>
+                    <input class="pregunta" type="text" name="preg3" id="preg1">
+    
+                    <!-- Seleccionar opcion correcta -->
+                    <label for="preg3_correcta" class="opcion-correcta">Opción correcta</label>
+                    <select name="preg3_correcta" id="preg3_correcta">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+                <div class="fila">
+                    <!-- Opciones -->
+                    <div class="input-opciones">
+                        <div class="opcion">
+                            <label>A</label>
+                            <input type="text" name="preg3_opcion_a">
+                        </div>
+
+                        <div class="opcion">
+                            <label>B</label>
+                            <input type="text" name="preg3_opcion_b">
+                        </div>
+
+                        <div class="opcion">
+                            <label>C</label>
+                            <input type="text" name="preg3_opcion_c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Pregunta examen -->
+
+            <!-- Inicio Pregunta examen -->
+            <div class="form_grupo form_grupo-pregunta">
+                <div class="fila">
+                    <label for="preg4" class="numero-pregunta">4</label>
+                    <input class="pregunta" type="text" name="preg4" id="preg1">
+    
+                    <!-- Seleccionar opcion correcta -->
+                    <label for="preg4_correcta" class="opcion-correcta">Opción correcta</label>
+                    <select name="preg4_correcta" id="preg4_correcta">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+                <div class="fila">
+                    <!-- Opciones -->
+                    <div class="input-opciones">
+                        <div class="opcion">
+                            <label>A</label>
+                            <input type="text" name="preg4_opcion_a">
+                        </div>
+
+                        <div class="opcion">
+                            <label>B</label>
+                            <input type="text" name="preg4_opcion_b">
+                        </div>
+
+                        <div class="opcion">
+                            <label>C</label>
+                            <input type="text" name="preg4_opcion_c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Pregunta examen -->
+
+            <!-- Inicio Pregunta examen -->
+            <div class="form_grupo form_grupo-pregunta">
+                <div class="fila">
+                    <label for="preg5" class="numero-pregunta">5</label>
+                    <input class="pregunta" type="text" name="preg5" id="preg1">
+    
+                    <!-- Seleccionar opcion correcta -->
+                    <label for="preg5_correcta" class="opcion-correcta">Opción correcta</label>
+                    <select name="preg5_correcta" id="preg5_correcta">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                </div>
+
+                <div class="fila">
+                    <!-- Opciones -->
+                    <div class="input-opciones">
+                        <div class="opcion">
+                            <label>A</label>
+                            <input type="text" name="preg5_opcion_a">
+                        </div>
+
+                        <div class="opcion">
+                            <label>B</label>
+                            <input type="text" name="preg5_opcion_b">
+                        </div>
+
+                        <div class="opcion">
+                            <label>C</label>
+                            <input type="text" name="preg5_opcion_c">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fin Pregunta examen -->
+
+            <input class="btn btn-principal btn-examen" type="submit" value="Guardar">
+        </form>
+    </main>

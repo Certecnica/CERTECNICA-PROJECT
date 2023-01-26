@@ -1,11 +1,35 @@
 <?php include 'includes/session.php'; ?>
+
+<?php $documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+$documentos -> execute();
+$listado = $documentos ->fetchAll();
+?>
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
+  <style>
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            padding-top: 1em;
+        }
 
+        .mycontainer {
+            width: 90%;
+            margin: 1.5rem auto;
+            min-height: 60vh;
+        }
+
+        .mycontainer table {
+            margin: 1.5rem auto;
+        }
+    </style>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,7 +40,7 @@
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li>Solicitudes</li>
-        <li class="active">Historial de Solicitudes</li>
+        <li class="active">Lista de Solicitudes</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -43,62 +67,67 @@
           unset($_SESSION['success']);
         }
       ?>
-<body>
-    <nav class="navbar header-nav navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-        
-    </nav>
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+               <a href="#addsolicitud" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
+            </div>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered">
+                <thead>
+                  <th>Empleado</th>
+                  <th>Motivo</th>
+                  <th>descripcion</th>
+                  <th>fecha de permiso</th>
+                  <th>N° de dias</th>
+                  <th>N° de horas</th>
+                  <th>Aprobacion Gestion Humana</th>
+                  <th>Aprobacion de Jefe </th>
+                  <th>Acciones</th>
 
-    <h1>Historial de Solicitudes</h1>
+                </thead>
+                <tbody>
+                <?php foreach ($listado as $key => $value) { ?>
+                <?php $datetime1 = new DateTime($value['fecha_inicio']);
+                $datetime2 = new DateTime($value['fecha_fin']);
+                $interval = $datetime1->diff($datetime2);
+                ?>         
+                        <tr>
+                          <td><?php echo $value['emplead']; ?></td>
+                          <td><?php echo $value['Motivo']; ?></td>
+                          <td><?php echo $value['descripcion']; ?></td>
+                          <td><?php echo $datetime1->format('Y/m/d  h:i:s ') ?><b> Hasta </b> <?php echo $datetime2->format('Y/m/d/ h:i:s') ?></td>                  
+                          <td><?php echo $interval->format('%a Dia/s') ?></td>
+                          <td><?php echo $interval->format('%H Horas %i Minutos') ?></td>
+                          <td><?php echo $value['aprobacion_GH'] ?></td>
+                          <td><?php echo  $value['estado_JF'] ?></td>
 
-    <div class="mycontainer">
+                          <td><button type="button" class="btn btn-warning"><a href="<?php echo $value['documento']; ?>">Descargar Archivo</a></td></button>
 
-        <div class="table-responsive">
-              <table class="table table-bordered table-hover table-striped">
-                  <thead>
-                      <th>N° Solicitud</th>
-                      <th>Empleado</th>
-                      <th>Solicitud de permiso</th>
-                      <th>Dias</th>
-                      <th>Fecha Inicio</th>
-                      <th>Fecha Fin</th>
-                      <th>Estado</th>
-                  </thead>
-                  <tbody>
-                    <!-- loading all leave applications of the user -->
+                        </tr>
                     <?php
-                          $leaves = mysqli_query($conn,"SELECT * FROM leaves");
-                          if($leaves){
-                            $numrow = mysqli_num_rows($leaves);
-                            if($numrow!=0){
-                              $cnt=1;
-                              while($row1 = mysqli_fetch_array($leaves)){
-                                $datetime1 = new DateTime($row1['fromdate']);
-                                $datetime2 = new DateTime($row1['todate']);
-                                $interval = $datetime1->diff($datetime2);
-                                echo "<tr>
-                                        <td>$cnt</td>
-                                        <td>{$row1['ename']}</td>
-                                        <td>{$row1['descr']}</td>
-                                        <td>{$interval->format('%a Day/s')}</td>
-                                        <td>{$datetime1->format('Y/m/d')}</td>
-                                        <td>{$datetime2->format('Y/m/d')}</td>
-                                        <td><b>{$row1['status']}</b></td>
-                                      </tr>";
-                             $cnt++; }
-                            } else {
-                              echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
-                            }
                           }
-                          else{
-                            echo "Query Error : " . "SELECT descr,status FROM leaves WHERE eid='".$_SESSION['sess_eid']."'" . "<br>" . mysqli_error($conn);;
-                          }
-                      ?>
-                  </tbody>
+                ?>
+                        </tr>
+                </tbody>
               </table>
+            </div>
           </div>
-    </div>
-</body>
+        </div>
+      </div>
+    </section>   
+  </div>
+    </body>                        
+    </section>   
+</div>
+
+
+</html>
+<?php
+ini_set('display_errors', true);
+error_reporting(E_ALL);
+?>
 </div>
     </section>   
   </div>

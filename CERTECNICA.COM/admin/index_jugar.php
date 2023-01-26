@@ -3,7 +3,7 @@
 session_start();
 // session_destroy();
 
-include("admin/funciones.php");
+include("funciones.php");
 
 aumentarVisita();
 

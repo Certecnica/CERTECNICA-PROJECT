@@ -1,0 +1,36 @@
+// COPIA 
+
+                        <th>Area</th>
+                        <th>Correo</th>
+                        <th>EPS</th>
+                        <th>AFP</th>
+                        <th>ARL</th>
+                        <th>CESANTIAS</th>
+                        <th>Caja Compensación</th>
+                        <th>Centro Trabajo</th>
+                        <th>Campo Trabajo</th>
+                        <th>Fecha Vinculación</th>
+                        <th>Tipo Contrato</th>
+                        <th>Nivel Escolaridad</th>
+                        <th>Titulo</th>
+                        <th>Matricula Profesional</th>
+                        <th>Salario Basico</th>
+                        <th>Nivel Riesgo</th>
+                        <th>Telefono</th>
+
+
+
+
+// TRAER DATOS 
+
+<?php
+                        while ($datos = mysqli_fetch_array($sqlquery2))
+                        {
+                    ?>
+                        <option value="<?php echo $datos['Nombres']; echo $datos['APELLIDOS'] ?>"><?php echo $datos['Nombres']; echo $datos['APELLIDOS']?></option>
+                        <br>
+                        <br>
+
+                    <?php
+                     }
+                    ?>  

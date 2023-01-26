@@ -1,3 +1,4 @@
+
 <?php include 'includes/session.php'; ?>
 
 <?php include 'includes/header.php'; ?>
@@ -64,7 +65,7 @@
                 </thead>
                 <tbody>
                   <?php    
-                  $sql= "SELECT *FROM  informacion_empleado ";
+                  $sql= "SELECT * FROM  informacion_empleado ";
                     $query = $conn->query($sql);
                     while($fila = $query->fetch_assoc()){
                       ?>
@@ -75,8 +76,10 @@
                           <td><?php echo $fila['correo_corporativo']; ?></td>
                           <td><?php echo $fila['created_on'] ?></td>
                           <td>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
-                            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
+                            <!-- Boton                              <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['caid']."'><i class='fa fa-edit'></i> Editar</button>
+-->
+                            <a class='btn btn-success btn-sm edit btn-flat' href="editar_empleado.php?id=<?php echo $fila['id']?> "><i class="fa fa-edit">Editar</i></a>
+                          <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
                           </td>
                         </tr>
                       <?php
@@ -95,6 +98,7 @@
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
+<?php include 'editar_empleado.php' ?>
 <script>
 $(function(){
   $('.edit').click(function(e){

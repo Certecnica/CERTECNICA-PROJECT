@@ -41,31 +41,76 @@
           ";
           unset($_SESSION['success']);
         }
-      ?>9
+      ?>
 <?php
 include("funciones.php");
 
 $resultado_preguntas = obetenerTodasLasPreguntas();
 ?>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="quiz.css">
     <title>Examenes</title>
-</head>
-<body>
-    <div class="contenedor">
-        <header>
-            <h1>Examenes</h1>
-        </header>
-        <div class="contenedor-info">
 
-            <div class="panel">
-                <h2>Listado de Preguntas</h2>
-                <hr>
+<body>
+  <br>
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header with-border">
+            </div>
+            <div class="box-body">
+              <table id="example1" class="table table-bordered">
+                <thead>
+                  <th>Tema</th>
+                  <th>Pregunta</th>
+                  <th>Opcion a</th>
+                  <th>Opcion b</th>
+                  <th>Opcion c</th>
+                  <th>Opcion Correcta</th>
+                  <th>Acción</th>
+                </thead>
+                <tbody>
+                <?php
+                    $sql = "SELECT * FROM preguntas";
+                    $query = $conn->query($sql);
+                        while ($row = mysqli_fetch_assoc($resultado_preguntas)) {
+                      ?>
+                        <tr>
+                          <td><?php echo obtenerNombreTema($row['tema'])?></td>
+                          <td><?php echo $row['pregunta']?></td>
+                          <td><?php echo $row['opcion_a']?></td>
+                          <td><?php echo $row['opcion_b']?></td>
+                          <td><?php echo $row['opcion_c']?></td>
+                          <td><?php echo $row['correcta']?></td>
+
+                          <td>
+                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
+                            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
+                          </td>
+                        </tr>
+                      <?php
+                    }
+                  ?>
+                     
+                    
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+              
+                <!-- 
                 <section id="listadoPreguntas">
                 <?php while ($row = mysqli_fetch_assoc($resultado_preguntas)) : ?>
                     <div class="contenedor-pregunta">
@@ -95,6 +140,7 @@ $resultado_preguntas = obetenerTodasLasPreguntas();
                     </div>
                     
                 <?php endwhile ?>
+                -->
                 </section>
             </div>
         </div>

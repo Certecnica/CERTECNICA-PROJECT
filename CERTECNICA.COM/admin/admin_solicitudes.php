@@ -63,60 +63,74 @@
           unset($_SESSION['success']);
         }
       ?>
-
-
-<body>
-    <nav class="navbar header-nav navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-             
-    </nav>
-
-    <h1>Solicitudes Pendientes</h1>
-
-    <div class="mycontainer">
-
-            <table class="table table-bordered table-hover table-striped">
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-body">
+              <table id="example1" class="table table-bordered">
                 <thead>
-                    <th>N° de Solicitud</th>
-                    <th>Empleado</th>
-                    <th>Solicitudes de permiso</th>
-                    <th>Fechas</th>
-                    <th>Tiempo</th>
-                    <th>Acciones</th>
+                  <th>ID de solicitud</th>
+                  <th>motivo</th>
+                  <th>Empleado</th>
+                  <th>descripcion</th>
+                  <th>fecha_inicio</th>
+                  <th>N° de dias</th>
+                  <th>N° de horas</th>
+                  <th>Aprobacion Gestion Humana</th>
+                  <th>Aprobacion de Jefe </th>
+                  <th>Acciones</th>
                 </thead>
                 <tbody>
-                        <?php
-                                global $row;
-                                $query = mysqli_query($conn,"SELECT * FROM leaves WHERE status='Pendiente'");
-                                $numrow = mysqli_num_rows($query);
-                               if($query){
-                                    if($numrow!=0){
-                                         $cnt=1;
+                  <?php
+                  global $row;
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE estado_JF ='Aceptado' AND aprobacion_GH = 'Pendiente'");
+                 
+                 if($leaves){
+                   $numrow = mysqli_num_rows($leaves);
+                   if($numrow!=0){
+                     $cnt=1;
+                     while($row1 = mysqli_fetch_array($leaves)){
+                       $datetime1 = new DateTime($row1['fecha_inicio']);
+                       $datetime2 = new DateTime($row1['fecha_fin']);
+                       $interval = $datetime1->diff($datetime2);
+                       
+                       echo "<tr>
+                       <td>$cnt</td>
+                       <td>{$row1['Motivo']}</td>
+                       <td>{$row1['emplead']}</td>
+                       <td>{$row1['descripcion']}</td>
+                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
+                       <td>{$interval->format('%a Dia/s')}</td>
+                       <td>{$interval->format('%H Horas %i Minutos')}</td>
+                       <td>{$row1['aprobacion_GH']}</td>
+                       <td>{$row1['estado_JF']}</td>
+                       <td><a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>
+                       <a href=\"updateStatusReject.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>    
+                       </tr>";
+                    $cnt++; }
+                   } else {
+                     echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
+                   }
+                 }
+                 else{
+                  echo "Query Error : " . "SELECT * FROM solicitudes WHERE aprobacion_GH ='Pendiente'" . "<br>" . mysqli_error($conn);
 
-                                          while($row = mysqli_fetch_assoc($query)){
-                                            $datetime1 = new DateTime($row['fromdate']);
-                                            $datetime2 = new DateTime($row['todate']);
-                                            $interval = $datetime1->diff($datetime2);
-                                            echo "<tr>
-                                                    <td>$cnt</td>
-                                                    <td>{$row['ename']}</td>
-                                                    <td>{$row['descr']}</td>
-                                                    <td>{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
-                                                    <td>{$interval->format('%a Day/s')}</td>
-                                                    <td><a href=\"updateStatusAccept.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-success btn-sm' >Aceptar</button></a>
-                                                    <a href=\"updateStatusReject.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>
-                                                  </tr>";  
-                                         $cnt++; }       
-                                    }
-                                }
-                                else{
-                                    echo "Query Error : " . "SELECT * FROM leaves WHERE status= 'Pendiente'" . "<br>" . mysqli_error($conn);
-                                }
-                       ?>
+                               }
+             ?>
+                        </tr>
                 </tbody>
-            </table>
-    </div>  
-</body>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+  </div>
+    </body>                        
+    </section>   
+</div>
+
+
 </html>
 <?php
 ini_set('display_errors', true);

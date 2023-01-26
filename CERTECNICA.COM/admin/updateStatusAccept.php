@@ -8,17 +8,15 @@ if(!isset($_SESSION["admin"])){
   }
 else{
 
-	$eid = $_GET['eid'];
-	$descr = $_GET['descr'];
-
-	$conexion = mysqli_query($conn,"UPDATE leaves SET status='Aceptado' WHERE eid='".$eid."' AND descr='".$descr."'");
+	$id = $_GET['id'];
+	$conexion = mysqli_query($conn,"UPDATE solicitudes  SET aprobacion_GH ='Aceptado' WHERE id='".$id."'");
 
 				if($conexion){	
 					echo 'Saved!!';
 					header("Location: admin_solicitudes.php");
 				}
 				else{
-					echo "Query Error : " . "UPDATE leaves SET status='Aceptado' WHERE eid='".$eid."' AND descr='".$descr."'" . "<br>" . mysqli_error($conn);
+					echo "Query Error : " . "UPDATE solicitudes SET aprobacion_GH ='Aceptado' WHERE id='".$id."' AND descripcion='".$descr."'" . "<br>" . mysqli_error($conn);
 				}
 	}
 

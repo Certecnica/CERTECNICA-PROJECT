@@ -2,6 +2,7 @@
 	include 'includes/session.php';
 
 	if(isset($_POST['CreateSalario'])){
+		
 		$empleado = $_POST['empleado'];
         $salario_basico = $_POST['salario'];
         $aux_no_salarial = $_POST['aux'];

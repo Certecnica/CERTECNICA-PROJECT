@@ -58,9 +58,7 @@
     </div>
 </div>
 <!--Edit-->
-<?php
 
-?>
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -72,9 +70,9 @@
 <div class="modal-body">
             	<form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
 				<div class="form-group">
-                    <label for="empleado" class="col-sm-3 control-label">EMPLEADO :</label>
+                    <label for="edit_empleado" class="col-sm-3 control-label">EMPLEADO :</label>
                     <div class="col-sm-9">
-                      <select class="form-control" name="empleado" id="empleado" required>
+                      <select class="form-control" name="edit_empleado" id="edit_empleado" required>
                         <option value="" selected>- Seleccionar -</option>
                         <?php
                           $sql = "SELECT * FROM employees";
@@ -89,9 +87,9 @@
                     </div>
                 </div>	
 <div class="form-group">
-                  	<label for="camisa" class="col-sm-3 control-label">TALLA CAMISA</label>	
+                  	<label for="edit_camisa" class="col-sm-3 control-label">TALLA CAMISA</label>	
                   	<div class="col-sm-9">
-                    	<input type="text" class="form-control" id="camisa" name="camisa" placeholder="" value="<?php echo $_SESSION['TALLA_CAMISA'];?>">
+                    	<input type="text" class="form-control" id="edit_camisa" name="edit_camisa">
                   	</div>
                 </div>
                       <div class="form-group">

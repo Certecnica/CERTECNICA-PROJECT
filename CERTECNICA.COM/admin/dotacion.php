@@ -1,3 +1,4 @@
+
 <?php include 'includes/session.php'; ?>
 
 <?php include 'includes/header.php'; ?>
@@ -5,7 +6,6 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
-
 
   <?php include 'includes/navbar.php'; ?>
 
@@ -18,13 +18,19 @@
 
     <section class="content-header">
 
-      <h1>
-         Dotacion Empleados
-      </h1>
+       <h1>     
+    
+      Dotación Empleados
+    
+       </h1>
+
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li>Administradores</li>
-        <li class="active">Lista de Administradores</li>
+        
+      <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      
+      <li>Administradores</li>
+      
+      <li class="active">Lista de Administradores</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -144,25 +150,17 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'employee_row.php',
+    url: 'dotacion_row.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('.empid').val(response.empid);
-      $('.employee_id').html(response.id);
-      $('.del_employee_name').html(response.firstname+' '+response.lastname);
-      $('#employee_name').html(response.firstname+' '+response.lastname);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#edit_address').val(response.address);
-      $('#datepicker_edit').val(response.birthdate);
-      $('#edit_contact').val(response.contact_info);
-      $('#gender_val').val(response.gender).html(response.gender);
-      $('#position_val').val(response.position_id).html(response.description);
-      $('#schedule_val').val(response.schedule_id).html(response.time_in+' - '+response.time_out);
+    $('#dotacion_id').val(response.id);
+    $('')
     }
   });
 }
 </script>
+
 </body>
+
 </html>

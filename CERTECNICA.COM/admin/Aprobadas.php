@@ -1,4 +1,3 @@
-
 <?php include 'includes/session.php'; ?>
 
 <?php include 'includes/header.php'; ?>
@@ -8,9 +7,7 @@
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
-
   <?php include 'includes/menubar.php'; ?>
-
   <style>
         h1 {
             text-align: center;
@@ -18,11 +15,13 @@
             font-weight: bold;
             padding-top: 1em;
         }
+
         .mycontainer {
             width: 90%;
             margin: 1.5rem auto;
             min-height: 60vh;
         }
+
         .mycontainer table {
             margin: 1.5rem auto;
         }
@@ -32,12 +31,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Lista de Administradores
+        Solicitudes
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-        <li>Administradores</li>
-        <li class="active">Lista de Administradores</li>
+        <li>Solicitudes</li>
+        <li class="active">Lista de Solicitudes</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -64,68 +63,79 @@
           unset($_SESSION['success']);
         }
       ?>
-
-
-<body>
-    <nav class="navbar header-nav navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-             
-    </nav>
-
-    <h1>Admin Panel</h1>
-
-    <div class="mycontainer">
-
-            <table class="table table-bordered table-hover table-striped">
+<div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-body">
+              <table id="example1" class="table table-bordered">
                 <thead>
-                    <th>N° de Solicitud</th>
-                    <th>Empleado</th>
-                    <th>Solicitud de Permiso</th>
-                    <th>Fechas</th>
-                    <th></th>
-                    <!-- <th>Acciones</th> -->
+                  <th>ID de solicitud</th>
+                  <th>motivo</th>
+                  <th>Empleado</th>
+                  <th>descripcion</th>
+                  <th>fecha_inicio</th>
+                  <th>N° de dias</th>
+                  <th>N° de horas</th>
+                  <th>Aprobacion Gestion Humana</th>
+                  <th>Aprobacion de Jefe </th>
                 </thead>
-                <tbody>   <!-- Cargando todas las solicitudes de permiso -->
-                        <?php
-                                global $row;
-                                $query = mysqli_query($conn,"SELECT * FROM leaves WHERE status='Aceptado'");      
-                                $numrow = mysqli_num_rows($query);
-                               if($query){
-                                    if($numrow!=0){
-                                         $cnt=1;
-                                          while($row = mysqli_fetch_assoc($query)){
-                                            $datetime1 = new DateTime($row['fromdate']);
-                                            $datetime2 = new DateTime($row['todate']);
-                                            $interval = $datetime1->diff($datetime2); 
-                                            echo "<tr>
-                                                    <td>$cnt</td>
-                                                    <td>{$row['ename']}</td>
-                                                    <td>{$row['descr']}</td>
-                                                    <td>{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
-                                                    <td>{$interval->format('%a Day/s')}</td>
-                                                  </tr>";  
-                                         $cnt++; }       
-                                    }
-                                }
-                                else{
-                                    echo "Query Error : " . "SELECT * FROM leaves WHERE status='Aceptado'" . "<br>" . mysqli_error($conn);
-                                }
-                       ?>              
-                </tbody>
-            </table>
-    </div>  
-</body>
-</html>
+                <tbody>
+                  <?php
+                  global $row;
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Aceptado' AND estado_JF = 'Aceptado'");
+                 
+                 if($leaves){
+                   $numrow = mysqli_num_rows($leaves);
+                   if($numrow!=0){
+                     $cnt=1;
+                     while($row1 = mysqli_fetch_array($leaves)){
+                       $datetime1 = new DateTime($row1['fecha_inicio']);
+                       $datetime2 = new DateTime($row1['fecha_fin']);
+                       $interval = $datetime1->diff($datetime2);
+                       
+                       echo "<tr>
+                       <td>$cnt</td>
+                       <td>{$row1['Motivo']}</td>
+                       <td>{$row1['emplead']}</td>
+                       <td>{$row1['descripcion']}</td>
+                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
+                       <td>{$interval->format('%a Dia/s')}</td>
+                       <td>{$interval->format('%H Horas %i Minutos')}</td>
+                       <td>{$row1['aprobacion_GH']}</td>
+                       <td>{$row1['estado_JF']}</td>
+                       </tr>";
+                    $cnt++; }
+                   } else {
+                     echo"<tr class='text-center'><td colspan='12'>NO EXISTEN SOLICITUDES APROBADAS!</td></tr>";
+                   }
+                 }
+                 else{
+                  echo "Query Error : " . "SELECT * FROM solicitudes WHERE aprobacion_GH ='Aprobada'" . "<br>" . mysqli_error($conn);
 
+                               }
+             ?>
+                        </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>   
+  </div>
+    </body>                        
+    </section>   
+</div>
+
+
+</html>
 <?php
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 ?>
-
 </div>
     </section>   
   </div>
-<?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>

@@ -30,42 +30,38 @@
 			$_SESSION['success'] = 'Empleado actualizado con éxito';
 		}
 		else{
-
 			$_SESSION['error'] = $conn->error;
 		}
-
 	}
 	else{
-
 		$_SESSION['error'] = 'Seleccionar empleado para editar primero';
 	}
-
 	header('location: employee.php');
 
-$nombre_completo = "$firstname , $lastname";
+	$nombre_completo = "$firstname , $lastname";
 
-// obtener la hora y fecha actual
+	// obtener la hora y fecha actual
 
-$timestamp = date ('Y-m-d H:i:s');
+	$timestamp = date ('Y-m-d H:i:s');
 
-// obtener el ID del usuario actual(si estás registrando modificaciones realizadas por usuarios)
+	// obtener el ID del usuario actual(si estás registrando modificaciones realizadas por usuarios)
 
-$user_id = $_SESSION['admin'];
+	$user_id = $_SESSION['admin'];
 
-// crear una descripción de la modificación
+	// crear una descripción de la modificación
 
-$description = "Se actualizo la información del empleado $nombre_completo con ID:$empid";
+	$description = "Se actualizo la información del empleado $nombre_completo con ID:$empid";
 
-//definicion de todos los datos que se estan consultando y almacnarlos en una unica variable
+	//definicion de todos los datos que se estan consultando y almacnarlos en una unica variable
 
-$data = "$firstname , $lastname , $address , $birthdate , $contact , $contraseña , $gender , $position , $schedule";
+	$data = "$firstname , $lastname , $address , $birthdate , $contact , $contraseña , $gender , $position , $schedule";
 
-// insertar una entrada en la tabla de log
+	// insertar una entrada en la tabla de log
 
-$sql = "INSERT INTO log_employees (timestamp, user_id, description , data) VALUES('$timestamp','$user_id','$description','$data')";
+	$sql = "INSERT INTO log_employees (timestamp,user_id,description,data) VALUES ('$timestamp','$user_id','$description','$data')";
 
-// llamamos la variable conexion y mi sql hace referencia a la variable en la cual se hizo la consulta
+	// llamamos la variable conexion y mi sql hace referencia a la variable en la cual se hizo la consulta
 
-mysqli_query($conn, $sql);
+	mysqli_query($conn, $sql);
 
 ?>	

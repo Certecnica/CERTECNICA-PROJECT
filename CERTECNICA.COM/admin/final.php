@@ -3,11 +3,11 @@ session_start();
 
 
 //Si el usuario no esta logeado lo enviamos al index
-if (!$_SESSION['usuario']) {
+if (!$_SESSION['admin']) {
     header("Location:index.php");
 }
 //Aumentamos la estadistica
-include("admin/funciones.php");
+include("funciones.php");
 aumentarCompletados();
 
 ?>
