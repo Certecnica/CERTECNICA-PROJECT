@@ -15,7 +15,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-      Adelanto en Efectivo
+       Solicitud de Prestamo
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -56,7 +56,6 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th class="hidden"></th>
                   <th>Fecha</th>
                   <th>ID Empleado</th>
                   <th>Nombre</th>
@@ -72,23 +71,22 @@
                     $sql = "SELECT *, cashadvance.id AS caid, employees.employee_id AS empid FROM cashadvance LEFT JOIN employees ON employees.id=cashadvance.employee_id ORDER BY date_advance DESC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
-                      echo "
+                      ?>
                         <tr>
-                          <td class='hidden'></td>
-                          <td>".date('M d, Y', strtotime($row['date_advance']))."</td>
-                          <td>".$row['empid']."</td>
-                          <td>".$row['firstname'].' '.$row['lastname']."</td>
-                          <td>".number_format($row['amount'], 2)."</td>
-                          <td>" .$row['cuotas']."</td>
-                          <td> ".$row['cuota_mensual']."</td>
-                          <td>".$row['date_primerpago']."</td>
-                          <td> ".$row['destino_prestasmo']."</td>
+                          <td><?php echo date('M d, Y', strtotime($row['date_advance']))?></td>
+                          <td><?php echo $row['empid'] ?></td>
+                          <td><?php echo $row['firstname'].' '.$row['lastname']?></td>
+                          <td><?php echo number_format($row['amount'], 2)?></td>
+                          <td><?php echo $row['cuotas'] ?></td>
+                          <td><?php echo $row['cuota_mensual']?></td>
+                          <td><?php echo $row['date_primerpago']?></td>
+                          <td><?php echo $row['destino_prestasmo']?></td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['caid']."'><i class='fa fa-edit'></i> Editar</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['caid']."'><i class='fa fa-trash'></i> Eliminar</button>
+                          <a class='btn btn-success btn-sm editar btn-flat' href="form_editar_admin.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit">  Editar</i></a>
+                          <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_admin.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"> Eliminar</i>
                           </td>
                         </tr>
-                      ";
+                    <?php 
                     }
                   ?>
                 </tbody>
@@ -97,18 +95,11 @@
           </div>
         </div>
       </div>
-
     </section>
 </div>
-
-  <?php include 'includes/footer.php'; ?>
-
-  <?php include 'includes/cashadvance_modal.php'; ?>
-  
+<?php include 'includes/cashadvance_modal.php'; ?>
 </div>
-
 <?php include 'includes/scripts.php'; ?>
-
 <script>
 $(function(){
   $('.edit').click(function(e){

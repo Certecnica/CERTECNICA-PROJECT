@@ -28,15 +28,9 @@
 				<div class="form-group">
                   	<label for="empleado" class="col-sm-3 control-label">EMPLEADO : </label>	
                   	<div class="col-sm-9">
-                      <input type="text" class="form-control" id="empleado" name="empleado" value="<?php echo $user['firstname'] ?> <?=  $user ['lastname']; ?>">
+                      <input type="text" class="form-control" id="empleado" name="empleado" value="<?php echo $user['firstname'] ?> <?=  $user ['lastname']; ?>" readonly>
                   	</div>
-                </div>	
-				<div class="form-group">
-                  	<label for="empleado" class="col-sm-3 control-label">AREA : </label>	
-                  	<div class="col-sm-9">
-                      <input type="text" class="form-control" id="empleado" name="empleado" value="<?php echo $user['position_id'] ?> <?=  $user ['position_id']; ?>">
-                  	</div>
-                </div>	
+                </div>
 <div class="form-group">
                   	<label for="fecha_inicio" class="col-sm-3 control-label">Fecha Inicio</label>	
                   	<div class="col-sm-9">

@@ -1,14 +1,19 @@
+
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+ 
   <?php include 'includes/menubar.php'; ?>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    
     <section class="content-header">
       <h1>
         Lista de Empleados
@@ -63,7 +68,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN position ON position.id=employees.position_id LEFT JOIN schedules ON schedules.id=employees.schedule_id";
+                    $sql = "SELECT *, employees.id AS empid FROM employees LEFT JOIN position ON position.id=employees.position_id LEFT JOIN schedules ON schedules.id=employees.schedule_id ";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       ?>
@@ -90,9 +95,7 @@
         </div>
       </div>
     </section>   
-  </div>
-    
-  <?php include 'includes/footer.php'; ?>
+  </div> 
   <?php include 'includes/employee_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>

@@ -89,9 +89,9 @@
                           <td><?php echo $fila['TALLA_CHAQUETA']; ?></td>
                           <td><?php echo $fila['TALLA_PANTALON']; ?></td> 
                           <td>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
-                            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $row['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
-                          </td>
+                          <a class='btn btn-success btn-sm editar btn-flat' href="edit_dotacion.php?id=<?php echo $fila['id']?> "><i class="fa fa-edit">  Editar</i></a>
+                          <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_dotacion.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"> Eliminar</i>
+                        </td>
                         </tr>
                       <?php
                     }
@@ -113,15 +113,9 @@
 </section>   
   </div>
   <?php include 'modal_add_dotacion.php' ?>  
-
-  <?php include 'includes/footer.php'; ?>
-
   <?php include '../admin/includes/admin_modal.php'; ?>
-
 </div>
-
 <?php include 'includes/scripts.php'; ?>
-
 <script>
 
 $(function(){

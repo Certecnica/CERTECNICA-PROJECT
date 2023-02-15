@@ -216,9 +216,18 @@
                   	<label for="matricula" class="col-sm-3 control-label">MATRICULA PROFESIONAL</label>
 
                   	<div class="col-sm-9">
-                    	<input type="tex" class="form-control" id="matricula" name="matricula" placeholder="Ingrese la matricula profesional">
+                    	<input type="text" class="form-control" id="matricula" name="matricula" placeholder="Ingrese la matricula profesional">
                   	</div> 
                 </div>
+
+                <div class="form-group">
+                  	<label for="fecha_contratacion" class="col-sm-3 control-label">FECHA CONTRATACIÓN</label>
+
+                  	<div class="col-sm-9">
+                    	<input type="date" class="form-control" id="fecha_contratacion" name="fecha_contratacion" placeholder="Ingrese la matricula profesional">
+                  	</div> 
+                </div>
+
           	</div>
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
             	<button type="submit" class="btn btn-primary btn-flat" name="AddEmpleado"><i class="fa fa-save"></i> Guardar</button>
@@ -227,5 +236,6 @@
         </div>
     </div>
 </div>
+
 <!--Delete-->
 

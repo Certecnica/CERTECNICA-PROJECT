@@ -2,6 +2,7 @@
 
 <?php include 'includes/header.php'; ?>
 
+<?php include 'includes/conn.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -17,6 +18,8 @@
     <!-- Content Header (Page header) -->
   
     <section class="content-header">
+  
+    <script src="https://code.iconify.design/iconify-icon/1.0.4/iconify-icon.min.js"></script>
 
       <h1>
 
@@ -57,12 +60,70 @@
           unset($_SESSION['success']);
         }
       ?>    
-    
-</div>
+  
+  <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <?php
+               $id = $_SESSION['employees'];
+               $leaves ="SELECT * FROM solicitudes WHERE id_user = '$id' AND aprobacion_GH = 'Aceptado' AND estado_JF = 'Aceptado' ";
+                $query = $conn->query($leaves);
 
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+
+              <p>Solicitudes Aprobadas</p>
+            </div>
+            <div class="icon">
+            <iconify-icon icon="ion:checkmark-circle-outline"></iconify-icon>
+          </div>
+            <a href="solicitudes_permisos.php" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <?php
+               $id = $_SESSION['employees'];
+               $leaves ="SELECT * FROM solicitudes WHERE id_user = '$id' AND aprobacion_GH = 'Rechazada' OR  estado_JF = 'Rechazada' ";
+               $query = $conn->query($leaves);
+
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Solicitudes Rechazadas</p>
+            </div>
+            <div class="icon">
+            <iconify-icon icon="ion:close-circle-outline"></iconify-icon>
+          </div>
+            <a href="solicitudes_rechazadas.php" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+        <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <?php
+               $id = $_SESSION['employees'];
+               $leaves ="SELECT * FROM solicitudes WHERE id_user = '$id' AND aprobacion_GH = 'Pendiente' OR  estado_JF = 'Pendiente' ";
+               $query = $conn->query($leaves);
+                echo "<h3>".$query->num_rows."</h3>";
+              ?>
+              <p>Solicitudes Pendientes</p>
+            </div>
+            <div class="icon">
+            <iconify-icon icon="ion:warning-outline"></iconify-icon>
+          </div>
+            <a href="solicitudes_pendientes.php" class="small-box-footer"> Más información <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
 <?php include 'includes/scripts.php'; ?>
-
-<?php include 'includes/footer.php'; ?>
 <script>
 $(function(){
   $('.edit').click(function(e){

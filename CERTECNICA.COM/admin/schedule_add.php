@@ -9,14 +9,14 @@
 
 		$sql = "INSERT INTO schedules (time_in, time_out) VALUES ('$time_in', '$time_out')";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Schedule added successfully';
+			$_SESSION['success'] = 'Horario añadido con exito';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
 		}
 	}	
 	else{
-		$_SESSION['error'] = 'Fill up add form first';
+		$_SESSION['error'] = 'Rellene la información del formulario';
 	}
 
 	header('location: schedule.php');

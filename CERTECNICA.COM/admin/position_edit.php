@@ -1,7 +1,7 @@
 <?php
 	include 'includes/session.php';
 
-	if(isset($_POST['edit'])){
+	if(isset($_POST['accion'])){
 		$id = $_POST['id'];
 		$title = $_POST['title'];
 

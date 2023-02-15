@@ -1,7 +1,11 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
+
 <?php 
 
 $sqlquery4 = " SELECT firstname,lastname FROM employees";
@@ -63,20 +67,29 @@ $data = $conn ->query($sqlquery4);
                   <?php    
                   $sql= "SELECT *FROM  salarios ";
                     $query = $conn->query($sql);
-                    while($fila = $query->fetch_assoc()){
-                      echo "
+                  while ($fila = $query->fetch_assoc()) {
+                    ?>
                       <tr>
-                        <td>".$fila['EMPLEADO']."</td>
-                        <td>".$fila['SALARIO_BASICO']."</td>
-                        <td>".$fila['AUX_NO_SALARIAL']."</td>
-                        <td>".number_format($fila['TOTAL'], 2)."</td>
+                        <td><?php echo $fila['EMPLEADO'] ?></td>
+                        <td><?php echo $fila['SALARIO_BASICO'] ?></td>
+                        <td><?php echo $fila['AUX_NO_SALARIAL'] ?></td>
+                        <td><?php 
+                         
+                         $suma_1 = $fila['SALARIO_BASICO'];
+                         $suma_2 = $fila['AUX_NO_SALARIAL'];
+                         $resultado = $suma_1 + $suma_2;
+                        
+                        
+                        echo number_format($resultado) ?></td>
                         <td>
-                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$fila['id']."'><i class='fa fa-edit'></i> Editar</button>
-                          <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$fila['id']."'><i class='fa fa-trash'></i> Eliminar</button>
+                        <a class='btn btn-success btn-sm editar btn-flat' href="edit_salarios.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit">  Editar</i></a>
+                        <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_salarios.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"></i>
+  Eliminar</i></a>
                         </td>
                       </tr>
-                    ";
+                  <?php
                   }
+                  ;
                 ?>
                 </tbody>
               </table>
@@ -86,11 +99,13 @@ $data = $conn ->query($sqlquery4);
       </div>
     </section>   
   </div>
+
   <?php include 'includes/footer.php'; ?>
   <?php include 'modal_salarial.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
+<script></script>
 <script>
 $(function(){
   $('.edit').click(function(e){

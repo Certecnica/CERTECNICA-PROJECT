@@ -9,53 +9,49 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="cashadvance_add.php">
-          		  <div class="form-group">
+          		  
+				<div class="form-group">
                   	<label for="employee" class="col-sm-3 control-label">ID Empleado</label>
 
                   	<div class="col-sm-9">
                     	<input type="text" class="form-control" id="employee" name="employee" required>
                   	</div>
                 </div>
-                <div class="form-group">
-                    <label for="amount" class="col-sm-3 control-label">Monto</label>
+                
+				<div class="form-group">
+                  	<label for="monto" class="col-sm-3 control-label">MONTO</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="amount" name="amount" required>
-                    </div>
-<br>
-<br>
-					<div class="form-group">
-                    <label for="cuotas" class="col-sm-3 control-label">N° de cuotas</label>
+                  	<div class="col-sm-9">
+                    	<input type="number" class="form-control" id="monto" name="monto" required>
+                  	</div>
+                </div>
+				<div class="form-group">
+                  	<label for="cuotas" class="col-sm-3 control-label">N° CUOTAS</label>
 
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control" id="cuotas" name="cuotas" required>
-                    </div>
-					<br>
-<br>
-					<div class="form-group">
-                    <label for="cuota_mensual" class="col-sm-3 control-label">Cuota Mensual</label>
+                  	<div class="col-sm-9">
+                    	<input type="number" class="form-control" id="cuotas" name="cuotas" required>
+                  	</div>
+                </div>
+				<div class="form-group">
+                  	<label for="cuota_mensual" class="col-sm-3 control-label">VALOR CUOTA MENSUAL</label>
 
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control" id="cuota_mensual" name="cuota_mensual" required>
-                    </div>
-					<br>
-					<br>
-					<div class="form-group">
-                  	<label for="fecha_pago" class="col-sm-3 control-label">Fecha de pago</label>
+                  	<div class="col-sm-9">
+                    	<input type="number" class="form-control" id="cuota_mensual" name="cuota_mensual" required>
+                  	</div>
+                </div>
+				<div class="form-group">
+                  	<label for="fecha_pago" class="col-sm-3 control-label">FECHA PRIMER PAGO</label>
 
-                  	<div class="col-sm-8">
+                  	<div class="col-sm-9">
                     	<input type="date" class="form-control" id="fecha_pago" name="fecha_pago" required>
                   	</div>
-					<br>
-			  <br>
-					  <div class="form-group">
-                    <label for="destino_prestamo" class="col-sm-3 control-label">Destino Prestamo</label>
+                </div>
+				<div class="form-group">
+                  	<label for="destino_prestamo" class="col-sm-3 control-label">DESTINO PRESTAMO</label>
 
-                    <div class="col-sm-8">
-                      <input type="text" class="form-control" id="destino_prestamo" name="destino_prestamo" required>
-                    </div>
-                </div>
-                </div>
+                  	<div class="col-sm-9">
+                    	<input type="text" class="form-control" id="destino_prestamo" name="destino_prestamo" required>
+                  	</div>
                 </div>
           	</div>
           	<div class="modal-footer">

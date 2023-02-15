@@ -3,10 +3,13 @@
 	include 'includes/conn.php';
 
 	if(isset($_POST['ingresar'])){
+		
 		$username = $_POST['usuario'];
+
 		$password = $_POST['contraseña'];
 
 		$sql = "SELECT * FROM employees WHERE contact_info = '$username'";
+		
 		$query = $conn->query($sql);
 
 		if($query->num_rows < 1){
@@ -27,7 +30,6 @@
 	else{
 		$_SESSION['ERRORES'] = 'Ingrese las Credenciales de Usuario primero';
 	}
-
-    header('location: home.php');
-
+  
+	header ('location: home.php')
 ?>

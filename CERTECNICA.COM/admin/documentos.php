@@ -125,9 +125,7 @@ $listado = $documentos ->fetchAll();
 
 </section>   
   </div>
-    
-  <?php include 'includes/footer.php'; ?>
-</div>
+    </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){

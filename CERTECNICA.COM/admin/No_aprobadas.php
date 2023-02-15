@@ -84,7 +84,7 @@
                 <tbody>
                   <?php
                   global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH='Rechazada' AND estado_JF ='Rechazada'");
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH='Rechazada' OR estado_JF ='Rechazada'");
                  
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);

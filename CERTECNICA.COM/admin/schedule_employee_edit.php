@@ -7,7 +7,7 @@
 		
 		$sql = "UPDATE employees SET schedule_id = '$sched_id' WHERE id = '$empid'";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Schedule updated successfully';
+			$_SESSION['success'] = 'Horario actualizado con exito';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;

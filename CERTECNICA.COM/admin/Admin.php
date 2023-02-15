@@ -3,6 +3,7 @@
 <?php include 'includes/header.php';?>
 
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php';?>
@@ -10,12 +11,15 @@
   <?php include 'includes/menubar.php';?>
 
   <!-- Content Wrapper. Contains page content -->
+ 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+ 
     <section class="content-header">
       <h1>
         Lista de Administradores
       </h1>
+ 
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li>Administradores</li>
@@ -69,12 +73,12 @@
                       ?>
                         <tr>
                           <td><?php echo $fila['username']; ?></td>
-                          <td><img src="<?php echo (!empty($fila['photo']))? '../images/'.$fila['photo']:'../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $fila['username']; ?>"><span class="fa fa-edit"></span></a></td>
+                          <td><img src="<?php echo (!empty($fila['photo']))?'../images/'.$fila['photo']:'../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $fila['username']; ?>"></span></a></td>
                           <td><?php echo $fila['firstname'].' '.$fila['lastname']; ?></td>
                           <td><?php echo date('M d, Y', strtotime($fila['created_on'])) ?></td>
                           <td>
-                            <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
-                            <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
+                          <a class='btn btn-success btn-sm editar btn-flat' href="form_editar_admin.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit">  Editar</i></a>
+                          <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_admin.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"> Eliminar</i>
                           </td>
                         </tr>
                       <?php
@@ -89,8 +93,9 @@
     </section>   
   </div
   <?php include 'includes/footer.php'; ?>
-  <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
+<?php include '../admin/includes/admin_modal.php'; ?>
+
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){

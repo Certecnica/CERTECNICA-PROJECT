@@ -89,7 +89,7 @@
                     <div class="col-sm-9">
                       <select class="form-control" name="position" id="position" required>
                         <option value="" selected>- Seleccionar -</option>
-                        <?php
+                        <?php  
                           $sql = "SELECT * FROM position";
                           $query = $conn->query($sql);
                           while($prow = $query->fetch_assoc()){

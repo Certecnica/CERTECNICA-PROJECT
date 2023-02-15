@@ -101,9 +101,7 @@ $lista = $documento ->fetchAll();
   </div>
 
   <?php include 'modal_sanciones.php'?>
-
-  <?php include 'includes/footer.php'; ?>
-
+  
   <?php include '../admin/includes/admin_modal.php'; ?>
 
 </div>

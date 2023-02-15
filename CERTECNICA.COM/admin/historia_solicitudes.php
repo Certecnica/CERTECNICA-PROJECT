@@ -104,12 +104,11 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo  $value['estado_JF'] ?></td>
 
                           <td><button type="button" class="btn btn-warning"><a href="<?php echo $value['documento']; ?>">Descargar Archivo</a></td></button>
-
                         </tr>
                     <?php
                           }
                 ?>
-                        </tr>
+       </tr>
                 </tbody>
               </table>
             </div>
@@ -122,7 +121,6 @@ $listado = $documentos ->fetchAll();
     </section>   
 </div>
 
-
 </html>
 <?php
 ini_set('display_errors', true);
@@ -131,7 +129,6 @@ error_reporting(E_ALL);
 </div>
     </section>   
   </div>
-<?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>

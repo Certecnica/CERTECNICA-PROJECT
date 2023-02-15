@@ -73,7 +73,7 @@
                   <th>motivo</th>
                   <th>Empleado</th>
                   <th>descripcion</th>
-                  <th>fecha_inicio</th>
+                  <th>fecha </th>
                   <th>N° de dias</th>
                   <th>N° de horas</th>
                   <th>Aprobacion Gestion Humana</th>
@@ -129,8 +129,6 @@
     </body>                        
     </section>   
 </div>
-
-
 </html>
 <?php
 ini_set('display_errors', true);
@@ -139,7 +137,6 @@ error_reporting(E_ALL);
 </div>
     </section>   
   </div>
-<?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>

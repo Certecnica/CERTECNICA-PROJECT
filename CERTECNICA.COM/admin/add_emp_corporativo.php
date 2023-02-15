@@ -3,6 +3,7 @@ include 'includes/conn.php';
 include 'includes/session.php';
 
 if (isset($_POST['AddEmpleado'])) {
+
       $empleado = $_POST['empleado'];
       $cargo  = $_POST['cargo'];
       $area  = $_POST['area'];
@@ -17,9 +18,20 @@ if (isset($_POST['AddEmpleado'])) {
       $escolaridad= $_POST['escolaridad'];
       $titulo= $_POST['titulo'];
       $matricula= $_POST['matricula'];
+      $fecha_contratacion = $_POST['fecha_contratacion'];
 
-      $sql = "INSERT INTO informacion_empleado (empleado,cargo,area,correo_corporativo,telefono_corporativo,eps,afp,cesantia,caja_compensacion,arl,tipo_contrato,nivel_escolaridad,titulo,matricula_profesional,created_on ) VALUES ('$empleado', '$cargo', '$area', '$correo_corporativo','$numero','$eps','$afp','$cesantias','$caja_compensacion','$arl','$Tcontrato','$escolaridad','$titulo','$matricula', NOW());";
-    
+
+      $sql = "INSERT INTO informacion_empleado (empleado,cargo,area,correo_corporativo,telefono_corporativo,eps,afp,cesantia,caja_compensacion,arl,tipo_contrato,nivel_escolaridad,titulo,matricula_profesional, fecha_contratacion , created_on) VALUES ('$empleado', '$cargo', '$area', '$correo_corporativo','$numero','$eps','$afp','$cesantias','$caja_compensacion','$arl','$Tcontrato','$escolaridad','$titulo','$matricula','$fecha_contratacion', NOW());";
+
+      $data = "INSERT INTO vacaciones (empleado , fecha_contratacion) VALUES ('$empleado' , '$fecha_contratacion')";
+
+      if($conn->query($data)){
+        $_SESSION['success'] = 'Informacion de vacaciones Añadida con exito';
+    }
+    else{
+        $_SESSION['error'] = $conn->error;
+    }
+
       if($conn->query($sql)){
         $_SESSION['success'] = 'Informacion Corporativa Añadida con exito';
     }

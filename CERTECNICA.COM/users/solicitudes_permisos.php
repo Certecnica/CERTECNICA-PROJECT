@@ -16,12 +16,12 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-
       <h1>
        Solicitudes  de Permiso
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
+       
+      <li><a href="#"><i class="fa fa-dashboard"></i>Inicio</a></li>
 
         <li>Empleado</li>
         
@@ -62,19 +62,20 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                <th>ID de solicitud</th>
-                  <th>motivo</th>
-                  <th>Empleado</th>
-                  <th>descripcion</th>
-                  <th>fecha_inicio</th>
-                  <th>N° de dias</th>
-                  <th>N° de horas</th>
-                  <th>Aprobacion Gestion Humana</th>
-                  <th>Aprobacion de Jefe </th>
+                <th>NUMERO DE SOLICITUD</th>
+                  <th>MOTIVO</th>
+                  <th>EMPLEADO</th>
+                  <th>DESCRIPCIÓN</th>
+                  <th>FECHA INICIO</th>
+                  <th>N° DIAS</th>
+                  <th>N° HORAS</th>
+                  <th>APROBACIÓN GESTION HUMANA</th>
+                  <th>APROBACIÓN JEFE </th>
                 </thead>
                 <tbody>
                   <?php
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes");
+                  $id = $_SESSION['employees'];
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user = $id  AND aprobacion_GH = 'Aceptado' AND estado_JF = 'Aceptado'");
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){
@@ -101,7 +102,7 @@
                    }
                  }
                  else{
-                   echo "Query Error : " . "SELECT descripcion, aprobacion_GH FROM solicitudes WHERE id='".$_SESSION['employee']."'" . "<br>" . mysqli_error($conn);;
+                   echo "Query Error : " .  " SELECT descripcion, aprobacion_GH FROM solicitudes WHERE id='".$_SESSION['employees']."'" . "<br>" . mysqli_error($conn);;
                  }
              ?>
                         </tr>
@@ -116,9 +117,7 @@
     </body>                        
     </section>   
 </div>
-
 <?php include 'includes/scripts.php'; ?>
-<?php include 'includes/footer.php'; ?>
 <?php include 'modal_solicitud.php'; ?>
 </body>
 </html>

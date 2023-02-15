@@ -110,11 +110,13 @@
  <table id="example1" class="table table-bordered">
           <thead>
             <tr>
-              <th>Nombres</th>
-              <th>Apellidos</th>
+              <th>NOMBRES</th>
+              <th>APELLIDOS</th>
               <th>FECHA</th>
-              <th>Hora Llegada</th>
-              <th>Hora Salida</th>
+              <th>HORA LLEGADA</th>
+              <th>HORA SALIDA</th>
+              <th>ESTADO DE ENTRADA</th>
+              <th>ESTADO DE SALIDA</th>
             </tr>
           </thead>
           <tbody>
@@ -127,8 +129,34 @@
               <td><?php echo $data['FECHA']; ?></td>
               <td><?php echo $data['HORA_LLEGADA']; ?></td>
               <td><?php echo $data['HORA_SALIDA']; ?></td>
+              <td>
+              <?php 
+            $hora_entrada = $data['HORA_LLEGADA'];
+
+            $currentTime = new DateTime("07:00:00");
+            $hora_puntual = date_format($currentTime, 'H:i:s');
+            
+            if ($hora_entrada > $hora_puntual) {
+                echo "  <button class='btn btn-danger btn-sm edit btn-flat'>Tarde</button>";
+              } else {
+                echo "  <button class='btn btn-success btn-sm edit btn-flat'>Temprano</button>";
+              }
+            ?>
+              </td>
+              <td>
+                  <?php              
+                  $hora_salida = $data['HORA_SALIDA'];
+                  $currentTiempo = new DateTime("17:15:00");
+                  $puntual_salida = date_format($currentTiempo, 'H:i:s');
+                  if ($hora_salida < $puntual_salida) {
+                    echo "  <button class='btn btn-warning btn-sm edit btn-flat'>Antes de tiempo</button>";
+                  } else {
+                    echo "  <button class='btn btn-info btn-sm edit btn-flat'> A tiempo </button>";
+                  }
+                  ?>
+              </td>
             </tr>
-          <?php } ?>
+          <?php } ?> 
           </tbody>
         </table>
             </div>

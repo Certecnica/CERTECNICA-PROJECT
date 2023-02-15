@@ -3,7 +3,7 @@
 <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<title>Control de Asistencia y Sistema de Nómina</title>
+  	<title>CERTECNICA S.A.S</title>
     <link rel="icon" href="../images/favicon.jpg">
   	<!-- Tell the browser to be responsive to screen width -->
   	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -35,7 +35,6 @@
 
   	<!-- Google Font -->
   	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
   	<style type="text/css">
   		.mt20{
   			margin-top:20px;
@@ -43,12 +42,10 @@
       .bold{
         font-weight:bold;
       }
-
      /* chart style*/
       #legend ul {
         list-style: none;
       }
-
       #legend ul li {
         display: inline;
         padding-left: 30px;
@@ -63,7 +60,6 @@
         -o-transition: background-color 200ms ease-in-out;
         transition: background-color 200ms ease-in-out;
       }
-
       #legend li span {
         display: block;
         position: absolute;

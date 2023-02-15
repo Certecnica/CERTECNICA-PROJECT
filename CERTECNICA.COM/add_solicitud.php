@@ -4,7 +4,9 @@ include 'users/includes/conn.php';
 
 include 'users/includes/session.php';
 
-     $empleado  = $_POST['empleado'];
+$user_id = $_SESSION['employees'];
+     
+$empleado  = $_POST['empleado'];
    
     $motivo = $_POST['motivo'];
     
@@ -17,16 +19,18 @@ include 'users/includes/session.php';
     $documentos =$_FILES['documento']['name'];
 
     $tmp_name =$_FILES['documento']['tmp_name'];
+
+
     
     if(move_uploaded_file($tmp_name, "admin/solicitudes/" .$documentos)){
     
            $ruta =  "solicitudes/" .$documentos;
 
-           $sql = "INSERT INTO solicitudes (emplead , Motivo ,fecha_inicio , fecha_fin, descripcion ,aprobacion_GH, estado_JF,documento) VALUES ('$empleado','$motivo', '$fecha_inicio', '$fecha_fin', '$descripcion','Pendiente','Pendiente' , '$ruta');";
+           $sql = "INSERT INTO solicitudes (emplead,id_user, Motivo,fecha_inicio,fecha_fin,descripcion,aprobacion_GH, estado_JF,documento) VALUES ('$empleado','$user_id','$motivo', '$fecha_inicio', '$fecha_fin', '$descripcion','Pendiente','Pendiente' , '$ruta');";
 
            if($conn->query($sql)){
             
-            $_SESSION['success'] = 'Informacion Corporativa Añadida con exito';
+            $_SESSION['success'] = 'Solicitud de permiso  Añadida con exito';
         }
         else{
             $_SESSION['ERROR'] = $conn-> error;
@@ -38,7 +42,6 @@ include 'users/includes/session.php';
     }
     
     header('location: users/home.php');
-        
-
-?>
+    
+    ?>
 
