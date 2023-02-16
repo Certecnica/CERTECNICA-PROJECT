@@ -2,6 +2,15 @@
 
 <?php include 'includes/header.php'; ?>
 
+<?php 
+
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+
+$documentos -> execute();
+
+$listado = $documentos ->fetchAll();
+?>
+
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
@@ -36,7 +45,7 @@
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li>Solicitudes</li>
-        <li class="active">Lista de Solicitudes</li>
+        <li class="active">Solicitudes No Aprovadas</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -78,14 +87,12 @@
                   <th>N° de dias</th>
                   <th>N° de horas</th>
                   <th>Aprobacion Gestion Humana</th>
-                  <th>Aprobacion de Jefe </th>
-  
+                  <th>SOPORTES</th>
                 </thead>
                 <tbody>
                   <?php
                   global $row;
                  $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH='Rechazada' OR estado_JF ='Rechazada'");
-                 
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){
@@ -104,9 +111,12 @@
                        <td>{$interval->format('%a Dia/s')}</td>
                        <td>{$interval->format('%H Horas %i Minutos')}</td>
                        <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-      
-                       </tr>";
+                       "
+                       ?>
+                       <td>
+                       <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                       </tr>
+                       <?php
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";

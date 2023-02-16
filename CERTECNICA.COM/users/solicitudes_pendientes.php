@@ -64,13 +64,12 @@
                 <thead>
                 <th>NUMERO DE SOLICITUD</th>
                   <th>MOTIVO</th>
-                  <th>EMPLEADO</th>
                   <th>DESCRIPCIÓN</th>
                   <th>FECHA INICIO</th>
-                  <th>N° DIAS</th>
-                  <th>N° HORAS</th>
                   <th>APROBACIÓN GESTION HUMANA</th>
                   <th>APROBACIÓN JEFE </th>
+                  <th>APROBACIÓN DIRECTOR ADMINISTRATIVO</th>
+                  <th>Acciones</th>     
                 </thead>
                 <tbody>
                   <?php
@@ -88,14 +87,15 @@
                        echo "<tr>
                        <td>$cnt</td>
                        <td>{$row1['Motivo']}</td>
-                       <td>{$row1['emplead']}</td>
                        <td>{$row1['descripcion']}</td>
                        <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$interval->format('%a Dia/s')}</td>
-                       <td>{$interval->format('%H Horas %i Minutos')}</td>
                        <td>{$row1['aprobacion_GH']}</td>
                        <td>{$row1['estado_JF']}</td>
-                             </tr>";
+                       <td>{$row1['estado_DA']}</td>   
+                       "?>
+                       <td><a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                       </tr>
+                       <?php
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";

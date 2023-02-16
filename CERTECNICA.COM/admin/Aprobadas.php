@@ -6,6 +6,16 @@
 
 <div class="wrapper">
 
+<?php 
+
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+
+$documentos -> execute();
+
+$listado = $documentos ->fetchAll();
+?>
+
+
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
   <style>
@@ -36,7 +46,7 @@
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
         <li>Solicitudes</li>
-        <li class="active">Lista de Solicitudes</li>
+        <li class="active">solicitudes aprovadas</li>
       </ol>
     </section>
     <!-- Main content -->
@@ -77,7 +87,7 @@
                   <th>N° de dias</th>
                   <th>N° de horas</th>
                   <th>Aprobacion Gestion Humana</th>
-                  <th>Aprobacion de Jefe </th>
+                  <th>Soporte</th>     
                 </thead>
                 <tbody>
                   <?php
@@ -92,26 +102,30 @@
                        $datetime1 = new DateTime($row1['fecha_inicio']);
                        $datetime2 = new DateTime($row1['fecha_fin']);
                        $interval = $datetime1->diff($datetime2);
-                       
-                       echo "<tr>
-                       <td>$cnt</td>
-                       <td>{$row1['Motivo']}</td>
-                       <td>{$row1['emplead']}</td>
-                       <td>{$row1['descripcion']}</td>
-                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$interval->format('%a Dia/s')}</td>
-                       <td>{$interval->format('%H Horas %i Minutos')}</td>
-                       <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-                       </tr>";
+                       ?>
+                        <tr>
+                       <td><?php echo $cnt?></td>
+                       <td><?php echo $row1['Motivo']?></td>
+                       <td><?php echo $row1['emplead']?></td>
+                       <td><?php echo $row1['descripcion']?></td>
+                       <td><?php echo $datetime1->format('Y/m/d  h:i:s ')?> <b> Hasta </b> <?php echo $datetime2->format('Y/m/d/ h:i:s')?></td>
+                       <td><?php echo $interval->format('%a Dia/s')?></td>
+                       <td><?php echo $interval->format('%H Horas %i Minutos')?></td>
+                       <td><?php echo $row1['aprobacion_GH']?></td>
+                      <td> 
+                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>  Descargar Archivo</a></button></td>
+                      </td>
+
+                      
+                      </tr>
+                       <?php 
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>NO EXISTEN SOLICITUDES APROBADAS!</td></tr>";
                    }
-                 }
+                  }
                  else{
                   echo "Query Error : " . "SELECT * FROM solicitudes WHERE aprobacion_GH ='Aprobada'" . "<br>" . mysqli_error($conn);
-
                                }
              ?>
                         </tr>
@@ -126,8 +140,6 @@
     </body>                        
     </section>   
 </div>
-
-
 </html>
 <?php
 ini_set('display_errors', true);

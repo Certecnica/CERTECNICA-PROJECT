@@ -25,7 +25,6 @@
 	
 			}
 		}
-		
 	}
 	else{
 		$_SESSION['ERRORES'] = 'Ingrese las Credenciales de Usuario primero';

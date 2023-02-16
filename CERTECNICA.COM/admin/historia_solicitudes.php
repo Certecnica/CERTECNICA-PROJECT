@@ -71,7 +71,7 @@ $listado = $documentos ->fetchAll();
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-               <a href="#addsolicitud" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
+               <a href="#addSolicitud" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
@@ -85,14 +85,13 @@ $listado = $documentos ->fetchAll();
                   <th>Aprobacion Gestion Humana</th>
                   <th>Aprobacion de Jefe </th>
                   <th>Acciones</th>
-
                 </thead>
                 <tbody>
                 <?php foreach ($listado as $key => $value) { ?>
                 <?php $datetime1 = new DateTime($value['fecha_inicio']);
                 $datetime2 = new DateTime($value['fecha_fin']);
                 $interval = $datetime1->diff($datetime2);
-                ?>         
+                ?>          
                         <tr>
                           <td><?php echo $value['emplead']; ?></td>
                           <td><?php echo $value['Motivo']; ?></td>
@@ -103,7 +102,7 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['aprobacion_GH'] ?></td>
                           <td><?php echo  $value['estado_JF'] ?></td>
 
-                          <td><button type="button" class="btn btn-warning"><a href="<?php echo $value['documento']; ?>">Descargar Archivo</a></td></button>
+                          <td><button type="button" class="btn btn-link"><a href="<?php echo $value['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
                         </tr>
                     <?php
                           }
@@ -132,6 +131,7 @@ error_reporting(E_ALL);
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
+<?php include 'add_empleado_solicitud.php';?>
 <script>
 $(function(){
   $('.edit').click(function(e){

@@ -5,7 +5,14 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
+<?php 
 
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+
+$documentos -> execute();
+
+$listado = $documentos ->fetchAll();
+?>
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
   <style>
@@ -15,7 +22,6 @@
             font-weight: bold;
             padding-top: 1em;
         }
-
         .mycontainer {
             width: 90%;
             margin: 1.5rem auto;
@@ -69,16 +75,16 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>ID de solicitud</th>
-                  <th>motivo</th>
-                  <th>Empleado</th>
-                  <th>descripcion</th>
-                  <th>fecha </th>
-                  <th>N° de dias</th>
-                  <th>N° de horas</th>
-                  <th>Aprobacion Gestion Humana</th>
-                  <th>Aprobacion de Jefe </th>
-                  <th>Acciones</th>
+                  <th>ID DE SOLICITUD</th>
+                  <th>MOTIVO</th>
+                  <th>EMPLEADO</th>
+                  <th>DESCRIPCION</th>
+                  <th>FECHA</th>
+                  <th>N° DE DIAS</th>
+                  <th>N° DE HORAS</th>
+                  <th>APROBACION GESTION HUMANA</th>
+                  <th>COMENTARIO Y SOPORTES</th>
+                  <th>ACCIONES</th>
                 </thead>
                 <tbody>
                   <?php
@@ -103,19 +109,30 @@
                        <td>{$interval->format('%a Dia/s')}</td>
                        <td>{$interval->format('%H Horas %i Minutos')}</td>
                        <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-                       <td><a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>
-                       <a href=\"updateStatusReject.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>    
-                       </tr>";
+                       "
+                    ?>
+                    <td>
+                      <a class='btn btn-primary btn-sm editar btn-flat' href="ver_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> Añadir Comentario</a>
+                      <br>
+                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>
+Descargar Archivo</a></button></td>
+                    </td>
+                       <td>
+                        <?php echo"  
+                      <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a> 
+                      <a href=\"updateStatusReject.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>
+                      "?>
+                      </td>
+                      </tr>
+                       <?php
+                       ;
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
                    }
                  }
                  else{
-                  echo "Query Error : " . "SELECT * FROM solicitudes WHERE aprobacion_GH ='Pendiente'" . "<br>" . mysqli_error($conn);
-
-                               }
+                }
              ?>
                         </tr>
                 </tbody>
@@ -137,7 +154,6 @@ error_reporting(E_ALL);
 </div>
     </section>   
   </div>
-  <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>

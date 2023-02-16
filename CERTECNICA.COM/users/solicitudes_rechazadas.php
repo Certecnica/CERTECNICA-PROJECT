@@ -71,6 +71,7 @@
                   <th>N° HORAS</th>
                   <th>APROBACIÓN GESTION HUMANA</th>
                   <th>APROBACIÓN JEFE </th>
+                  <th>Comentarios</th>
                 </thead>
                 <tbody>
                   <?php
@@ -95,6 +96,7 @@
                        <td>{$interval->format('%H Horas %i Minutos')}</td>
                        <td>{$row1['aprobacion_GH']}</td>
                        <td>{$row1['estado_JF']}</td>
+                       <td>{$row1['comentario_GH']}</td>
                              </tr>";
                     $cnt++; }
                    } else {

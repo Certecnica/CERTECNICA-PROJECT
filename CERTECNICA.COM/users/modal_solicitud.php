@@ -46,13 +46,13 @@
  <div class="form-group">
                   	<label for="descripcion" class="col-sm-3 control-label">Descripción</label>
                   	<div class="col-sm-9">
-                    	<input type="descripcion" class="form-control" id="descripcion" name="descripcion" required>
+                    	<input type="descripcion" class="form-control" id="descripcion" name="descripcion">
                   	</div>
                 </div>
 				
 				<div class="">
 <label for="documento" class="col-sm-3 control-label" >Documento  </label>
-<input type="file" class="form-control" id="documento" name="documento" >
+<input type="file" class="form-control" id="documento" name="documento">
 </div>
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
             	<button type="submit" class="btn btn-primary btn-flat" name="Createsolicitud"><i class="fa fa-save"></i> Guardar</button>

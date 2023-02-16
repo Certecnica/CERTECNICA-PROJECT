@@ -109,8 +109,8 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['EMPLEADO']; ?></td>
                           <td><?php echo $value['tipo_documento']; ?></td>
                           <td><?php echo $value['Fecha_subida']; ?></td>
-                          <td><button type="button" class="btn btn-warning"><a href="<?php echo $value['DOCUMENTO']; ?>">Descargar Archivo</a></td></button>
-                          <td><button type="button" class="btn btn-success"><a href="eliminar.php?id=<?php echo $value['id']; ?>">Eliminar</a></td></button>
+                          <td><button type="button" class="btn btn-link"><a href="<?php echo $value['DOCUMENTO']; ?>"><i class="fa fa-download" aria-hidden="true">Descargar Archivo</a></i></td></button>
+                          <td><button type="button" class="btn btn-link"><a href="eliminar.php?id=<?php echo $value['id']; ?>"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</a></td></button>
                         </tr>
                     <?php 
                     } ?>

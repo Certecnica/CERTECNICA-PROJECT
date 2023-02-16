@@ -82,8 +82,8 @@
                           <td><?php echo $row['date_primerpago']?></td>
                           <td><?php echo $row['destino_prestasmo']?></td>
                           <td>
-                          <a class='btn btn-success btn-sm editar btn-flat' href="form_editar_admin.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit">  Editar</i></a>
-                          <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_admin.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"> Eliminar</i>
+                          <a class='btn btn-success btn-sm editar btn-flat' href="editar_prestamo.php?id=<?php echo $fila['id'] ?> "><i class="fa fa-edit">  Editar</i></a>
+                          <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_prestamo.php?id=<?php echo $fila['id']?> "><i class="fa fa-trash" aria-hidden="true"> Eliminar</i>
                           </td>
                         </tr>
                     <?php 
