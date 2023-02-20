@@ -83,19 +83,20 @@
                        $datetime1 = new DateTime($row1['fecha_inicio']);
                        $datetime2 = new DateTime($row1['fecha_fin']);
                        $interval = $datetime1->diff($datetime2);
-                       
-                       echo "<tr>
-                       <td>$cnt</td>
-                       <td>{$row1['Motivo']}</td>
-                       <td>{$row1['descripcion']}</td>
-                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-                       <td>{$row1['estado_DA']}</td>   
-                       "?>
+                       ?>
+                       <tr>
+                       <td><?php echo $cnt ?></td>
+                       <td><?php echo $row1['Motivo']?></td>
+                       <td><?php echo $row1['descripcion']?></td>
+                       <td><?php echo $datetime1->format('Y/m/d  h:i:s ')?> <b> Hasta </b><?php echo $datetime2->format('Y/m/d/ h:i:s')?></td>
+                       <td><?php echo $row1['aprobacion_GH']?></td>
+                       <td><?php echo $row1['estado_JF']?></td>
+                       <td><?php echo $row1['estado_DA']?></td>  
+                         
                        <td><a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
-                       </tr>
-                       <?php
+                       <td><a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Solicitud</a>
+                     </tr>
+                    <?php
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";

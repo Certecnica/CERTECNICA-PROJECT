@@ -60,9 +60,29 @@ Entrega</a></li0>
  No Aprobadas</a></li>
             <li><a href="historia_solicitudes.php"><i class="fa fa-history" aria-hidden="true"></i>
  Todas las Solicitudes</a></li>
-
           </ul>
         </li>
+
+        <li class="treeview">
+          <a href="#">
+          <i class="fa fa-money" aria-hidden="true"></i>
+          <span>Prestamos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="prestamos_pendientes.php"><i class="fa fa-exclamation" aria-hidden="true"></i>
+ Pendientes por aprobación</a></li>
+          <li><a href="prestamos_curso.php"><i class="fa fa-check" aria-hidden="true"></i>
+ Prestamos en curso</a></li>
+          <li><a href="prestamos_finalizados.php"><i class="fa fa-times-circle" aria-hidden="true"></i>
+ Finalizados</a></li>
+            <li><a href="solicitudes_total.php"><i class="fa fa-history" aria-hidden="true"></i>
+ Todas las Solicitudes</a></li>
+          </ul>
+        </li>
+
         <li><a href="cashadvance.php"><i class="fa fa-money" aria-hidden="true"></i>
 Solicitud de Prestamos</a></li>
         <li><a href="index_calendario.php"><i class="fa fa-calendar" aria-hidden="true"></i></i>Calendario Certecnica</a></li>
@@ -77,10 +97,6 @@ Solicitud de Prestamos</a></li>
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="new_survey.php"><i class="fa fa-circle-o"></i>Crear Encuesta</a></li>
-            <li><a href="survey_list.php"><i class="fa fa-circle-o"></i>Encuestas</a></li>
-          </ul>
         </li>
     </section>
   </aside>

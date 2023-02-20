@@ -2,7 +2,7 @@
 
 <?php 
 
-$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_prestamo = 'FINALIZADO';") ;
 
 $documentos -> execute();
 
@@ -41,7 +41,7 @@ $listado = $documentos ->fetchAll();
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Solicitudes
+        SOLICITUD DE PRESTAMO
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -73,43 +73,35 @@ $listado = $documentos ->fetchAll();
           unset($_SESSION['success']);
         }
       ?>
-<div class="row">
+<div class="row">   
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-               <a href="#addSolicitud" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
+               <a href="#addPrestamo" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Empleado</th>
-                  <th>Motivo</th>
-                  <th>descripcion</th>
-                  <th>fecha de permiso</th>
-                  <th>N° de dias</th>
-                  <th>N° de horas</th>
-                  <th>Aprobacion Gestion Humana</th>
-                  <th>Aprobacion de Jefe </th>
-                  <th>Acciones</th>
+                  <th>MONTO SOLICITADO</th>
+                  <th>CUOTAS</th>
+                  <th>FECHA PRIMER DESCUENTO</th>
+                  <th>DESTINO PRESTAMO </th>
+                  <th>APROBACIÓN GESTION HUMANA</th>
+                  <th>APROBACIÓN SUBGERENCIA</th>
+                  <th>APROBACIÓN DIRECTOR ADMINISTRATIVO</th>
+                  <th>ACCIONES</th>
                 </thead>
                 <tbody>
                 <?php foreach ($listado as $key => $value) { ?>
-                <?php $datetime1 = new DateTime($value['fecha_inicio']);
-                $datetime2 = new DateTime($value['fecha_fin']);
-                $interval = $datetime1->diff($datetime2);
-                ?>          
-
               <tr>
-                          <td><?php echo $value['emplead']; ?></td>
-                          <td><?php echo $value['Motivo']; ?></td>
-                          <td><?php echo $value['descripcion']; ?></td>
-                          <td><?php echo $datetime1->format('Y/m/d  h:i:s ') ?><b> Hasta </b> <?php echo $datetime2->format('Y/m/d/ h:i:s') ?></td>                  
-                          <td><?php echo $interval->format('%a Dia/s') ?></td>
-                          <td><?php echo $interval->format('%H Horas %i Minutos') ?></td>
-                          <td><?php echo $value['aprobacion_GH'] ?></td>
-                          <td><?php echo  $value['estado_JF'] ?></td>
-
-                          <td><button type="button" class="btn btn-link"><a href="<?php echo $value['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                          <td><?php echo $value['empleado']; ?></td>
+                          <td><?php echo $value['cuotas']; ?></td>
+                          <td><?php echo $value['fecha_primer_descuento']; ?></td>
+                          <td><?php echo $value['destino_prestamo']; ?></td>                  
+                          <td><?php echo $value['estado_GH']; ?></td>
+                          <td><?php echo $value['estado_subgerencia']; ?></td>
+                          <td><?php echo $value['estado_DA']; ?></td>
+                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
                         </tr>
                     <?php
                           }
@@ -137,7 +129,6 @@ error_reporting(E_ALL);
   </div>
 </div>
 <?php include 'includes/scripts.php'; ?>
-<?php include 'modal_solicitud.php'?>
 <script>
 $(function(){
   $('.edit').click(function(e){

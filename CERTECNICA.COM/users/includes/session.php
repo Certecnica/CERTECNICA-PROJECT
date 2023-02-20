@@ -6,7 +6,9 @@
 		header('location: ../index.php');
 	}
 	$sql = "SELECT * FROM employees WHERE id = '".$_SESSION['employees']."'";
+	
 	$query = $conn->query($sql);
+	
 	$user = $query->fetch_assoc();
 
 	

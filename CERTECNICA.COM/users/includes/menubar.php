@@ -32,6 +32,22 @@
     </ul>
         </li>
 
+        <li class="treeview">
+          <a href="#">
+<i class="fa fa-money" aria-hidden="true"></i>
+          <span>Prestamos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="prestamos_aprobadas.php"><iconify-icon icon="material-symbols:check-box"></iconify-icon> Solicitudes Aprobadas</a></li>
+          <li><a href="prestamos_rechazadas.php"><iconify-icon icon="material-symbols:cancel"></iconify-icon> Solicitudes Rechazadas</a></li>
+          <li><a href="prestamos_pendientes.php"><iconify-icon icon="material-symbols:warning"></iconify-icon> Solicitudes Pendientes</a></li>
+          <li><a href="prestamos_historial.php"><iconify-icon icon="material-symbols:history-rounded"></iconify-icon></i>Historial Solicitudes</a></li>
+    </ul>
+        </li>
+
         <li><a href="solicitud_vacaciones.php"><i class="fa fa-calendar" aria-hidden="true"></i>
 Solicitar Vacaciones</a></li>
         <li><a href="includes/logout.php"><i class="fa fa-suitcase"></i>Cerrar Sesión</a></li>

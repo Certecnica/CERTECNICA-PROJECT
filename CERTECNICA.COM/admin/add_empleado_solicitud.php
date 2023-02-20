@@ -2,7 +2,6 @@
 
 include 'includes/conn.php';
 
-include 'includes/session.php';
  
     $empleado  = $_POST['empleado_solicitud'];
    

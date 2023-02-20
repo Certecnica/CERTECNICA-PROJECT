@@ -1,6 +1,8 @@
 <?php
 	include 'includes/session.php';
-//TRAEMOS DATOS DEL MODAL
+
+	//TRAEMOS DATOS DEL MODAL
+
 	if(isset($_POST['add'])){
 		
 		$employee = $_POST['employee'];
@@ -16,6 +18,7 @@
 		$destino_prestamo = $_POST['destino_prestamo'];
 
 		//CONSULTA A LA BASE DE DATOS (BASICO)		
+
 		$sql = "SELECT * FROM employees WHERE employee_id = '$employee'";
 		
 		$query = $conn->query($sql);
@@ -36,7 +39,6 @@
 				
 				$_SESSION['success'] = 'Préstamo añadido satisfactoriamente';
 			}
-			
 			else{
 				$_SESSION['error'] = $conn->error;
 			}

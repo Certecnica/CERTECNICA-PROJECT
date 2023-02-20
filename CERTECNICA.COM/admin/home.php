@@ -152,7 +152,6 @@
       </section>
       <!-- right col -->
     </div>
-  	<?php include 'includes/footer.php'; ?>
 </div>
 <!-- ./wrapper -->
 
