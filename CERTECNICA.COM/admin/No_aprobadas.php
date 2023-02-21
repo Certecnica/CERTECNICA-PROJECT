@@ -119,7 +119,7 @@ $listado = $documentos ->fetchAll();
                        <?php
                     $cnt++; }
                    } else {
-                     echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
+                     echo"<tr class='text-center'><td colspan='12'>NO EXISTEN SOLICITUDES RECHAZADAS!</td></tr>";
                    }
                  }
                  else{

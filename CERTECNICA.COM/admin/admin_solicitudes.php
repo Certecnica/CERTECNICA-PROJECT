@@ -89,8 +89,7 @@ $listado = $documentos ->fetchAll();
                 <tbody>
                   <?php
                   global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE estado_JF ='Aceptado' AND aprobacion_GH = 'Pendiente'");
-                 
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE estado_JF ='Aceptado' AND aprobacion_GH = 'Pendiente' AND estado_DA = 'Aceptado' ");
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){
@@ -99,36 +98,32 @@ $listado = $documentos ->fetchAll();
                        $datetime1 = new DateTime($row1['fecha_inicio']);
                        $datetime2 = new DateTime($row1['fecha_fin']);
                        $interval = $datetime1->diff($datetime2);
-                       
-                       echo "<tr>
-                       <td>$cnt</td>
-                       <td>{$row1['Motivo']}</td>
-                       <td>{$row1['emplead']}</td>
-                       <td>{$row1['descripcion']}</td>
-                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$interval->format('%a Dia/s')}</td>
-                       <td>{$interval->format('%H Horas %i Minutos')}</td>
-                       <td>{$row1['aprobacion_GH']}</td>
-                       "
-                    ?>
+                        ?>
+                       <tr>
+                       <td><?php echo $cnt?></td>
+                       <td><?php echo $row1['Motivo']?></td>
+                       <td><?php echo $row1['emplead']?></td>
+                       <td><?php echo $row1['descripcion']?></td>
+                       <td><?php echo $datetime1->format('Y/m/d  h:i:s ')?> <b> Hasta </b><?php echo $datetime2->format('Y/m/d/ h:i:s')?></td>
+                       <td><?php echo $interval->format('%a Dia/s')?></td>
+                       <td><?php echo $interval->format('%H Horas %i Minutos')?></td>
+                       <td><?php echo $row1['aprobacion_GH'] ?></td>
                     <td>
                       <a class='btn btn-primary btn-sm editar btn-flat' href="ver_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> Añadir Comentario</a>
                       <br>
-                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>
-Descargar Archivo</a></button></td>
+                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
                     </td>
                        <td>
                         <?php echo"  
-                      <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a> 
-                      <a href=\"updateStatusReject.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>
-                      "?>
-                      </td>
+                      <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>"?>
+                      <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_rechazo.php?id=<?php echo $row1['id']?>" > Rechazar </a>
+                    </td>
                       </tr>
                        <?php
                        ;
                     $cnt++; }
                    } else {
-                     echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";
+                     echo"<tr class='text-center'><td colspan='12'> NO TIENES SOLICITUDES PENDIENTES POR APROBACIÓN!</td></tr>";
                    }
                  }
                  else{

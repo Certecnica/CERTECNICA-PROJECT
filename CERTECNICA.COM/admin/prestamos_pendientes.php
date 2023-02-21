@@ -1,12 +1,12 @@
 <?php include 'includes/session.php'; ?>
 
 <?php 
-
-$documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Pendiente' AND estado_subgerencia = 'Aprobado' AND estado_DA = 'Aprobado';") ;
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Pendiente' OR estado_subgerencia = 'Pendiente' AND estado_DA = 'Pendiente';") ;
 
 $documentos -> execute();
 
 $listado = $documentos ->fetchAll();
+
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -16,6 +16,7 @@ $listado = $documentos ->fetchAll();
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
   <style>
         h1 {
@@ -85,9 +86,10 @@ $listado = $documentos ->fetchAll();
                   <th>APROBACIÓN GESTION HUMANA</th>
                   <th>APROBACIÓN SUBGERENCIA</th>
                   <th>APROBACIÓN DIRECTOR ADMINISTRATIVO</th>
+                  <th>VER SOLICITUD</th>
                   <th>ACCIONES</th>
                 </thead>
-                <tbody>
+                 <tbody>
                 <?php foreach ($listado as $key => $value) { ?>
               <tr>
                           <td><?php echo $value['empleado']; ?></td>
@@ -97,10 +99,15 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['estado_GH']; ?></td>
                           <td><?php echo $value['estado_subgerencia']; ?></td>
                           <td><?php echo $value['estado_DA']; ?></td>
-                          
-                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
 
-                        </tr>
+                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                           <td>
+                            <?php echo"  
+                            <a href=\"UpdateStatusPrestamos.php?id={$value['id']}&destino_prestamo={$value['destino_prestamo']}\"><button class='btn-success btn-sm' > Aceptar </button></a>"?>
+                            <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_rechazo_prestamo.php?id=<?php echo $value['id']?>" > Rechazar </a>
+                            </td>
+                        </td>
+                                      
                     <?php
                           }
                 ?>
@@ -150,7 +157,6 @@ $(function(){
   });
 
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',

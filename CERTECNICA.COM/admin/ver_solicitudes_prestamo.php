@@ -70,7 +70,7 @@ $usuario = mysqli_fetch_assoc($resultado);
 
   <div class="form-group col-md-6">
       <label for="monto_solicitado"> MONTO </label>    
-      <input type="text" class="form-control" id="monto_solicitado" name="monto_solicitado" value="<?= $usuario['monto_solicitado'];  ?>" readonly>
+      <input type="text" class="form-control" id="monto_solicitado" name="monto_solicitado" value="<?php echo  number_format ($usuario['monto_solicitado']);  ?>" readonly>
     </div>
 
     <div class="form-group col-md-4">
@@ -79,7 +79,7 @@ $usuario = mysqli_fetch_assoc($resultado);
     </div>
     <div class="col-md-4 mb-3">
       <label for="valor_cuota_mensual">VALOR CUOTA MENSUAL</label>
-      <input type="text" class="form-control" id="valor_cuota_mensual" name="valor_cuota_mensual"  value="<?= $usuario['valor_cuota_mensual']?>"readonly>
+      <input type="text" class="form-control" id="valor_cuota_mensual" name="valor_cuota_mensual"  value="<?php echo number_format($usuario['valor_cuota_mensual']); ?>"readonly>
       </div>
 
     <div class="form-row">

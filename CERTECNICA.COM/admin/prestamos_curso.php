@@ -87,6 +87,7 @@ $listado = $documentos ->fetchAll();
                   <th>APROBACIÓN SUBGERENCIA</th>
                   <th>APROBACIÓN DIRECTOR ADMINISTRATIVO</th>
                   <th>ACCIONES</th>
+                  <th>FINALIZAR PRESTAMO</th>
                 </thead>
                 <tbody>
                 <?php foreach ($listado as $key => $value) { ?>
@@ -99,8 +100,11 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['estado_subgerencia']; ?></td>
                           <td><?php echo $value['estado_DA']; ?></td>
 
-                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
-                        </tr>
+                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="prestamo_curso_update.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                </td>
+                         <td><a class='btn btn-primary btn-sm editar btn-flat' href="prestamo_curso_update.php?id=<?php echo $value['id']?>"><i class="fa fa-step-forward" aria-hidden="true"></i>
+ Finalizar Prestamo</a></td> 
+</tr>
                     <?php
                           }
                 ?>

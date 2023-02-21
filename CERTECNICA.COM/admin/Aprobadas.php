@@ -92,7 +92,7 @@ $listado = $documentos ->fetchAll();
                 <tbody>
                   <?php
                   global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Aceptado' AND estado_JF = 'Aceptado'");
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Aceptado' AND estado_JF = 'Aceptado' AND estado_DA = 'Aceptado'");
                  
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);

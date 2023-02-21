@@ -12,7 +12,9 @@
 
 <?php 
 $documento = $conexion2 -> prepare("SELECT * FROM sanciones") ;
+
 $documento -> execute();
+
 $lista = $documento ->fetchAll();
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -86,8 +88,8 @@ $lista = $documento ->fetchAll();
                           <td><?php echo $valor['MOTIVO']; ?></td>
                           <td><?php echo $valor['DESCRIPCION']; ?></td>
                           <td><?php echo $valor['Fecha_subida']; ?></td>
-                          <td><a href="<?php echo $valor['DOCUMENTO']; ?>">Descargar Archivo</a></td>
-                          <td><a href="eliminar.php?id=<?php echo $valor['id']; ?>">Eliminar</a></td>
+                          <td><a href="<?php echo $valor['DOCUMENTO']; ?>"> Descargar Archivo</a></td>
+                          <td><a href="eliminar.php?id=<?php echo $valor['id']; ?>"> Eliminar</a></td>
                         </tr>
                     <?php 
                     } ?>

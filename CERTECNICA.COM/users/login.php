@@ -22,7 +22,6 @@
 			}
 			else{
 				$_SESSION['ERRORES'] = 'Contraseña Incorrecta';
-	
 			}
 		}
 	}

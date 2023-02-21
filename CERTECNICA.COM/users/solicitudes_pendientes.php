@@ -94,7 +94,7 @@
                        <td><?php echo $row1['estado_DA']?></td>  
                          
                        <td><a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
-                       <td><a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar Solicitud</a>
+                       <td><a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancelar Solicitud</a>
                      </tr>
                     <?php
                     $cnt++; }
@@ -106,7 +106,7 @@
                    echo "Query Error : " .  " SELECT descripcion, aprobacion_GH FROM solicitudes WHERE id='".$_SESSION['employees']."'" . "<br>" . mysqli_error($conn);;
                  }
              ?>
-                        </tr>
+              </tr>
                 </tbody>
               </table>
             </div>

@@ -62,7 +62,6 @@ Entrega</a></li0>
  Todas las Solicitudes</a></li>
           </ul>
         </li>
-
         <li class="treeview">
           <a href="#">
           <i class="fa fa-money" aria-hidden="true"></i>
@@ -74,6 +73,8 @@ Entrega</a></li0>
           <ul class="treeview-menu">
           <li><a href="prestamos_pendientes.php"><i class="fa fa-exclamation" aria-hidden="true"></i>
  Pendientes por aprobación</a></li>
+ <li><a href="prestamos_rechazados.php"><i class="fa fa-ban" aria-hidden="true"></i>
+Solicitudes Rechazadas </a></li>
           <li><a href="prestamos_curso.php"><i class="fa fa-check" aria-hidden="true"></i>
  Prestamos en curso</a></li>
           <li><a href="prestamos_finalizados.php"><i class="fa fa-times-circle" aria-hidden="true"></i>
@@ -82,9 +83,6 @@ Entrega</a></li0>
  Todas las Solicitudes</a></li>
           </ul>
         </li>
-
-        <li><a href="cashadvance.php"><i class="fa fa-money" aria-hidden="true"></i>
-Solicitud de Prestamos</a></li>
         <li><a href="index_calendario.php"><i class="fa fa-calendar" aria-hidden="true"></i></i>Calendario Certecnica</a></li>
         <li><a href="position.php"><i class="fa fa-suitcase"></i> Cargos</a></li>
         <li><a href="vacaciones.php"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>

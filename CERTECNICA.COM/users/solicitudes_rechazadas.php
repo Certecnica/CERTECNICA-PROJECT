@@ -71,7 +71,7 @@
                   <th>N° HORAS</th>
                   <th>APROBACIÓN GESTION HUMANA</th>
                   <th>APROBACIÓN JEFE </th>
-                  <th>Comentarios</th>
+                  <th>Ver Solicitud</th>
                 </thead>
                 <tbody>
                   <?php
@@ -85,19 +85,22 @@
                        $datetime1 = new DateTime($row1['fecha_inicio']);
                        $datetime2 = new DateTime($row1['fecha_fin']);
                        $interval = $datetime1->diff($datetime2);
-                       
-                       echo "<tr>
-                       <td>$cnt</td>
-                       <td>{$row1['Motivo']}</td>
-                       <td>{$row1['emplead']}</td>
-                       <td>{$row1['descripcion']}</td>
-                       <td>{$datetime1->format('Y/m/d  h:i:s ')} <b> Hasta </b> {$datetime2->format('Y/m/d/ h:i:s')}</td>
-                       <td>{$interval->format('%a Dia/s')}</td>
-                       <td>{$interval->format('%H Horas %i Minutos')}</td>
-                       <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-                       <td>{$row1['comentario_GH']}</td>
-                             </tr>";
+                       ?>
+                       <tr>
+                       <td><?php echo $cnt?></td>
+                       <td><?php echo $row1['Motivo']?></td>
+                       <td><?php echo $row1['emplead']?></td>
+                       <td><?php echo $row1['descripcion']?></td>
+                       <td><?php echo $datetime1->format('Y/m/d  h:i:s ')?><b> Hasta </b> <?php $datetime2->format('Y/m/d/ h:i:s')?></td>
+                       <td><?php echo $interval->format('%a Dia/s')?></td>
+                       <td><?php echo $interval->format('%H Horas %i Minutos')?></td>
+                       <td><?php echo $row1['aprobacion_GH']?></td>
+                       <td><?php echo $row1['estado_JF']?></td>
+                        <td>
+                     <a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                        </td>
+                             </tr>
+                             <?php 
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>NO TIENES SOLICITUDES DE PERMISO RECHAZADAS!</td></tr>";

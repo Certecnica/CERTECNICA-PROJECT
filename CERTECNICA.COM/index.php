@@ -4,10 +4,6 @@
     
     header('location:admin/home.php');
   }
-  if(isset($_SESSION['employees'])){
-
-    header('location:users/home.php');
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">

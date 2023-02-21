@@ -135,9 +135,6 @@ $interval = $datetime1->diff($datetime2);
                             </div>
     </center>
 <style>    
-.buton a{
-
-}
 </style>
 
 </form>
