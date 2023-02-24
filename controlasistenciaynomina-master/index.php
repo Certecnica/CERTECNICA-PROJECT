@@ -3,7 +3,11 @@
   if(isset($_SESSION['admin'])){
     header('location:admin/home.php');
   }
+  if(isset($_SESSION['employees'])){
+    header('location:users/home.php');
+  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,29 +18,28 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.jpg" />
     <title>INICIA SESIÓN</title>
   </head>
   <body>
     <div class="container">
       <div class="forms-container">
-      <img src="../controlasistenciaynomina-master/images/CERTECNICA_2-removebg-preview (1).png" style="padding-top:70px; padding-left:160px ; width:35%; padding-bottom:25px;">      
-
+      <img src="images/certecnica.2.jpg" style="padding-top:70px; padding-left:160px ; width:35%; padding-bottom:25px;">      
         <div class="signin-signup">
-          
-          <form action="#" class="sign-in-form" method="POST" > 
+          <form action="users/login.php" class="sign-in-form" method="POST" > 
             <div>
-          <img src="../controlasistenciaynomina-master/images/CERTECNICA_2-removebg-preview (1).png" style="padding-bottom:70px; width: 75%;">      
+          <img src="images/certecnica.2.jpg" style="padding-bottom:70px; width: 75%;">      
           </div>
           <h2 class="title">INICIA SESIÓN</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Usuario" />
+              <input type="text" placeholder="Usuario" name="usuario" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Contraseña" />
+              <input type="password" placeholder="Contraseña" name="contraseña" />
             </div>
-            <input type="submit" value="iNGRESA" class="btn solid" />
+            <input type="submit" value="INGRESA" class="btn solid" name="ingresar" />
             <div class="social-media">
             </div>
           </form>
@@ -54,6 +57,16 @@
             <div class="social-media">
             </div>
           </form>
+          <?php
+  		if(isset($_SESSION['ERRORES'])){
+  			echo "
+  				<div class='callout callout-danger text-center mt20'>
+			  		<p>".$_SESSION['ERRORES']."</p> 
+			  	</div>
+  			";
+  			unset($_SESSION['ERRORES']);
+  		}
+  	?>
         </div>
       </div>
       <div class="panels-container">
@@ -70,6 +83,7 @@
           </div>
           <img src="img/log.svg" class="image" alt="" />
         </div>
+        
         <div class="panel right-panel">
           <div class="content">
             <h3>¿Eres Empleado?</h3>
@@ -94,8 +108,8 @@
   	?>
       </div>
     </div>
-
-    <?php include 'includes/scripts.php' ?>
+    <?php include 'admin/includes/scripts.php' ?>
+    <?php include 'users/includes/scripts.php' ?>
     <script src="app.js"></script>
   </body>
 </html>

@@ -54,15 +54,22 @@
 
                   	<div class="col-sm-9"> 
                       <div class="date">
-                        <input type="text" class="form-control" id="datepicker_add" name="birthdate">
+                        <input type="date" class="form-control" id="datepicker_add" name="birthdate">
                       </div>
                   	</div>
                 </div>
                 <div class="form-group">
-                    <label for="contact" class="col-sm-3 control-label">Información de Contacto</label>
+                    <label for="contact" class="col-sm-3 control-label">Correo Electronico</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="contact" name="contact">
+                      <input type="email" class="form-control" id="contact" name="contact" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contraseña" class="col-sm-3 control-label">Contraseña</label>
+
+                    <div class="col-sm-9">
+                      <input type="password" class="form-control" id="contraseña" name="contraseña" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -234,7 +241,6 @@
         </div>
     </div>
 </div>
-
 <!-- Delete -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">

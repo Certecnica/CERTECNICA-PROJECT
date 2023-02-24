@@ -9,9 +9,7 @@ $data = $conn ->query($sqlquery4);
 ?>
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
       Salarios Empleados
@@ -46,7 +44,6 @@ $data = $conn ->query($sqlquery4);
           unset($_SESSION['success']);
         }
         ?> 
-
 <div class="row">
         <div class="col-xs-12">
           <div class="box">
@@ -89,7 +86,6 @@ $data = $conn ->query($sqlquery4);
       </div>
     </section>   
   </div>
-
   <?php include 'includes/footer.php'; ?>
   <?php include 'modal_salarial.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
@@ -116,7 +112,6 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-
 });
 </script>
 </body>

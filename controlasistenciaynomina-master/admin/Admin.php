@@ -2,7 +2,6 @@
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <?php include 'includes/navbar.php'; ?>
   <?php include 'includes/menubar.php'; ?>
   <!-- Content Wrapper. Contains page content -->
@@ -83,8 +82,7 @@
         </div>
       </div>
     </section>   
-  </div>
-    
+  </div
   <?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
@@ -110,9 +108,7 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
-
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',
@@ -138,3 +134,4 @@ function getRow(id){
 </script>
 </body>
 </html>
+
