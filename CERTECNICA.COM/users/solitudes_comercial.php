@@ -1,3 +1,4 @@
+<?php if($user['position_id'] == '12' ||$user['position_id'] == '11'){?>
 <?php include 'includes/session.php'; ?>
 
 <?php include 'includes/header.php'; ?>
@@ -5,7 +6,6 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <div class="wrapper">
-  
 <?php 
 
 $documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
@@ -201,3 +201,8 @@ function getRow(id){
 </script>
 </body>
 </html>
+ <?php 
+	  }else{
+		// en caso de que el rol no esté definido, redirigir a una página de error o mostrar un mensaje de error
+		header('location: error.php');
+	  }

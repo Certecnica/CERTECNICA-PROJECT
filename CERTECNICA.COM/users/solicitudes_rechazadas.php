@@ -97,7 +97,7 @@
                        <td><?php echo $row1['aprobacion_GH']?></td>
                        <td><?php echo $row1['estado_JF']?></td>
                         <td>
-                     <a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                          <a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
                         </td>
                              </tr>
                              <?php 

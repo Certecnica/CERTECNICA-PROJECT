@@ -1,5 +1,23 @@
 
-<?php include 'includes/session.php'; ?>
+<?php
+
+include 'includes/session.php';
+
+$id_user = $_SESSION['employees'];
+
+$sql = "SELECT * FROM vacaciones WHERE id = '$id_user'";
+
+$result = mysqli_query($conn , $sql);
+
+$row = mysqli_fetch_assoc($result);
+
+$fecha_inicio = strtotime($row ['fecha_contratacion']);
+
+$fecha_actual = time ();
+
+$dias_trabajados = ($fecha_actual - $fecha_inicio ) /86400;
+
+if ($dias_trabajados > 365){?>
 
 <?php include 'includes/header.php'; ?>
 
@@ -71,8 +89,8 @@
                   <th>NUMERO DE SOLICITUD</th>
                   <th>EMPLEADO</th>
                   <th>FECHA INICIO</th>
-				  <th>FECHA FIN</th>
-				  <th>DIAS TOTALES</th>
+				          <th>FECHA FIN</th>
+				          <th>DIAS TOTALES</th>
                 </thead>
                 <tbody>
                   <?php
@@ -119,4 +137,13 @@
 <?php include 'modal_solicitud_vacaciones.php'; ?>
 </body>
 </html>
+<?php 
+}else{
+  // en caso de que el rol no esté definido, redirigir a una página de error o mostrar un mensaje de error
+  header('location: error_vacaciones.php');
+  }
+
+?>
+
+
 

@@ -1,8 +1,10 @@
-<?php include 'includes/session.php'; ?>
+<?php include  'includes/session.php'; ?>
 
 <?php 
 
-$documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Aprobado' AND estado_subgerencia = 'Aprobado' AND estado_DA = 'Aprobado'") ;
+include 'includes/conn.php';
+
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Aceptado' AND estado_subgerencia = 'Aceptado' AND estado_DA = 'Aceptado'") ;
 
 $documentos -> execute();
 
@@ -25,13 +27,11 @@ $listado = $documentos ->fetchAll();
             font-weight: bold;
             padding-top: 1em;
         }
-
         .mycontainer {
             width: 90%;
             margin: 1.5rem auto;
             min-height: 60vh;
         }
-
         .mycontainer table {
             margin: 1.5rem auto;
         }
@@ -101,7 +101,7 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['estado_GH']; ?></td>
                           <td><?php echo $value['estado_subgerencia']; ?></td>
                           <td><?php echo $value['estado_DA']; ?></td>
-                          
+
                           <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitud_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
 
                         </tr>
@@ -155,7 +155,6 @@ $(function(){
   });
 
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',

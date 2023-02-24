@@ -77,6 +77,7 @@ $usuario = mysqli_fetch_assoc($resultado);
       <label for="cuotas"> CUOTAS </label>
       <input type="text" class="form-control" id="cuotas" name="cuotas" value="<?= $usuario['cuotas'];  ?>" readonly>
     </div>
+
     <div class="col-md-4 mb-3">
       <label for="valor_cuota_mensual">VALOR CUOTA MENSUAL</label>
       <input type="text" class="form-control" id="valor_cuota_mensual" name="valor_cuota_mensual"  value="<?php echo number_format($usuario['valor_cuota_mensual']); ?>"readonly>
@@ -112,10 +113,12 @@ $usuario = mysqli_fetch_assoc($resultado);
       <label for="comentarios_subgerencia">COMENTARIOS SUBGERENCIA</label>
       <input type="text" class="form-control" id="comentarios_subgerencia" name="comentarios_subgerencia" value="<?= $usuario['comentario_subgerencia'] ?>"readonly>
     </div>
+
     <div class="form-group col-md-6">
       <label for="comentarios_DA"> COMENTARIOS DIRECTOR ADMINISTRATIVO</label>
       <input type="text" class="form-control" id="comentarios_DA" name="comentarios_DA" value="<?= $usuario['comentario_DA'] ?>" readonly>
     </div>
+    
         <div class="form-group col-md-6"> 
 <label for="comentarios_GH">COMENTARIOS GESTION HUMANA</label>
         <input type="text" class="form-control" id="comentarios_GH" name="comentarios_GH" value="<?= $usuario['comentario_GH']?>" readonly

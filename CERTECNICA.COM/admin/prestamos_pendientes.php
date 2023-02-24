@@ -100,7 +100,7 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['estado_subgerencia']; ?></td>
                           <td><?php echo $value['estado_DA']; ?></td>
 
-                          <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                          <td><a class='btn btn-link btn-sm editar btn-flat' href="ver_solicitudes_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
                            <td>
                             <?php echo"  
                             <a href=\"UpdateStatusPrestamos.php?id={$value['id']}&destino_prestamo={$value['destino_prestamo']}\"><button class='btn-success btn-sm' > Aceptar </button></a>"?>

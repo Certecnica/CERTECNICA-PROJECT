@@ -1,4 +1,13 @@
+<?php
+	include 'includes/conn.php';
 
+   $sql = "SELECT * FROM employees WHERE id = 1";
+	
+   $query = $conn->query($sql);
+  
+  $user = $query->fetch_assoc();
+
+  ?>
 <aside class="main-sidebar">
     <section class="sidebar">
     <script src="https://code.iconify.design/iconify-icon/1.0.5/iconify-icon.min.js"></script>
@@ -13,8 +22,8 @@
       </div>
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">REPORTES</li>
-        <li class=""><a href="home.php"><iconify-icon icon="ion:speedometer-outline"></iconify-icon> <span>Panel de Control</span></a></li>
-        <li class="header">ADMINISTRACIÓN</li>
+        <li class=""><a href="home.php"><iconify-icon icon="ion:speedometer-outline"></iconify-icon><span>Panel de Control</span></a></li>
+        <li class="header">SOLICITUDES</li>
   
         <li class="treeview">
           <a href="#">
@@ -31,7 +40,7 @@
           <li><a href="solicitudes_historial.php"><iconify-icon icon="material-symbols:history-rounded"></iconify-icon></i>Historial Solicitudes</a></li>
     </ul>
         </li>
-
+     <?php   if($user['position_id'] == '11' ){?>
         <li class="treeview">
           <a href="#">
 <i class="fa fa-money" aria-hidden="true"></i>
@@ -47,11 +56,30 @@
           <li><a href="prestamos_historial.php"><iconify-icon icon="material-symbols:history-rounded"></iconify-icon></i>Historial Solicitudes</a></li>
     </ul>
         </li>
-
-        <li><a href="solicitud_vacaciones.php"><i class="fa fa-calendar" aria-hidden="true"></i>
-Solicitar Vacaciones</a></li>
+        <?php
+}
+?>
+<?php   if($user['position_id'] == '11'){?>
+        <li class="treeview">
+          <a href="#">
+          <iconify-icon icon="ion:exit-outline" rotate="180deg"></iconify-icon>
+          <span>Solicitudes Comercial</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+          </a>
+          <ul class="treeview-menu">
+          <li><a href="comercial_pendientes.php"><iconify-icon icon="material-symbols:check-box"></iconify-icon> Solicitudes Pendientes</a></li>
+          <li><a href=".php"><iconify-icon icon="material-symbols:cancel"></iconify-icon> Solicitudes Rechazadas</a></li>
+          <li><a href=".php"><iconify-icon icon="material-symbols:warning"></iconify-icon> Solicitudes Aprobadas</a></li>
+          <li><a href=".php"><iconify-icon icon="material-symbols:history-rounded"></iconify-icon></i>Historial Solicitudes</a></li>
+    </ul>
+        </li>
+        <?php
+}
+?>
+        <li><a href="solicitud_vacaciones.php"><i class="fa fa-calendar" aria-hidden="true"></i> Vacaciones </a></li>
         <li><a href="includes/logout.php"><i class="fa fa-suitcase"></i>Cerrar Sesión</a></li>
-    
     </section>
   </aside>
 

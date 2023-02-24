@@ -115,8 +115,6 @@ $listado = $documentos ->fetchAll();
                       <td> 
                       <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>  Descargar Archivo</a></button></td>
                       </td>
-
-                      
                       </tr>
                        <?php 
                     $cnt++; }

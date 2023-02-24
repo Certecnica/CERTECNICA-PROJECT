@@ -1,3 +1,6 @@
+<?php
+	include 'includes/conn.php';
+  ?>
 <header class="main-header">
     <!-- Logo -->
     <a href="home.php" class="logo">

@@ -56,15 +56,15 @@
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Fecha</th>
-                  <th>ID Empleado</th>
-                  <th>Nombre</th>
-                  <th>Monto</th>
-                  <th>Cuotas</th>
-                  <th>Cuota Mensual</th>
-                  <th>Fecha Primer Pago</th>
-                  <th>Destino del prestamo</th>
-                  <th>Acción</th>
+                  <th>FECHA</th>
+                  <th>ID EMPLEADO</th>
+                  <th>NOMBRE</th>
+                  <th>MONTO</th>
+                  <th>CUOTAS</th>
+                  <th>CUOTA MENSUAL</th>
+                  <th>FECHA PRIMER PAGO</th>
+                  <th>DESTINO DEL PRESTAMO</th>
+                  <th>ACCIÓN</th>
                 </thead>
                 <tbody>
                   <?php 
