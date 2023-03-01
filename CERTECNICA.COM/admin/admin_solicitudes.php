@@ -8,14 +8,17 @@
   
 <?php 
 
-$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes") ;
+$documentos = $conexion2 -> prepare("SELECT * FROM solicitudes WHERE estado_JF ='Aprobada' AND aprobacion_GH = 'Pendiente' AND estado_DA = 'Aprobada'") ;
 
 $documentos -> execute();
 
 $listado = $documentos ->fetchAll();
+
 ?>
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
+  
   <style>
         h1 {
             text-align: center;
@@ -28,7 +31,6 @@ $listado = $documentos ->fetchAll();
             margin: 1.5rem auto;
             min-height: 60vh;
         }
-
         .mycontainer table {
             margin: 1.5rem auto;
         }
@@ -38,7 +40,7 @@ $listado = $documentos ->fetchAll();
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Solicitudes
+          Solicitudes
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -74,7 +76,7 @@ $listado = $documentos ->fetchAll();
         <div class="col-xs-12">
           <div class="box">
             <div class="box-body">
-              <table id="example1" class="table table-bordered">
+              <table id="example1" class="table table-bordered">  
                 <thead>
                   <th>ID DE SOLICITUD</th>
                   <th>MOTIVO</th>
@@ -90,7 +92,7 @@ $listado = $documentos ->fetchAll();
                 <tbody>
                   <?php
                   global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE estado_JF ='Aceptado' AND aprobacion_GH = 'Pendiente' AND estado_DA = 'Aceptado' ");
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE estado_JF ='Aprobada' AND aprobacion_GH = 'Pendiente' AND estado_DA = 'Aprobada' ");
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){
@@ -112,12 +114,15 @@ $listado = $documentos ->fetchAll();
                     <td>
                       <a class='btn btn-primary btn-sm editar btn-flat' href="ver_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> Añadir Comentario</a>
                       <br>
-                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
-                    </td>
+                        <?php if(!empty($row1['documento'])): ?>
+                           <td><button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                            <?php else: ?>
+                             <td></td> <!-- Mostrar una columna vacía si no hay documento -->
+                            <?php endif; ?>
                        <td>
-                        <?php echo"  
-                      <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>"?>
-                      <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_rechazo.php?id=<?php echo $row1['id']?>" > Rechazar </a>
+                      <?php echo"  
+                       <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>"?>
+                       <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_rechazo.php?id=<?php echo $row1['id']?>" > Rechazar </a>
                     </td>
                       </tr>
                        <?php
@@ -143,9 +148,13 @@ $listado = $documentos ->fetchAll();
     </section>   
 </div>
 </html>
+
 <?php
-ini_set('display_errors', true);
-error_reporting(E_ALL);
+
+  ini_set('display_errors', true);
+
+  error_reporting(E_ALL);
+
 ?>
 </div>
     </section>   

@@ -92,7 +92,7 @@ $listado = $documentos ->fetchAll();
                 <tbody>
                   <?php
                   global $row;
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Aceptado' AND estado_JF = 'Aceptado' AND estado_DA = 'Aceptado'");
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE aprobacion_GH ='Aprobada' AND estado_JF = 'Aprobada' AND estado_DA = 'Aprobada'");
                  
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
@@ -112,8 +112,11 @@ $listado = $documentos ->fetchAll();
                        <td><?php echo $interval->format('%a Dia/s')?></td>
                        <td><?php echo $interval->format('%H Horas %i Minutos')?></td>
                        <td><?php echo $row1['aprobacion_GH']?></td>
-                      <td> 
-                      <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>  Descargar Archivo</a></button></td>
+                       <?php if(!empty($row1['documento'])): ?>
+                           <td><button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                            <?php else: ?>
+                             <td></td> <!-- Mostrar una columna vacía si no hay documento -->
+                            <?php endif; ?>
                       </td>
                       </tr>
                        <?php 

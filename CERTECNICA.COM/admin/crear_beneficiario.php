@@ -154,6 +154,8 @@
     </div>
 </form>
 <?php include 'includes/scripts.php' ;?>
+
+
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function() {
@@ -174,3 +176,6 @@
   }, false);
 })();
 </script>
+
+
+

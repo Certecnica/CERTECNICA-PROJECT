@@ -17,18 +17,20 @@
     <div class="row">
     <div class="col-sm-6 offset-sm-3">
     <div class="alert alert-danger text-center">
-    <p>¿Desea confirmar la eliminacion del registro?</p>
+    <p>¿Desea confirmar la cancelación de la Solicitud?</p>
     </div>
 
     <div class="row">
         <div class="col-sm-6">
             <form action="function_solicitud_user.php" method="POST">
-                <input type="hidden" name="accion" value="eliminar_registro">
+            <center>  
+
+            <input type="hidden" name="accion" value="eliminar_registro">
                 <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
                 <div class="boton-eliminar">
-                              <input type="submit"  name="" value="Eliminar" class= " btn btn-danger" >
-                              <a href="home.php" class="btn btn-success">Cancelar</a>
-
+                    <input type="submit"  name="" value="Confirmar" class= " btn btn-danger" >
+                              <a href="home.php" class="btn btn-success">Volver</a></center>
+</center>
                 </div>
 
         </div>

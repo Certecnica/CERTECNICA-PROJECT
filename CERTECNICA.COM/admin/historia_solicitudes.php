@@ -105,10 +105,14 @@ $listado = $documentos ->fetchAll();
                           <td><?php echo $value['aprobacion_GH'] ?></td>
                           <td><?php echo  $value['estado_JF'] ?></td>
 
-                          <td><button type="button" class="btn btn-link"><a href="<?php echo $value['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                          <?php if(!empty($value['documento'])): ?>
+                           <td><button type="button" class="btn btn-link"><a href="<?php echo $value['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                            <?php else: ?>
+                             <td></td> <!-- Mostrar una columna vacía si no hay documento -->
+                            <?php endif; ?>
                         </tr>
-                    <?php
-                          }
+                    <?php       
+}
                 ?>
        </tr>
                 </tbody>

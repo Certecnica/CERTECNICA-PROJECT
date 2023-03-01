@@ -1,6 +1,9 @@
 <?php include 'includes/session.php'; ?>
 
 <?php 
+
+
+
 $documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Pendiente' OR estado_subgerencia = 'Pendiente' AND estado_DA = 'Pendiente';") ;
 
 $documentos -> execute();

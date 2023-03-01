@@ -55,7 +55,7 @@
           	</div>
           	<div class="modal-footer">
             	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
-            	<button type="submit" class="btn btn-success btn-flat" name="guardar"><i class="fa fa-check-square-o"></i> Guardar</button>
+            	<button type="submit" class="btn btn-success btn-flat" name="save"><i class="fa fa-check-square-o"></i> Guardar</button>
             	</form>
           	</div>
         </div>

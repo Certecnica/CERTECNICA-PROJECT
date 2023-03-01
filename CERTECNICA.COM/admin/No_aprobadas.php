@@ -113,8 +113,11 @@ $listado = $documentos ->fetchAll();
                        <td>{$row1['aprobacion_GH']}</td>
                        "
                        ?>
-                       <td>
-                       <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                             <?php if(!empty($row1['documento'])): ?>
+                           <td><button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                            <?php else: ?>
+                             <td></td> <!-- Mostrar una columna vacía si no hay documento -->
+                            <?php endif; ?>
                        </tr>
                        <?php
                     $cnt++; }

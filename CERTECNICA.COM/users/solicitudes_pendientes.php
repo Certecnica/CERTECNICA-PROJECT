@@ -73,8 +73,8 @@
                 </thead>
                 <tbody>
                   <?php
-                  $id = $_SESSION['employees'];
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user = $id  AND aprobacion_GH = 'Pendiente' OR estado_JF = 'Pendiente'");
+                     $id = $_SESSION['employees'];
+                     $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user = $id AND (aprobacion_GH = 'Pendiente' OR estado_JF = 'Pendiente' OR estado_DA = 'Pendiente')");
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){
@@ -92,9 +92,9 @@
                        <td><?php echo $row1['aprobacion_GH']?></td>
                        <td><?php echo $row1['estado_JF']?></td>
                        <td><?php echo $row1['estado_DA']?></td>  
-                         
-                       <td><a class='btn btn-success btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
-                       <td><a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancelar Solicitud</a>
+                       
+                       <td><a class='btn btn-link btn-sm editar btn-flat' href="ver_solicitud_user.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                       <a class='btn btn-danger btn-sm editar btn-flat' href="eliminar_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-times-circle" aria-hidden="true"></i> Cancelar Solicitud</a></td>
                      </tr>
                     <?php
                     $cnt++; }

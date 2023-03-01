@@ -71,6 +71,7 @@
                   <th>N° HORAS</th>
                   <th>APROBACIÓN GESTION HUMANA</th>
                   <th>APROBACIÓN JEFE </th>
+                  <th>Acciones</th>
                 </thead>
                 <tbody>
                   <?php
@@ -94,8 +95,10 @@
                        <td>{$interval->format('%a Dia/s')}</td>
                        <td>{$interval->format('%H Horas %i Minutos')}</td>
                        <td>{$row1['aprobacion_GH']}</td>
-                       <td>{$row1['estado_JF']}</td>
-                             </tr>";
+                       <td>{$row1['estado_JF']}</td>"?>
+                                         
+                <td><a class='btn btn-link btn-sm editar btn-flat' href="ver_solicitud_read.php?id=<?php echo $row1['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a></td>
+                             </tr><?php
                     $cnt++; }
                    } else {
                      echo"<tr class='text-center'><td colspan='12'>YOU DON'T HAVE ANY LEAVE HISTORY! PLEASE APPLY TO VIEW YOUR STATUS HERE!</td></tr>";

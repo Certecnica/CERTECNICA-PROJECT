@@ -24,6 +24,8 @@ include 'includes/session.php';
 
 		$position = $_POST['position'];
 
+		$area = $_POST['area'];
+
 		$schedule = $_POST['schedule'] ;
 
 		$password_encriptada= password_hash($contraseña,PASSWORD_DEFAULT);
@@ -36,21 +38,20 @@ include 'includes/session.php';
 		
 		}
 		
-		$sql = "INSERT INTO employees (tipo_documento,employee_id, firstname, lastname, address, birthdate, contact_info,contraseña, gender, position_id, schedule_id, photo, created_on) VALUES ('$Tipo_Documento','$documento	', '$firstname', '$lastname', '$address', '$birthdate', '$contact','$password_encriptada', '$gender', '$position', '$schedule', '$filename', NOW())";
+		$sql = "INSERT INTO employees (tipo_documento,employee_id, firstname, lastname, address, birthdate, contact_info,contraseña, gender, position_id, schedule_id, area , photo, created_on) VALUES ('$Tipo_Documento','$documento	', '$firstname', '$lastname', '$address', '$birthdate', '$contact','$password_encriptada', '$gender', '$position', '$schedule', '$area', '$filename', NOW())";
 		
 		if($conn->query($sql)){
 
 			$_SESSION['success'] = 'Empleado añadido satisfactoriamente';
 		}
 		else{
-
 			$_SESSION['error'] = $conn->error;
 		}
 	}
 	else{
 		$_SESSION['error'] = 'Complete el formulario completo';
 	} 
-
+	
 	header('location: employee.php');
 
 //realizar modificación en la base de datos

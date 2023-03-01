@@ -75,7 +75,7 @@
                 <tbody>
                   <?php
                   $id = $_SESSION['employees'];
-                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user = $id  AND aprobacion_GH = 'Aceptado' AND estado_JF = 'Aceptado'");
+                 $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user = $id AND aprobacion_GH = 'Aprobada' AND estado_JF = 'Aprobada'");
                  if($leaves){
                    $numrow = mysqli_num_rows($leaves);
                    if($numrow!=0){

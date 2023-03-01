@@ -1,26 +1,31 @@
 <?php include 'includes/session.php';?>
 <?php 	
   include 'includes/conn.php';
-
-if($user['position_id'] == '12' ||$user['position_id'] == '11'){
     
   $query = $conn->query($sql);
   
   $user = $query->fetch_assoc();
 
-  $documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE estado_GH = 'Rechazado' OR estado_subgerencia = 'Rechazado' OR estado_DA = 'Rechazado'") ;
-  
+  $id_user = $_SESSION['employees'];
+
+  $documentos = $conexion2 -> prepare("SELECT * FROM solicitud_prestamo WHERE id_user = $id_user AND (estado_GH = 'Rechazada' OR estado_subgerencia = 'Rechazada' OR estado_DA = 'Rechazada')");
+
   $documentos -> execute();
   
   $listado = $documentos ->fetchAll();
   
   ?>
   <?php include 'includes/header.php'; ?>
+
   <body class="hold-transition skin-blue sidebar-mini">
+
   <div class="wrapper">
-    <?php include 'includes/navbar.php'; ?>
-    <?php include 'includes/menubar.php'; ?>
-    <style>
+    
+  <?php include 'includes/navbar.php'; ?>
+  
+  <?php include 'includes/menubar.php'; ?>
+  
+  <style>
           h1 {
               text-align: center;
               font-size: 2.5em;
@@ -101,7 +106,7 @@ if($user['position_id'] == '12' ||$user['position_id'] == '11'){
                             <td><?php echo $value['estado_GH']; ?></td>
                             <td><?php echo $value['estado_subgerencia']; ?></td>
                             <td><?php echo $value['estado_DA']; ?></td>
-                            <td><a class='btn btn-danger btn-sm editar btn-flat' href="ver_solicitud_prestamo.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
+                            <td><a class='btn btn-link btn-sm editar btn-flat' href="solicitud_prestamo_read.php?id=<?php echo $value['id']?>"><i class="fa fa-eye" aria-hidden="true"></i> Ver Solicitud</a>
   
                           </tr>
                       <?php
@@ -179,9 +184,3 @@ if($user['position_id'] == '12' ||$user['position_id'] == '11'){
   </script>
   </body>
   </html>
-<?php 
-	  }else{
-		// en caso de que el rol no esté definido, redirigir a una página de error o mostrar un mensaje de error
-		header('location: error.php');
-	  }
-	?>

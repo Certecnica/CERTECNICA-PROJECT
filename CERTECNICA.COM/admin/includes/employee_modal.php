@@ -21,6 +21,7 @@
                       </select>
                     </div>
                 </div>
+
               <div class="form-group">
                   	<label for="documento" class="col-sm-3 control-label">Documento</label>
 
@@ -62,14 +63,14 @@
                     <label for="contact" class="col-sm-3 control-label">Correo Electronico</label>
 
                     <div class="col-sm-9">
-                      <input type="email" class="form-control" id="contact" name="contact" required>
+                      <input type="email" class="form-control" id="contact" name="contact" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="contraseña" class="col-sm-3 control-label">Contraseña</label>
 
                     <div class="col-sm-9">
-                      <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                      <input type="password" class="form-control" id="contraseña" name="contraseña">
                     </div>
                 </div>
                 <div class="form-group">
@@ -83,9 +84,9 @@
                       </select>
                     </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="position" class="col-sm-3 control-label">Cargo</label>
-
+                    <label for="position" class="col-sm-3 control-label"> Cargo </label>
                     <div class="col-sm-9">
                       <select class="form-control" name="position" id="position" required>
                         <option value="" selected>- Seleccionar -</option>
@@ -101,10 +102,24 @@
                       </select>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="area" class="col-sm-3 control-label"> AREA </label>
+
+                    <div class="col-sm-9"> 
+                      <select class="form-control" name="area" id="area" required>
+                        <option value="" selected>- Seleccionar -</option>
+                        <option value="COMERCIAL"> COMERCIAL </option>
+                        <option value="TECNICA"> TECNICA </option>
+                        <option value="ADMINISTRATIVA"> ADMINISTRATIVA </option>
+                        <option value="CALIDAD"> CALIDAD </option>
+                     </select>
+                    </div>
+                </div>   
                 <div class="form-group">
                     <label for="schedule" class="col-sm-3 control-label">Horario</label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-9">           
                       <select class="form-control" id="schedule" name="schedule" required>
                         <option value="" selected>- Seleccionar -</option>
                         <?php
@@ -135,7 +150,6 @@
         </div>
     </div>
 </div>
-
 <!-- Edit -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">

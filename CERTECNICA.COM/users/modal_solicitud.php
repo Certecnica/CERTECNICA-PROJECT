@@ -7,7 +7,19 @@
             	<h4 class="modal-title"><b>Agregar Solicitud de permiso</b></h4>
           	</div>
   	<div class="modal-body">
-            	<form class="form-horizontal" method="POST" action="../add_solicitud.php" enctype="multipart/form-data">				
+            	<form class="form-horizontal" method="POST" action="../add_solicitud.php" enctype="multipart/form-data">	
+                
+              <div class="form-group">
+    <div class="col-sm-9">
+                      <input type="hidden" class="form-control" id="position_id" name="position_id" value="<?php echo $user['position_id'] ?>" readonly>
+                  	</div>
+                </div>
+				<div class="form-group">
+    <div class="col-sm-9">
+                      <input type="hidden" class="form-control" id="area" name="area" value="<?php echo $user['area'] ?>" readonly>
+                  	</div>
+                </div> 
+
 				<div class="form-group">
                     <label for="motivo" class="col-sm-3 control-label"> MOTIVO: </label>
                     <div class="col-sm-9">
@@ -49,7 +61,7 @@
                     	<input type="descripcion" class="form-control" id="descripcion" name="descripcion">
                   	</div>
                 </div>
-				
+
 				<div class="">
 <label for="documento" class="col-sm-3 control-label" >Documento  </label>
 <input type="file" class="form-control" id="documento" name="documento">

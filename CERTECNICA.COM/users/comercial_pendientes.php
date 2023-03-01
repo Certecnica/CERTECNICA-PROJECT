@@ -1,26 +1,32 @@
 <?php include 'includes/session.php';?>
+
 <?php 	
+
   include 'includes/conn.php';
 
-if($user['position_id'] == '12' ||$user['position_id'] == '11'){?>
+if($user['position_id'] == '16' ){?>
     
     <?php include 'includes/header.php'; ?>
     
     <body class="hold-transition skin-blue sidebar-mini">
     
     <div class="wrapper">
-          
+
     <?php 
-    
-    $documentos = $conexion2 -> prepare("SELECT * FROM solicitudes WHERE area = 'COMERCIAL' AND estado_JF = 'Pendiente'") ;
+
+    $documentos = $conexion2 -> prepare("SELECT * FROM solicitudes WHERE area = 'COMERCIAL' AND estado_JF = 'Pendiente'");
     
     $documentos -> execute();
     
     $listado = $documentos ->fetchAll();
+
     ?>
-      <?php include 'includes/navbar.php'; ?>
-      <?php include 'includes/menubar.php'; ?>
-      <style>
+
+    <?php include 'includes/navbar.php'; ?>
+     
+    <?php include 'includes/menubar.php'; ?>
+    
+    <style>
             h1 {
                 text-align: center;
                 font-size: 2.5em;
@@ -32,17 +38,17 @@ if($user['position_id'] == '12' ||$user['position_id'] == '11'){?>
                 margin: 1.5rem auto;
                 min-height: 60vh;
             }
-    
             .mycontainer table {
                 margin: 1.5rem auto;
             }
         </style>
+        
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Solicitudes
+            SOLICITUDES
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -88,14 +94,14 @@ if($user['position_id'] == '12' ||$user['position_id'] == '11'){?>
                       <th>FECHA</th>
                       <th>N° DE DIAS</th>
                       <th>N° DE HORAS</th>
-                      <th>APROBACION GESTION HUMANA</th>
                       <th>COMENTARIO Y SOPORTES</th>
                       <th>ACCIONES</th>
                     </thead>
                     <tbody>
                       <?php
-                      global $row;
-                     $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE area = 'COMERCIAL' AND estado_JF = 'Pendiente' ");
+                       global $row;
+                       $id_user = $_SESSION['employees'];
+                       $leaves = mysqli_query($conn,"SELECT * FROM solicitudes WHERE id_user != '$id_user' AND area = 'COMERCIAL' AND estado_JF = 'Pendiente' ");
                      if($leaves){
                        $numrow = mysqli_num_rows($leaves);
                        if($numrow!=0){
@@ -113,16 +119,19 @@ if($user['position_id'] == '12' ||$user['position_id'] == '11'){?>
                            <td><?php echo $datetime1->format('Y/m/d  h:i:s ')?> <b> Hasta </b><?php echo $datetime2->format('Y/m/d/ h:i:s')?></td>
                            <td><?php echo $interval->format('%a Dia/s')?></td>
                            <td><?php echo $interval->format('%H Horas %i Minutos')?></td>
-                           <td><?php echo $row1['aprobacion_GH'] ?></td>
                         <td>
                           <a class='btn btn-primary btn-sm editar btn-flat' href="ver_solicitud.php?id=<?php echo $row1['id']?>"><i class="fa fa-commenting-o" aria-hidden="true"></i> Añadir Comentario</a>
                           <br>
-                          <button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                          <?php if(!empty($row1['documento'])): ?>
+                           <td><button type="button" class="btn btn-link"><a href="<?php echo $row1['documento']; ?>"> <i class="fa fa-download" aria-hidden="true"></i>Descargar Archivo</a></button></td>
+                            <?php else: ?>
+                             <td></td> <!-- Mostrar una columna vacía si no hay documento -->
+                            <?php endif; ?>
                         </td>
                            <td>
                             <?php echo"  
-                          <a href=\"updateStatusAccept.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>"?>
-                          <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_rechazo.php?id=<?php echo $row1['id']?>" > Rechazar </a>
+                          <a href=\"UpdateStatusComercial.php?id={$row1['id']}&descripcion={$row1['descripcion']}\"><button class='btn-success btn-sm' >Aceptar</button></a>"?>
+                          <a class='btn btn-danger btn-sm rechazar btn-flat' href="comentarios_comercial.php?id=<?php echo $row1['id']?>" > Rechazar </a>
                         </td>
                           </tr>
                            <?php
