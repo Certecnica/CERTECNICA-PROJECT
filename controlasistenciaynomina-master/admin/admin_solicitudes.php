@@ -1,6 +1,9 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
@@ -82,15 +85,11 @@
                     <th>Acciones</th>
                 </thead>
                 <tbody>
-            
                         <?php
                                 global $row;
                                 $query = mysqli_query($conn,"SELECT * FROM leaves WHERE status='Pendiente'");
-                                
                                 $numrow = mysqli_num_rows($query);
-
                                if($query){
-                                    
                                     if($numrow!=0){
                                          $cnt=1;
 
@@ -98,44 +97,31 @@
                                             $datetime1 = new DateTime($row['fromdate']);
                                             $datetime2 = new DateTime($row['todate']);
                                             $interval = $datetime1->diff($datetime2);
-                                            
                                             echo "<tr>
                                                     <td>$cnt</td>
                                                     <td>{$row['ename']}</td>
                                                     <td>{$row['descr']}</td>
                                                     <td>{$datetime1->format('Y/m/d')} <b>--</b> {$datetime2->format('Y/m/d')}</td>
                                                     <td>{$interval->format('%a Day/s')}</td>
-                                          
-                                                    <td><a href=\"updateStatusAccept.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-success btn-sm' >Aceptado</button></a>
-                                                    <a href=\"updateStatusReject.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-danger btn-sm' >Rechazado</button></a></td>
+                                                    <td><a href=\"updateStatusAccept.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-success btn-sm' >Aceptar</button></a>
+                                                    <a href=\"updateStatusReject.php?eid={$row['eid']}&descr={$row['descr']}\"><button class='btn-danger btn-sm' >Rechazar</button></a></td>
                                                   </tr>";  
                                          $cnt++; }       
                                     }
                                 }
                                 else{
-                                    echo "Query Error : " . "SELECT * FROM leaves WHERE status='Pendiente'" . "<br>" . mysqli_error($conn);
+                                    echo "Query Error : " . "SELECT * FROM leaves WHERE status= 'Pendiente'" . "<br>" . mysqli_error($conn);
                                 }
-                       ?> 
-                    
+                       ?>
                 </tbody>
             </table>
     </div>  
 </body>
-
 </html>
-
 <?php
-
-
 ini_set('display_errors', true);
 error_reporting(E_ALL);
 ?>
-
-
-
-
-
-
 </div>
     </section>   
   </div>

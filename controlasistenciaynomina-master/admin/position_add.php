@@ -5,9 +5,9 @@
 		$title = $_POST['title'];
 		$rate = $_POST['rate'];
 
-		$sql = "INSERT INTO position (description, rate) VALUES ('$title', '$rate')";
+		$sql = "INSERT INTO position (description) VALUES ('$title')";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Position added successfully';
+			$_SESSION['success'] = 'Cargo añadido con exito';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;

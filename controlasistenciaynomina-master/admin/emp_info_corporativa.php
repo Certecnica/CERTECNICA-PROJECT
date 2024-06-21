@@ -46,28 +46,30 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-               <a href="#addAdmin" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
+               <a href="#addEmpleado" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> Nuevo</a>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <thead>
-                  <th>Usario</th>
-                  <th>Foto</th>
-                  <th>Nombres</th> 
-                  <th>Creado en </th>
+                  <th>Empleado</th>
+                  <th>Cargo</th>
+                  <th>Area</th> 
+                  <th>Correo Corporativo</th>
+                  <th>Creado en</th>
                   <th>Acción</th>
                 </thead>
                 <tbody>
                   <?php    
-                  $sql= "SELECT *FROM  admin ";
+                  $sql= "SELECT *FROM  informacion_empleado ";
                     $query = $conn->query($sql);
                     while($fila = $query->fetch_assoc()){
                       ?>
                         <tr>
-                          <td><?php echo $fila['username']; ?></td>
-                          <td><img src="<?php echo (!empty($fila['photo']))? '../images/'.$fila['photo']:'../images/profile.jpg'; ?>" width="30px" height="30px"> <a href="#edit_photo" data-toggle="modal" class="pull-right photo" data-id="<?php echo $fila['username']; ?>"><span class="fa fa-edit"></span></a></td>
-                          <td><?php echo $fila['firstname'].' '.$fila['lastname']; ?></td>
-                          <td><?php echo date('M d, Y', strtotime($fila['created_on'])) ?></td>
+                          <td><?php echo $fila['empleado']; ?></td>
+                          <td><?php echo $fila['cargo']; ?></td>
+                          <td><?php echo $fila['area']; ?></td>
+                          <td><?php echo $fila['correo_corporativo']; ?></td>
+                          <td><?php echo $fila['created_on'] ?></td>
                           <td>
                             <button class="btn btn-success btn-sm edit btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-edit"></i> Editar</button>
                             <button class="btn btn-danger btn-sm delete btn-flat" data-id="<?php echo $fila['id']; ?>"><i class="fa fa-trash"></i> Eliminar</button>
@@ -84,6 +86,7 @@
       </div>
     </section>   
   </div>
+  <?php include 'modal_inf_empleado.php' ?>
   <?php include 'includes/footer.php'; ?>
   <?php include '../admin/includes/admin_modal.php'; ?>
 </div>
@@ -110,7 +113,6 @@ $(function(){
   });
 
 });
-
 function getRow(id){
   $.ajax({
     type: 'POST',

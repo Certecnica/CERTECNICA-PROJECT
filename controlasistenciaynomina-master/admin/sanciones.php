@@ -1,26 +1,38 @@
 <?php include 'includes/session.php'; ?>
+
 <?php include 'includes/header.php'; ?>
+
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 
   <?php include 'includes/navbar.php'; ?>
+
   <?php include 'includes/menubar.php'; ?>
-  <?php 
+
+<?php 
   $documento = $conexion2 -> prepare("SELECT * FROM sanciones") ;
 $documento -> execute();
 $lista = $documento ->fetchAll();
 ?>
   <!-- Content Wrapper. Contains page content -->
+
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+
+  <!-- Content Header (Page header) -->
+
+  <section class="content-header">
+
       <h1>
-         Dotacion Empleados
+         Sanciones Empleado
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+
         <li>Sanciones</li>
+
         <li class="active">Sanciones Empleados</li>
+        
       </ol>
     </section>
     <!-- Main content -->
@@ -79,33 +91,26 @@ $lista = $documento ->fetchAll();
                         </tr>
                     <?php 
                     } ?>
-                 
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
     </div>
 </section>   
   </div>
   <?php include 'modal_sanciones.php'?>
+
   <?php include 'includes/footer.php'; ?>
+
   <?php include '../admin/includes/admin_modal.php'; ?>
+
 </div>
+
 <?php include 'includes/scripts.php'; ?>
+
 <script>
+
 $(function(){
   $('.edit').click(function(e){
     e.preventDefault();
